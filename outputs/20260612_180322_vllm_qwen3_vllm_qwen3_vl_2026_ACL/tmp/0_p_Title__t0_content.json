@@ -1,0 +1,25 @@
+[
+    {
+        "alignment": "center",
+        "bullet": false,
+        "level": 0,
+        "font_size": 60,
+        "runs": [
+            {
+                "text": "PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation",
+                "bold": true,
+                "color": [
+                    255,
+                    255,
+                    255
+                ],
+                "fill_color": [
+                    63,
+                    86,
+                    147
+                ]
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

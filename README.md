@@ -1,158 +1,173 @@
-<h2 align="center">
-    PosterForest:<br>
-    Hierarchical Multi-Agent Collaboration for Scientific Poster Generation
-</h2>
+# 🌲🌳 PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation
 
-<h5 align="center">
-    Jiho Choi<sup>*</sup>, Seojeong Park<sup>*</sup>, Seongjong Song, Hyunjung Shim<sup>†</sup><br/>
-    <br/>
-    <p>
-        * equal contribution  † corresponding author
-    </p>
-    Graduate School of Artificial Intelligence, KAIST, Republic of Korea<br/>
-    School of Integrated Technology, Yonsei University, Republic of Korea<br/>
-    <br/>
-    <code>{jihochoi, seojeong.park, kateshim}@kaist.ac.kr</code>,
-    <code>{bell}@yonsei.ac.kr</code>
-</h5>
+<p align="center">
+  <a href="https://arxiv.org/abs/2508.21720"><img src="https://img.shields.io/badge/arXiv-2508.21720-red"></a>
+  <img src="https://img.shields.io/badge/ACL-2026-blue">
+  <img src="https://img.shields.io/badge/License-MIT-yellow">
+</p>
 
-<h4 align="center">
-    <a href="#"> <img src="https://img.shields.io/badge/arXiv-TBA-b31b1b.svg" alt="arXiv"> </a>
-</h4>
+<p align="center">
+  <a href="https://jihochoi.github.io/">Jiho Choi</a><sup>1 *</sup>,&nbsp;
+  <a href="https://sjpark5800.github.io/">Seojeong Park</a><sup>1 *</sup>,&nbsp;
+  Seongjong Song<sup>2</sup>,&nbsp;
+  <a href="https://kaist-cvml.github.io/index.html">Hyunjung Shim</a><sup>1 †</sup>
+</p>
+<p align="center">
+  <sup>1</sup> Graduate School of Artificial Intelligence, KAIST, Republic of Korea<br>
+  <sup>2</sup> School of Integrated Technology, Yonsei University, Republic of Korea<br>
+  <sup>*</sup> Equal contribution &nbsp;&nbsp; <sup>†</sup> Corresponding author<br>
+  <!-- {jihochoi, seojeong.park, kateshim}@kaist.ac.kr &nbsp;|&nbsp; bell@yonsei.ac.kr -->
+</p>
 
-<div align="center">
-    <img src="assets/teaser.png" alt="teaser" width="90%"/>
-</div>
+---
 
-<br/>
+PosterForest is a training-free, hierarchical multi-agent system that automatically generates editable scientific posters (`poster.pptx`) from a paper PDF. It introduces a **Poster Tree** intermediate representation that captures document hierarchy and visual-textual semantics, enabling agents to conduct hierarchical reasoning and recursive refinement from global organization down to local composition.
 
-## Overview
+<p align="center">
+  <img src="./assets/2026_ACL.png" width="90%">
+</p>
 
-**PosterForest** is a training-free framework for automated scientific poster generation that takes research papers as input. The core idea is to create a **Poster Tree** that jointly represents document hierarchy and text-visual relationships, while content and layout agents engage in **iterative collaboration and feedback** to compress content and adjust layouts. This process simultaneously optimizes logical consistency and visual balance.
+---
 
-<br/>
+## Preview
 
-<!-- ## Key Features
+<table>
+  <tr>
+    <th align="center">Portrait (36 × 48 in)</th>
+    <th align="center">Landscape (48 × 36 in)</th>
+  </tr>
+  <!-- <tr>
+    <td align="center"><img src="./assets/PosterForest_Viewer_portrait.png" width="100%"></td>
+    <td align="center"><img src="./assets/PosterForest_Viewer_landscape.png" width="100%"></td>
+  </tr> -->
+  <tr>
+    <td align="center"><img src="./assets/PosterForest_viewer_portrait.gif" width="100%"></td>
+    <td align="center"><img src="./assets/PosterForest_viewer_landscape.gif" width="100%"></td>
+  </tr>
+</table>
 
-- 🌳 **Poster Tree**: Unified intermediate representation integrating hierarchical structure and visual-textual relationships
-- 🤝 **Multi-Agent Collaboration**: Content and layout experts cooperatively establish modification plans through mutual interaction
-- 🔄 **Iterative Refinement**: Tree-based iterative updates that simultaneously improve information density and readability
+---
 
-<br/> -->
-
-## Updates
-
-- 💻 **Code Release**: TBA
-
-<br/>
-
-<!-- 
 ## Installation
 
-### Prerequisites
-- Python 3.8 or higher
-- CUDA 11.8+ (for GPU acceleration)
-- Git
-
-### Setup Environment
-
 ```bash
-# Create conda environment
-conda create -n posterforest python=3.10 -y
-conda activate posterforest
-
-# Install PyTorch
-pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
-
-# Install dependencies
+conda create -n poster-forest python=3.10 -y
+conda activate poster-forest
 pip install -r requirements.txt
+pip install "docling-parse==4.5.0"
+
+# System Dependencies
+sudo apt-get install ttf-mscorefonts-installer msttcorefonts  # fonts
+sudo apt install libreoffice  # PPTX → image rendering
+conda install -c conda-forge poppler  # PDF utilities
+
+# API key (if using GPT-4o)
+echo "OPENAI_API_KEY=<your_key>" > .env
 ```
 
-<br/>
+---
 
-## Data Preparation
+## Quick Start
 
-### Scientific Paper Dataset
-
-Prepare your dataset in the following structure:
+Place your paper PDF under `papers/{paper_dir}/`:
 
 ```
-data/
-├── papers/
-│   ├── paper_1.pdf
-│   ├── paper_2.pdf
-│   └── ...
-├── metadata/
-│   ├── paper_1.json
-│   ├── paper_2.json
-│   └── ...
-└── output/
-    ├── posters/
-    └── intermediate/
+papers/
+├── 2017_NIPS/
+│   └── Attention_Is_All_You_Need.pdf
+└── 2026_ACL/
+    └── PosterForest.pdf
 ```
 
-<br/>
-
-## Usage
-
-### Quick Start
+**Using GPT-4o:**
 
 ```bash
-# Generate a poster from a single paper
-python src/main.py --config-name generate_poster --input-paper path/to/paper.pdf
-
-# Batch processing multiple papers
-python src/main.py --config-name batch_generate --input-dir data/papers/
-
-# Custom configuration
-python src/main.py --config-name custom_config --agent-config config/agents.yaml
+python -m PosterForest.main \
+    --paper_path="papers/2017_NIPS/Attention_Is_All_You_Need.pdf" \
+    --model_name_t="4o" \
+    --model_name_v="4o" \
+    --poster_width_inches=48 \
+    --poster_height_inches=36
 ```
 
-### Advanced Usage
+<sub>(API costs approximately $0.8 per poster with GPT-4o.)</sub>
 
-```python
-from src.poster_forest import PosterForest
-from src.agents import ContentAgent, LayoutAgent, ReviewAgent
+**Using Qwen3** (local - start vLLM servers first, see below):
 
-# Initialize the system
-poster_forest = PosterForest()
-
-# Generate poster with custom configuration
-poster = poster_forest.generate_poster(
-    input_paper="path/to/paper.pdf",
-    template="academic_standard"
-)
+```bash
+python -m PosterForest.main \
+    --paper_path="papers/2017_NIPS/Attention_Is_All_You_Need.pdf" \
+    --model_name_t="vllm_qwen3" \
+    --model_name_v="vllm_qwen3_vl" \
+    --poster_width_inches=48 \
+    --poster_height_inches=36
 ```
 
-<br/>
+Output is saved to `outputs/{timestamp}_{model_t}_{model_v}_{paper_name}/08_finalize_output/`:
+
+```
+08_finalize_output/
+├── poster_final.pptx   ← editable poster
+└── poster_final.jpg    ← rendered preview
+```
+
+**Viewer** - browse all generated posters in a local web UI:
+
+```bash
+uvicorn utils.viewer.server:app --reload --port 8080
+# open http://localhost:8080
+```
+
+---
+
+## vLLM Setup (Local MLLMs)
+
+Requires [vLLM](https://docs.vllm.ai/) ≥ 0.12.0 (for Qwen3-VL support).
+
+**Qwen3** (LLM on GPU 0-3, VLM on GPU 4-7):
+
+```bash
+conda activate poster-forest
+bash scripts/start_vllm_qwen3.sh
+```
+
+**Qwen2.5** (LLM on GPU 4,5, VLM on GPU 6,7):
+
+```bash
+conda activate poster-forest
+bash scripts/start_vllm_qwen2_5.sh
+```
+
+Wait until both servers are ready:
+
+```bash
+curl http://localhost:8005/health
+curl http://localhost:8010/health
+```
+
+Model strings and endpoints are defined in [`utils/wei_utils.py`](utils/wei_utils.py).
+
+---
 
 ## Evaluation
 
-```bash
-# Evaluate poster quality
-python evaluate.py --input-dir data/output/posters/ --metrics all
+For evaluation setup and metrics (PaperQuiz, VLM-as-Judge, etc.), please refer to the [Paper2Poster (NeurIPS 2025 D&B)](https://github.com/Paper2Poster/Paper2Poster) repository.
 
-# Specific evaluation metrics
-python evaluate.py --input-dir data/output/posters/ --metrics layout,content,visual
-```
-
-<br/>
-
-## Citation
-
-If you use PosterForest in your research, please cite our paper:
-
-```bibtex
-@article{choi2025posterforest,
-  title={PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation},
-  author={Choi, Jiho and Park, Seojeong and Song, Seongjong and Shim, Hyunjung},
-  journal={arXiv preprint arXiv:TBA},
-  year={2025}
-}
-```
-
-<br/>
+---
 
 ## Acknowledgements
 
-We would like to express our gratitude to the prior research in automated scientific poster generation and the open-source community for their valuable contributions. -->
+We thank [CAMEL (NeurIPS 2023)](https://github.com/camel-ai/camel), [OWL (NeurIPS 2025)](https://github.com/camel-ai/owl), [Docling](https://github.com/docling-project/docling), [PPTAgent (EMNLP 2025)](https://github.com/icip-cas/PPTAgent), [Paper2Poster (NeurIPS 2025 D&B)](https://github.com/Paper2Poster/Paper2Poster), and [P2P (ICLR 2026)](https://github.com/multimodal-art-projection/P2P) for their open-source codebases.
+
+---
+
+## Citation
+
+```bibtex
+@inproceedings{posterforest2026,
+  title     = {PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation},
+  author    = {Jiho Choi and Seojeong Park and Seongjong Song and Hyunjung Shim},
+  booktitle = {Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year      = {2026},
+}
+```

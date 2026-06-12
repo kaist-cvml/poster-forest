@@ -1,0 +1,12 @@
+{
+    "2": {
+        "caption": "Table 2: Human Evaluation. Numbers represent the proportion of times each method was ranked first for each criterion.",
+        "table_path": "outputs/20260612_181802_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-table-2.png",
+        "width": 973,
+        "height": 300,
+        "figure_size": 291900,
+        "figure_aspect": 3.243333333333333,
+        "original_index": 2,
+        "caption_number": "2"
+    }
+}

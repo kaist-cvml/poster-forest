@@ -1,0 +1,2050 @@
+{
+    "panel_arrangement": [
+        {
+            "panel_id": 0,
+            "section_name": "Title",
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 125.16000000000001,
+            "figure_size": 0,
+            "tp": 0,
+            "gp": 0,
+            "figure_aspect": 1
+        },
+        {
+            "panel_id": "1",
+            "section_name": "Introduction",
+            "node_type": "section",
+            "children": [
+                {
+                    "panel_id": "11",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.09267313482770158,
+                    "gp": 0.186046511627907,
+                    "text_len": 954,
+                    "figure_size": 432954,
+                    "figure_aspect": 2.6791044776119404,
+                    "is_main_figure": true,
+                    "is_table": false,
+                    "content": "Scientific poster generation plays a vital role in effective knowledge sharing at conferences and academic events, yet current methods often fail to capture the hierarchical nature of scientific documents. Existing approaches typically treat content as a linear sequence, leading to fragmented structure and poor contextual understanding. They also decouple content creation from layout design, resulting in misaligned or visually inconsistent posters. Furthermore, many solutions rely on large-scale training, which demands significant computational resources and limits accessibility. These limitations hinder the generation of coherent, professional-quality posters that reflect the intended scholarly narrative. The authors identify these gaps as key barriers to advancing automated scientific communication tools. This work addresses them through a novel, training-free architecture grounded in hierarchical reasoning and collaborative agent design.",
+                    "assets": {
+                        "figures": [
+                            "1"
+                        ],
+                        "tables": [],
+                        "references": []
+                    },
+                    "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-1.png",
+                    "children": [],
+                    "natural_fig_w": 1143.153532995459,
+                    "paper_size_ratio": 0.3,
+                    "sp": 0.17067313482770158
+                }
+            ],
+            "sp": 0.5603863325762526,
+            "x": 0,
+            "y": 125.16000000000001,
+            "width": 664.4041461443711,
+            "height": 248.9270126251644
+        },
+        {
+            "panel_id": "11",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.09267313482770158,
+            "gp": 0.186046511627907,
+            "text_len": 954,
+            "figure_size": 432954,
+            "figure_aspect": 2.6791044776119404,
+            "is_main_figure": true,
+            "is_table": false,
+            "content": "Scientific poster generation plays a vital role in effective knowledge sharing at conferences and academic events, yet current methods often fail to capture the hierarchical nature of scientific documents. Existing approaches typically treat content as a linear sequence, leading to fragmented structure and poor contextual understanding. They also decouple content creation from layout design, resulting in misaligned or visually inconsistent posters. Furthermore, many solutions rely on large-scale training, which demands significant computational resources and limits accessibility. These limitations hinder the generation of coherent, professional-quality posters that reflect the intended scholarly narrative. The authors identify these gaps as key barriers to advancing automated scientific communication tools. This work addresses them through a novel, training-free architecture grounded in hierarchical reasoning and collaborative agent design.",
+            "assets": {
+                "figures": [
+                    "1"
+                ],
+                "tables": [],
+                "references": []
+            },
+            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-1.png",
+            "children": [],
+            "natural_fig_w": 1143.153532995459,
+            "paper_size_ratio": 0.3,
+            "sp": 0.17067313482770158,
+            "x": 0,
+            "y": 161.16000000000003,
+            "width": 664.4041461443711,
+            "height": 212.9270126251644
+        },
+        {
+            "panel_id": "2",
+            "section_name": "Proposed Method",
+            "node_type": "section",
+            "children": [
+                {
+                    "panel_id": "21",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.0,
+                    "gp": 0.1627906976744186,
+                    "text_len": 0,
+                    "figure_size": 1921287,
+                    "figure_aspect": 2.6654888103651353,
+                    "is_main_figure": true,
+                    "is_table": false,
+                    "content": "",
+                    "assets": {
+                        "figures": [
+                            "2"
+                        ],
+                        "tables": [],
+                        "references": []
+                    },
+                    "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-2.png",
+                    "children": [],
+                    "natural_fig_w": 1143.153532995459,
+                    "paper_size_ratio": 1.160123204674097,
+                    "sp": 0.30163203321526527
+                },
+                {
+                    "panel_id": "21",
+                    "section_name": "Preliminaries",
+                    "node_type": "subsection",
+                    "children": [
+                        {
+                            "panel_id": "211",
+                            "section_name": "Content",
+                            "node_type": "content",
+                            "tp": 0.08832385413181666,
+                            "gp": 0.0,
+                            "text_len": 865,
+                            "figure_size": 0,
+                            "figure_aspect": 1.0,
+                            "is_main_figure": false,
+                            "is_table": false,
+                            "content": "Traditional single-page generation (SPG) methods treat documents as flat sequences, failing to capture hierarchical structures and cross-modal alignment between content and layout. PosterForest addresses this limitation by modeling documents as a Raw Doc Tree, preserving the original structural hierarchy of the input paper. This Raw Doc Tree is then refined into a Content Tree through redundancy pruning and semantic summarization. Simultaneously, a Layout Tree is constructed to represent spatial relationships and visual organization. The integration of these two trees forms a unified Poster Tree that aligns semantic content with layout structure. This approach enables more coherent and semantically informed poster synthesis. By explicitly modeling hierarchy and cross-modal alignment, PosterForest overcomes key limitations of prior flat-sequence methods.",
+                            "assets": {},
+                            "asset_path": null,
+                            "children": [],
+                            "sp": 0.18832385413181668
+                        }
+                    ],
+                    "sp": 0.18832385413181668
+                },
+                {
+                    "panel_id": "22",
+                    "section_name": "Hierarchical Paper-to-Poster",
+                    "node_type": "subsection",
+                    "children": [
+                        {
+                            "panel_id": "221",
+                            "section_name": "Content",
+                            "node_type": "content",
+                            "tp": 0.09434593509534961,
+                            "gp": 0.186046511627907,
+                            "text_len": 986,
+                            "figure_size": 451962,
+                            "figure_aspect": 2.537914691943128,
+                            "is_main_figure": true,
+                            "is_table": false,
+                            "content": "The Hierarchical Paper-to-Poster pipeline begins by constructing a Content Tree through semantic summarization and redundancy removal, preserving key information while reducing noise. This Content Tree reflects the logical hierarchy of the paper, such as sections, subsections, and key findings. A corresponding Layout Tree is generated based on the content hierarchy, assigning spatial roles to each node according to importance and relationships. These two trees are merged into a unified Poster Tree, where each node encodes both semantic meaning and spatial attributes like position, size, and alignment. This integration enables structure-aware poster synthesis that respects both content flow and visual balance. The resulting Poster Tree serves as a high-level blueprint for generating visually coherent and semantically meaningful posters. This hierarchical approach ensures that the final poster maintains logical structure while optimizing for aesthetic and readability goals.",
+                            "assets": {
+                                "figures": [
+                                    "3"
+                                ],
+                                "tables": [],
+                                "references": []
+                            },
+                            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-3.png",
+                            "children": [],
+                            "paper_size_ratio": 0.27290644439425976,
+                            "natural_fig_w": 1143.153532995459,
+                            "sp": 0.16530161063785714
+                        }
+                    ],
+                    "sp": 0.16530161063785714
+                },
+                {
+                    "panel_id": "23",
+                    "section_name": "Hierarchical Modification Planning",
+                    "node_type": "subsection",
+                    "children": [
+                        {
+                            "panel_id": "231",
+                            "section_name": "Content",
+                            "node_type": "content",
+                            "tp": 0.09033121445299432,
+                            "gp": 0.0,
+                            "text_len": 906,
+                            "figure_size": 0,
+                            "figure_aspect": 1.0,
+                            "is_main_figure": false,
+                            "is_table": false,
+                            "content": "The hierarchical modification planning framework employs a root-to-leaf traversal strategy to systematically update poster components. The Layout Agent dynamically optimizes spatial attributes such as positioning and scaling, while the Content Agent adjusts text density to maintain readability and visual balance. By leveraging parent and descendant context at each node, structural and semantic consistency is preserved throughout the poster. This top-down propagation enables coherent, context-aware refinements that align layout with content intent. The iterative nature of the process ensures gradual improvement in visual quality and compositional harmony. Global feedback is integrated after each full traversal to guide further optimization, minimizing redundant changes and accelerating convergence. This structured approach supports high-fidelity poster generation with minimal user intervention.",
+                            "assets": {},
+                            "asset_path": null,
+                            "children": [],
+                            "sp": 0.19033121445299434
+                        }
+                    ],
+                    "sp": 0.19033121445299434
+                }
+            ],
+            "sp": 1.183939208289089,
+            "x": 0,
+            "y": 374.0870126251644,
+            "width": 664.4041461443711,
+            "height": 525.9129873748357
+        },
+        {
+            "panel_id": "21",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.0,
+            "gp": 0.1627906976744186,
+            "text_len": 0,
+            "figure_size": 1921287,
+            "figure_aspect": 2.6654888103651353,
+            "is_main_figure": true,
+            "is_table": false,
+            "content": "",
+            "assets": {
+                "figures": [
+                    "2"
+                ],
+                "tables": [],
+                "references": []
+            },
+            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-2.png",
+            "children": [],
+            "natural_fig_w": 1143.153532995459,
+            "paper_size_ratio": 1.160123204674097,
+            "sp": 0.30163203321526527,
+            "x": 0,
+            "y": 410.0870126251644,
+            "width": 664.4041461443711,
+            "height": 174.75806891318092
+        },
+        {
+            "panel_id": "21",
+            "section_name": "Preliminaries",
+            "node_type": "subsection",
+            "children": [
+                {
+                    "panel_id": "211",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.08832385413181666,
+                    "gp": 0.0,
+                    "text_len": 865,
+                    "figure_size": 0,
+                    "figure_aspect": 1.0,
+                    "is_main_figure": false,
+                    "is_table": false,
+                    "content": "Traditional single-page generation (SPG) methods treat documents as flat sequences, failing to capture hierarchical structures and cross-modal alignment between content and layout. PosterForest addresses this limitation by modeling documents as a Raw Doc Tree, preserving the original structural hierarchy of the input paper. This Raw Doc Tree is then refined into a Content Tree through redundancy pruning and semantic summarization. Simultaneously, a Layout Tree is constructed to represent spatial relationships and visual organization. The integration of these two trees forms a unified Poster Tree that aligns semantic content with layout structure. This approach enables more coherent and semantically informed poster synthesis. By explicitly modeling hierarchy and cross-modal alignment, PosterForest overcomes key limitations of prior flat-sequence methods.",
+                    "assets": {},
+                    "asset_path": null,
+                    "children": [],
+                    "sp": 0.18832385413181668
+                }
+            ],
+            "sp": 0.18832385413181668,
+            "x": 0,
+            "y": 587.8450815383453,
+            "width": 187.34625386628895,
+            "height": 312.15491846165474
+        },
+        {
+            "panel_id": "211",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.08832385413181666,
+            "gp": 0.0,
+            "text_len": 865,
+            "figure_size": 0,
+            "figure_aspect": 1.0,
+            "is_main_figure": false,
+            "is_table": false,
+            "content": "Traditional single-page generation (SPG) methods treat documents as flat sequences, failing to capture hierarchical structures and cross-modal alignment between content and layout. PosterForest addresses this limitation by modeling documents as a Raw Doc Tree, preserving the original structural hierarchy of the input paper. This Raw Doc Tree is then refined into a Content Tree through redundancy pruning and semantic summarization. Simultaneously, a Layout Tree is constructed to represent spatial relationships and visual organization. The integration of these two trees forms a unified Poster Tree that aligns semantic content with layout structure. This approach enables more coherent and semantically informed poster synthesis. By explicitly modeling hierarchy and cross-modal alignment, PosterForest overcomes key limitations of prior flat-sequence methods.",
+            "assets": {},
+            "asset_path": null,
+            "children": [],
+            "sp": 0.18832385413181668,
+            "x": 0,
+            "y": 615.8450815383453,
+            "width": 187.34625386628895,
+            "height": 284.15491846165474
+        },
+        {
+            "panel_id": "22",
+            "section_name": "Hierarchical Paper-to-Poster",
+            "node_type": "subsection",
+            "children": [
+                {
+                    "panel_id": "221",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.09434593509534961,
+                    "gp": 0.186046511627907,
+                    "text_len": 986,
+                    "figure_size": 451962,
+                    "figure_aspect": 2.537914691943128,
+                    "is_main_figure": true,
+                    "is_table": false,
+                    "content": "The Hierarchical Paper-to-Poster pipeline begins by constructing a Content Tree through semantic summarization and redundancy removal, preserving key information while reducing noise. This Content Tree reflects the logical hierarchy of the paper, such as sections, subsections, and key findings. A corresponding Layout Tree is generated based on the content hierarchy, assigning spatial roles to each node according to importance and relationships. These two trees are merged into a unified Poster Tree, where each node encodes both semantic meaning and spatial attributes like position, size, and alignment. This integration enables structure-aware poster synthesis that respects both content flow and visual balance. The resulting Poster Tree serves as a high-level blueprint for generating visually coherent and semantically meaningful posters. This hierarchical approach ensures that the final poster maintains logical structure while optimizing for aesthetic and readability goals.",
+                    "assets": {
+                        "figures": [
+                            "3"
+                        ],
+                        "tables": [],
+                        "references": []
+                    },
+                    "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-3.png",
+                    "children": [],
+                    "paper_size_ratio": 0.27290644439425976,
+                    "natural_fig_w": 1143.153532995459,
+                    "sp": 0.16530161063785714
+                }
+            ],
+            "sp": 0.16530161063785714,
+            "x": 187.34625386628895,
+            "y": 587.8450815383453,
+            "width": 477.05789227808214,
+            "height": 214.02121154411424
+        },
+        {
+            "panel_id": "221",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.09434593509534961,
+            "gp": 0.186046511627907,
+            "text_len": 986,
+            "figure_size": 451962,
+            "figure_aspect": 2.537914691943128,
+            "is_main_figure": true,
+            "is_table": false,
+            "content": "The Hierarchical Paper-to-Poster pipeline begins by constructing a Content Tree through semantic summarization and redundancy removal, preserving key information while reducing noise. This Content Tree reflects the logical hierarchy of the paper, such as sections, subsections, and key findings. A corresponding Layout Tree is generated based on the content hierarchy, assigning spatial roles to each node according to importance and relationships. These two trees are merged into a unified Poster Tree, where each node encodes both semantic meaning and spatial attributes like position, size, and alignment. This integration enables structure-aware poster synthesis that respects both content flow and visual balance. The resulting Poster Tree serves as a high-level blueprint for generating visually coherent and semantically meaningful posters. This hierarchical approach ensures that the final poster maintains logical structure while optimizing for aesthetic and readability goals.",
+            "assets": {
+                "figures": [
+                    "3"
+                ],
+                "tables": [],
+                "references": []
+            },
+            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-3.png",
+            "children": [],
+            "paper_size_ratio": 0.27290644439425976,
+            "natural_fig_w": 1143.153532995459,
+            "sp": 0.16530161063785714,
+            "x": 187.34625386628895,
+            "y": 615.8450815383453,
+            "width": 477.05789227808214,
+            "height": 186.02121154411424
+        },
+        {
+            "panel_id": "23",
+            "section_name": "Hierarchical Modification Planning",
+            "node_type": "subsection",
+            "children": [
+                {
+                    "panel_id": "231",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.09033121445299432,
+                    "gp": 0.0,
+                    "text_len": 906,
+                    "figure_size": 0,
+                    "figure_aspect": 1.0,
+                    "is_main_figure": false,
+                    "is_table": false,
+                    "content": "The hierarchical modification planning framework employs a root-to-leaf traversal strategy to systematically update poster components. The Layout Agent dynamically optimizes spatial attributes such as positioning and scaling, while the Content Agent adjusts text density to maintain readability and visual balance. By leveraging parent and descendant context at each node, structural and semantic consistency is preserved throughout the poster. This top-down propagation enables coherent, context-aware refinements that align layout with content intent. The iterative nature of the process ensures gradual improvement in visual quality and compositional harmony. Global feedback is integrated after each full traversal to guide further optimization, minimizing redundant changes and accelerating convergence. This structured approach supports high-fidelity poster generation with minimal user intervention.",
+                    "assets": {},
+                    "asset_path": null,
+                    "children": [],
+                    "sp": 0.19033121445299434
+                }
+            ],
+            "sp": 0.19033121445299434,
+            "x": 187.34625386628895,
+            "y": 804.8662930824596,
+            "width": 477.05789227808214,
+            "height": 95.13370691754051
+        },
+        {
+            "panel_id": "231",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.09033121445299432,
+            "gp": 0.0,
+            "text_len": 906,
+            "figure_size": 0,
+            "figure_aspect": 1.0,
+            "is_main_figure": false,
+            "is_table": false,
+            "content": "The hierarchical modification planning framework employs a root-to-leaf traversal strategy to systematically update poster components. The Layout Agent dynamically optimizes spatial attributes such as positioning and scaling, while the Content Agent adjusts text density to maintain readability and visual balance. By leveraging parent and descendant context at each node, structural and semantic consistency is preserved throughout the poster. This top-down propagation enables coherent, context-aware refinements that align layout with content intent. The iterative nature of the process ensures gradual improvement in visual quality and compositional harmony. Global feedback is integrated after each full traversal to guide further optimization, minimizing redundant changes and accelerating convergence. This structured approach supports high-fidelity poster generation with minimal user intervention.",
+            "assets": {},
+            "asset_path": null,
+            "children": [],
+            "sp": 0.19033121445299434,
+            "x": 187.34625386628895,
+            "y": 832.8662930824596,
+            "width": 477.05789227808214,
+            "height": 67.13370691754051
+        },
+        {
+            "panel_id": "3",
+            "section_name": "Experiments",
+            "node_type": "section",
+            "children": [
+                {
+                    "panel_id": "31",
+                    "section_name": "Experimental Setup",
+                    "node_type": "subsection",
+                    "children": [
+                        {
+                            "panel_id": "311",
+                            "section_name": "Content",
+                            "node_type": "content",
+                            "tp": 0.08297089327534292,
+                            "gp": 0.0,
+                            "text_len": 760,
+                            "figure_size": 0,
+                            "figure_aspect": 1.0,
+                            "is_main_figure": false,
+                            "is_table": false,
+                            "content": "The experimental evaluation is conducted using the Paper2Poster benchmark and a curated dataset of real-world papers from top-tier AI conferences such as NeurIPS, ICML, and CVPR. All models are evaluated under standardized visual conditions to ensure fair comparison, including fixed poster dimensions, consistent font sizes, and uniform layout constraints. Baselines include state-of-the-art end-to-end generative models, multi-agent collaborative frameworks, and specialized poster-generation agents. This setup enables rigorous assessment of layout planning, content prioritization, and visual harmony. The use of real-world papers ensures practical relevance and tests the model’s adaptability to diverse content structures and domain-specific conventions.",
+                            "assets": {},
+                            "asset_path": null,
+                            "children": [],
+                            "sp": 0.18297089327534294
+                        }
+                    ],
+                    "sp": 0.26098341727486224
+                },
+                {
+                    "panel_id": "32",
+                    "section_name": "Qualitative Evaluation",
+                    "node_type": "subsection",
+                    "children": [
+                        {
+                            "panel_id": "321",
+                            "section_name": "Content",
+                            "node_type": "content",
+                            "tp": 0.08263633322181331,
+                            "gp": 0.11627906976744186,
+                            "text_len": 754,
+                            "figure_size": 4125381,
+                            "figure_aspect": 1.2634200332042058,
+                            "is_main_figure": false,
+                            "is_table": false,
+                            "content": "Qualitative comparisons reveal that PosterForest generates well-balanced, visually coherent posters with optimal space utilization and logical content hierarchy. It effectively scales figures and tables without distortion, ensuring readability and visual impact across different sections. Unlike baselines that often omit critical content or misalign elements, PosterForest retains all key information while maintaining aesthetic consistency. The generated posters exhibit strong structural clarity, with clear section separation and intuitive flow from introduction to results. These visual advantages are consistent across diverse domains, demonstrating the model’s ability to generalize and adapt to varying content complexity and presentation styles.",
+                            "assets": {
+                                "figures": [
+                                    "4"
+                                ],
+                                "tables": [],
+                                "references": []
+                            },
+                            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-4.png",
+                            "children": [],
+                            "paper_size_ratio": 2.4910126525717557,
+                            "natural_fig_w": 1369.7606389814057,
+                            "sp": 0.605748990261882
+                        }
+                    ],
+                    "sp": 0.5405792984919349
+                },
+                {
+                    "panel_id": "33",
+                    "section_name": "Quantitative Evaluation",
+                    "node_type": "subsection",
+                    "children": [
+                        {
+                            "panel_id": "331",
+                            "section_name": "Content",
+                            "node_type": "content",
+                            "tp": 0.08464369354299096,
+                            "gp": 0.0,
+                            "text_len": 796,
+                            "figure_size": 0,
+                            "figure_aspect": 1.0,
+                            "is_main_figure": false,
+                            "is_table": false,
+                            "content": "PosterForest achieves the highest MLLM-as-a-Judge scores in informativeness, closely aligning with human-created ground truth. It outperforms all baselines in clarity, content completeness, and logical flow, indicating strong semantic fidelity. The quantitative results demonstrate that PosterForest effectively captures complex research content while maintaining coherent structure. These metrics reflect its ability to generate posters that are both informative and well-organized. The consistent superiority across multiple evaluation dimensions underscores its robustness. The model’s performance suggests it can reliably produce high-quality academic posters without human intervention. This quantitative validation supports its potential for real-world deployment in research communication.",
+                            "assets": {},
+                            "asset_path": null,
+                            "children": [],
+                            "sp": 0.18464369354299098
+                        }
+                    ],
+                    "sp": 0.26098341727486224
+                },
+                {
+                    "panel_id": "34",
+                    "section_name": "User Study",
+                    "node_type": "subsection",
+                    "children": [
+                        {
+                            "panel_id": "341",
+                            "section_name": "Content",
+                            "node_type": "content",
+                            "tp": 0.07929073268651723,
+                            "gp": 0.0930232558139535,
+                            "text_len": 697,
+                            "figure_size": 291900,
+                            "figure_aspect": 3.243333333333333,
+                            "is_main_figure": false,
+                            "is_table": true,
+                            "content": "A user study involving 25 AI graduate students confirms PosterForest is consistently preferred over existing baselines. Participants rated it highest in content fidelity, aesthetic quality, structural clarity, and overall quality. It achieved a peak preference rate of 59.2% in pairwise comparisons, significantly outperforming alternatives. The results indicate strong alignment with expert expectations for academic poster design. Users appreciated the balance between visual appeal and technical accuracy. This human evaluation validates the model’s effectiveness in producing publication-ready outputs. The high preference rate demonstrates its practical value in real-world research settings.",
+                            "assets": {
+                                "figures": [],
+                                "tables": [
+                                    "2"
+                                ],
+                                "references": []
+                            },
+                            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-table-2.png",
+                            "children": [],
+                            "table_size_ratio": 1.0,
+                            "natural_fig_w": 660.0,
+                            "sp": 0.35429073268651723
+                        }
+                    ],
+                    "sp": 0.3161742550409713
+                },
+                {
+                    "panel_id": "35",
+                    "section_name": "Ablation Study",
+                    "node_type": "subsection",
+                    "children": [
+                        {
+                            "panel_id": "351",
+                            "section_name": "Content",
+                            "node_type": "content",
+                            "tp": 0.05654064904650385,
+                            "gp": 0.13953488372093023,
+                            "text_len": 353,
+                            "figure_size": 1656106,
+                            "figure_aspect": 3.1334250343878955,
+                            "is_main_figure": false,
+                            "is_table": false,
+                            "content": "Ablation studies reveal that both the hierarchical Content Tree and dual-agent collaboration are critical to PosterForest’s performance. Removing the hierarchical Content Tree leads to fragmented structure and reduced coherence in poster content. Disabling dual-agent collaboration results in suboptimal content generation and weaker semantic alignment.",
+                            "assets": {
+                                "figures": [
+                                    "5"
+                                ],
+                                "tables": [],
+                                "references": []
+                            },
+                            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-6.png",
+                            "children": [],
+                            "paper_size_ratio": 1.0,
+                            "natural_fig_w": 660.0,
+                            "sp": 0.2765406490465039
+                        },
+                        {
+                            "panel_id": "352",
+                            "section_name": "Content [2]",
+                            "node_type": "content",
+                            "tp": 0.057209769153563066,
+                            "gp": 0.11627906976744186,
+                            "text_len": 365,
+                            "figure_size": 1166778,
+                            "figure_aspect": 1.0502846299810247,
+                            "is_main_figure": false,
+                            "is_table": false,
+                            "content": "The combined effect of both components ensures structured, logically consistent, and semantically rich outputs. These findings confirm that structural organization and collaborative reasoning are essential for high-quality poster generation. The ablation results highlight the design’s synergy and reinforce the necessity of both components for optimal performance.",
+                            "assets": {
+                                "figures": [
+                                    "6"
+                                ],
+                                "tables": [],
+                                "references": []
+                            },
+                            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-7.png",
+                            "children": [],
+                            "paper_size_ratio": 0.7045309901660884,
+                            "natural_fig_w": 498.72830436402234,
+                            "sp": 0.19811596718678076
+                        }
+                    ],
+                    "sp": 0.42359053791738693
+                }
+            ],
+            "sp": 1.6268702981044603,
+            "x": 664.4041461443711,
+            "y": 125.16000000000001,
+            "width": 385.5958538556289,
+            "height": 774.84
+        },
+        {
+            "panel_id": "31",
+            "section_name": "Experimental Setup",
+            "node_type": "subsection",
+            "children": [
+                {
+                    "panel_id": "311",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.08297089327534292,
+                    "gp": 0.0,
+                    "text_len": 760,
+                    "figure_size": 0,
+                    "figure_aspect": 1.0,
+                    "is_main_figure": false,
+                    "is_table": false,
+                    "content": "The experimental evaluation is conducted using the Paper2Poster benchmark and a curated dataset of real-world papers from top-tier AI conferences such as NeurIPS, ICML, and CVPR. All models are evaluated under standardized visual conditions to ensure fair comparison, including fixed poster dimensions, consistent font sizes, and uniform layout constraints. Baselines include state-of-the-art end-to-end generative models, multi-agent collaborative frameworks, and specialized poster-generation agents. This setup enables rigorous assessment of layout planning, content prioritization, and visual harmony. The use of real-world papers ensures practical relevance and tests the model’s adaptability to diverse content structures and domain-specific conventions.",
+                    "assets": {},
+                    "asset_path": null,
+                    "children": [],
+                    "sp": 0.18297089327534294
+                }
+            ],
+            "sp": 0.26098341727486224,
+            "x": 664.4041461443711,
+            "y": 161.16000000000003,
+            "width": 171.32727614326407,
+            "height": 328.5929127842033
+        },
+        {
+            "panel_id": "311",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.08297089327534292,
+            "gp": 0.0,
+            "text_len": 760,
+            "figure_size": 0,
+            "figure_aspect": 1.0,
+            "is_main_figure": false,
+            "is_table": false,
+            "content": "The experimental evaluation is conducted using the Paper2Poster benchmark and a curated dataset of real-world papers from top-tier AI conferences such as NeurIPS, ICML, and CVPR. All models are evaluated under standardized visual conditions to ensure fair comparison, including fixed poster dimensions, consistent font sizes, and uniform layout constraints. Baselines include state-of-the-art end-to-end generative models, multi-agent collaborative frameworks, and specialized poster-generation agents. This setup enables rigorous assessment of layout planning, content prioritization, and visual harmony. The use of real-world papers ensures practical relevance and tests the model’s adaptability to diverse content structures and domain-specific conventions.",
+            "assets": {},
+            "asset_path": null,
+            "children": [],
+            "sp": 0.18297089327534294,
+            "x": 664.4041461443711,
+            "y": 208.84750000000003,
+            "width": 171.32727614326407,
+            "height": 280.9054127842033
+        },
+        {
+            "panel_id": "32",
+            "section_name": "Qualitative Evaluation",
+            "node_type": "subsection",
+            "children": [
+                {
+                    "panel_id": "321",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.08263633322181331,
+                    "gp": 0.11627906976744186,
+                    "text_len": 754,
+                    "figure_size": 4125381,
+                    "figure_aspect": 1.2634200332042058,
+                    "is_main_figure": false,
+                    "is_table": false,
+                    "content": "Qualitative comparisons reveal that PosterForest generates well-balanced, visually coherent posters with optimal space utilization and logical content hierarchy. It effectively scales figures and tables without distortion, ensuring readability and visual impact across different sections. Unlike baselines that often omit critical content or misalign elements, PosterForest retains all key information while maintaining aesthetic consistency. The generated posters exhibit strong structural clarity, with clear section separation and intuitive flow from introduction to results. These visual advantages are consistent across diverse domains, demonstrating the model’s ability to generalize and adapt to varying content complexity and presentation styles.",
+                    "assets": {
+                        "figures": [
+                            "4"
+                        ],
+                        "tables": [],
+                        "references": []
+                    },
+                    "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-4.png",
+                    "children": [],
+                    "paper_size_ratio": 2.4910126525717557,
+                    "natural_fig_w": 1369.7606389814057,
+                    "sp": 0.605748990261882
+                }
+            ],
+            "sp": 0.5405792984919349,
+            "x": 835.7314222876352,
+            "y": 161.16000000000003,
+            "width": 214.26857771236482,
+            "height": 328.5929127842033
+        },
+        {
+            "panel_id": "321",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.08263633322181331,
+            "gp": 0.11627906976744186,
+            "text_len": 754,
+            "figure_size": 4125381,
+            "figure_aspect": 1.2634200332042058,
+            "is_main_figure": false,
+            "is_table": false,
+            "content": "Qualitative comparisons reveal that PosterForest generates well-balanced, visually coherent posters with optimal space utilization and logical content hierarchy. It effectively scales figures and tables without distortion, ensuring readability and visual impact across different sections. Unlike baselines that often omit critical content or misalign elements, PosterForest retains all key information while maintaining aesthetic consistency. The generated posters exhibit strong structural clarity, with clear section separation and intuitive flow from introduction to results. These visual advantages are consistent across diverse domains, demonstrating the model’s ability to generalize and adapt to varying content complexity and presentation styles.",
+            "assets": {
+                "figures": [
+                    "4"
+                ],
+                "tables": [],
+                "references": []
+            },
+            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-4.png",
+            "children": [],
+            "paper_size_ratio": 2.4910126525717557,
+            "natural_fig_w": 1369.7606389814057,
+            "sp": 0.605748990261882,
+            "x": 835.7314222876352,
+            "y": 189.16000000000003,
+            "width": 214.26857771236482,
+            "height": 300.5929127842033
+        },
+        {
+            "panel_id": "33",
+            "section_name": "Quantitative Evaluation",
+            "node_type": "subsection",
+            "children": [
+                {
+                    "panel_id": "331",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.08464369354299096,
+                    "gp": 0.0,
+                    "text_len": 796,
+                    "figure_size": 0,
+                    "figure_aspect": 1.0,
+                    "is_main_figure": false,
+                    "is_table": false,
+                    "content": "PosterForest achieves the highest MLLM-as-a-Judge scores in informativeness, closely aligning with human-created ground truth. It outperforms all baselines in clarity, content completeness, and logical flow, indicating strong semantic fidelity. The quantitative results demonstrate that PosterForest effectively captures complex research content while maintaining coherent structure. These metrics reflect its ability to generate posters that are both informative and well-organized. The consistent superiority across multiple evaluation dimensions underscores its robustness. The model’s performance suggests it can reliably produce high-quality academic posters without human intervention. This quantitative validation supports its potential for real-world deployment in research communication.",
+                    "assets": {},
+                    "asset_path": null,
+                    "children": [],
+                    "sp": 0.18464369354299098
+                }
+            ],
+            "sp": 0.26098341727486224,
+            "x": 664.4041461443711,
+            "y": 492.7529127842033,
+            "width": 151.2258287204075,
+            "height": 202.29028176366378
+        },
+        {
+            "panel_id": "331",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.08464369354299096,
+            "gp": 0.0,
+            "text_len": 796,
+            "figure_size": 0,
+            "figure_aspect": 1.0,
+            "is_main_figure": false,
+            "is_table": false,
+            "content": "PosterForest achieves the highest MLLM-as-a-Judge scores in informativeness, closely aligning with human-created ground truth. It outperforms all baselines in clarity, content completeness, and logical flow, indicating strong semantic fidelity. The quantitative results demonstrate that PosterForest effectively captures complex research content while maintaining coherent structure. These metrics reflect its ability to generate posters that are both informative and well-organized. The consistent superiority across multiple evaluation dimensions underscores its robustness. The model’s performance suggests it can reliably produce high-quality academic posters without human intervention. This quantitative validation supports its potential for real-world deployment in research communication.",
+            "assets": {},
+            "asset_path": null,
+            "children": [],
+            "sp": 0.18464369354299098,
+            "x": 664.4041461443711,
+            "y": 540.4404127842033,
+            "width": 151.2258287204075,
+            "height": 154.60278176366378
+        },
+        {
+            "panel_id": "34",
+            "section_name": "User Study",
+            "node_type": "subsection",
+            "children": [
+                {
+                    "panel_id": "341",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.07929073268651723,
+                    "gp": 0.0930232558139535,
+                    "text_len": 697,
+                    "figure_size": 291900,
+                    "figure_aspect": 3.243333333333333,
+                    "is_main_figure": false,
+                    "is_table": true,
+                    "content": "A user study involving 25 AI graduate students confirms PosterForest is consistently preferred over existing baselines. Participants rated it highest in content fidelity, aesthetic quality, structural clarity, and overall quality. It achieved a peak preference rate of 59.2% in pairwise comparisons, significantly outperforming alternatives. The results indicate strong alignment with expert expectations for academic poster design. Users appreciated the balance between visual appeal and technical accuracy. This human evaluation validates the model’s effectiveness in producing publication-ready outputs. The high preference rate demonstrates its practical value in real-world research settings.",
+                    "assets": {
+                        "figures": [],
+                        "tables": [
+                            "2"
+                        ],
+                        "references": []
+                    },
+                    "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-table-2.png",
+                    "children": [],
+                    "table_size_ratio": 1.0,
+                    "natural_fig_w": 660.0,
+                    "sp": 0.35429073268651723
+                }
+            ],
+            "sp": 0.3161742550409713,
+            "x": 815.6299748647787,
+            "y": 492.7529127842033,
+            "width": 234.3700251352214,
+            "height": 202.29028176366378
+        },
+        {
+            "panel_id": "341",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.07929073268651723,
+            "gp": 0.0930232558139535,
+            "text_len": 697,
+            "figure_size": 291900,
+            "figure_aspect": 3.243333333333333,
+            "is_main_figure": false,
+            "is_table": true,
+            "content": "A user study involving 25 AI graduate students confirms PosterForest is consistently preferred over existing baselines. Participants rated it highest in content fidelity, aesthetic quality, structural clarity, and overall quality. It achieved a peak preference rate of 59.2% in pairwise comparisons, significantly outperforming alternatives. The results indicate strong alignment with expert expectations for academic poster design. Users appreciated the balance between visual appeal and technical accuracy. This human evaluation validates the model’s effectiveness in producing publication-ready outputs. The high preference rate demonstrates its practical value in real-world research settings.",
+            "assets": {
+                "figures": [],
+                "tables": [
+                    "2"
+                ],
+                "references": []
+            },
+            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-table-2.png",
+            "children": [],
+            "table_size_ratio": 1.0,
+            "natural_fig_w": 660.0,
+            "sp": 0.35429073268651723,
+            "x": 815.6299748647787,
+            "y": 520.7529127842033,
+            "width": 234.3700251352214,
+            "height": 174.29028176366378
+        },
+        {
+            "panel_id": "35",
+            "section_name": "Ablation Study",
+            "node_type": "subsection",
+            "children": [
+                {
+                    "panel_id": "351",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.05654064904650385,
+                    "gp": 0.13953488372093023,
+                    "text_len": 353,
+                    "figure_size": 1656106,
+                    "figure_aspect": 3.1334250343878955,
+                    "is_main_figure": false,
+                    "is_table": false,
+                    "content": "Ablation studies reveal that both the hierarchical Content Tree and dual-agent collaboration are critical to PosterForest’s performance. Removing the hierarchical Content Tree leads to fragmented structure and reduced coherence in poster content. Disabling dual-agent collaboration results in suboptimal content generation and weaker semantic alignment.",
+                    "assets": {
+                        "figures": [
+                            "5"
+                        ],
+                        "tables": [],
+                        "references": []
+                    },
+                    "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-6.png",
+                    "children": [],
+                    "paper_size_ratio": 1.0,
+                    "natural_fig_w": 660.0,
+                    "sp": 0.2765406490465039
+                },
+                {
+                    "panel_id": "352",
+                    "section_name": "Content [2]",
+                    "node_type": "content",
+                    "tp": 0.057209769153563066,
+                    "gp": 0.11627906976744186,
+                    "text_len": 365,
+                    "figure_size": 1166778,
+                    "figure_aspect": 1.0502846299810247,
+                    "is_main_figure": false,
+                    "is_table": false,
+                    "content": "The combined effect of both components ensures structured, logically consistent, and semantically rich outputs. These findings confirm that structural organization and collaborative reasoning are essential for high-quality poster generation. The ablation results highlight the design’s synergy and reinforce the necessity of both components for optimal performance.",
+                    "assets": {
+                        "figures": [
+                            "6"
+                        ],
+                        "tables": [],
+                        "references": []
+                    },
+                    "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-7.png",
+                    "children": [],
+                    "paper_size_ratio": 0.7045309901660884,
+                    "natural_fig_w": 498.72830436402234,
+                    "sp": 0.19811596718678076
+                }
+            ],
+            "sp": 0.42359053791738693,
+            "x": 664.4041461443711,
+            "y": 698.0431945478671,
+            "width": 385.5958538556289,
+            "height": 201.95680545213295
+        },
+        {
+            "panel_id": "351",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.05654064904650385,
+            "gp": 0.13953488372093023,
+            "text_len": 353,
+            "figure_size": 1656106,
+            "figure_aspect": 3.1334250343878955,
+            "is_main_figure": false,
+            "is_table": false,
+            "content": "Ablation studies reveal that both the hierarchical Content Tree and dual-agent collaboration are critical to PosterForest’s performance. Removing the hierarchical Content Tree leads to fragmented structure and reduced coherence in poster content. Disabling dual-agent collaboration results in suboptimal content generation and weaker semantic alignment.",
+            "assets": {
+                "figures": [
+                    "5"
+                ],
+                "tables": [],
+                "references": []
+            },
+            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-6.png",
+            "children": [],
+            "paper_size_ratio": 1.0,
+            "natural_fig_w": 660.0,
+            "sp": 0.2765406490465039,
+            "x": 664.4041461443711,
+            "y": 726.0431945478671,
+            "width": 214.26857771236482,
+            "height": 173.95680545213295
+        },
+        {
+            "panel_id": "352",
+            "section_name": "Content [2]",
+            "node_type": "content",
+            "tp": 0.057209769153563066,
+            "gp": 0.11627906976744186,
+            "text_len": 365,
+            "figure_size": 1166778,
+            "figure_aspect": 1.0502846299810247,
+            "is_main_figure": false,
+            "is_table": false,
+            "content": "The combined effect of both components ensures structured, logically consistent, and semantically rich outputs. These findings confirm that structural organization and collaborative reasoning are essential for high-quality poster generation. The ablation results highlight the design’s synergy and reinforce the necessity of both components for optimal performance.",
+            "assets": {
+                "figures": [
+                    "6"
+                ],
+                "tables": [],
+                "references": []
+            },
+            "asset_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-7.png",
+            "children": [],
+            "paper_size_ratio": 0.7045309901660884,
+            "natural_fig_w": 498.72830436402234,
+            "sp": 0.19811596718678076,
+            "x": 878.672723856736,
+            "y": 726.0431945478671,
+            "width": 171.32727614326407,
+            "height": 173.95680545213295
+        },
+        {
+            "panel_id": "4",
+            "section_name": "Conclusion",
+            "node_type": "section",
+            "children": [
+                {
+                    "panel_id": "41",
+                    "section_name": "Content",
+                    "node_type": "content",
+                    "tp": 0.09300769488123119,
+                    "gp": 0.0,
+                    "text_len": 955,
+                    "figure_size": 0,
+                    "figure_aspect": 1.0,
+                    "is_main_figure": false,
+                    "is_table": false,
+                    "content": "PosterForest presents a novel, training-free framework for generating scientific posters by modeling them through a hierarchical Poster Tree and leveraging multi-agent collaboration. The hierarchical structure captures the logical flow of research, ensuring content coherence and spatial alignment of figures with text. By integrating content and layout agents that work in tandem, the system jointly optimizes semantic accuracy and visual design. This approach achieves state-of-the-art performance in both automated evaluations (e.g., layout correctness, content relevance) and human assessments (e.g., readability, aesthetic quality). The framework eliminates the need for large-scale training data, making it highly adaptable across domains. Its success lies in the principled integration of structure and collaboration, enabling scalable, high-quality poster generation. PosterForest sets a new benchmark for automated scientific visualization tools.",
+                    "assets": {},
+                    "asset_path": null,
+                    "children": [],
+                    "sp": 0.1930076948812312
+                }
+            ],
+            "sp": 0.5603863325762526,
+            "x": 1050.0,
+            "y": 125.16000000000001,
+            "width": 150.0,
+            "height": 774.84
+        },
+        {
+            "panel_id": "41",
+            "section_name": "Content",
+            "node_type": "content",
+            "tp": 0.09300769488123119,
+            "gp": 0.0,
+            "text_len": 955,
+            "figure_size": 0,
+            "figure_aspect": 1.0,
+            "is_main_figure": false,
+            "is_table": false,
+            "content": "PosterForest presents a novel, training-free framework for generating scientific posters by modeling them through a hierarchical Poster Tree and leveraging multi-agent collaboration. The hierarchical structure captures the logical flow of research, ensuring content coherence and spatial alignment of figures with text. By integrating content and layout agents that work in tandem, the system jointly optimizes semantic accuracy and visual design. This approach achieves state-of-the-art performance in both automated evaluations (e.g., layout correctness, content relevance) and human assessments (e.g., readability, aesthetic quality). The framework eliminates the need for large-scale training data, making it highly adaptable across domains. Its success lies in the principled integration of structure and collaboration, enabling scalable, high-quality poster generation. PosterForest sets a new benchmark for automated scientific visualization tools.",
+            "assets": {},
+            "asset_path": null,
+            "children": [],
+            "sp": 0.1930076948812312,
+            "x": 1050.0,
+            "y": 161.16000000000003,
+            "width": 150.0,
+            "height": 738.84
+        }
+    ],
+    "figure_arrangement": [
+        {
+            "panel_id": "11",
+            "x": 130.02745541384965,
+            "y": 167.16000000000003,
+            "panel_name": "Content",
+            "width": 404.3492353166718,
+            "height": 150.9270126251644,
+            "figure_id": 0,
+            "figure_name": "p<Content>_f0",
+            "figure_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-1.png"
+        },
+        {
+            "panel_id": "21",
+            "x": 128.61461138165058,
+            "y": 416.0870126251644,
+            "panel_name": "Content",
+            "width": 407.17492338106996,
+            "height": 152.75806891318092,
+            "figure_id": 0,
+            "figure_name": "p<Content>_f0",
+            "figure_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-2.png"
+        },
+        {
+            "panel_id": "221",
+            "x": 264.6907005222182,
+            "y": 618.8450815383453,
+            "panel_name": "Content",
+            "width": 322.36899896622356,
+            "height": 127.02121154411424,
+            "figure_id": 0,
+            "figure_name": "p<Content>_f0",
+            "figure_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-3.png"
+        },
+        {
+            "panel_id": "321",
+            "x": 841.7314222876352,
+            "y": 192.16000000000003,
+            "panel_name": "Content",
+            "width": 202.26857771236482,
+            "height": 160.09606654675568,
+            "figure_id": 0,
+            "figure_name": "p<Content>_f0",
+            "figure_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-4.png"
+        },
+        {
+            "panel_id": "341",
+            "x": 821.6299748647787,
+            "y": 523.7529127842033,
+            "panel_name": "Content",
+            "width": 222.3700251352214,
+            "height": 68.5621865781772,
+            "figure_id": 0,
+            "figure_name": "p<Content>_f0",
+            "figure_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-table-2.png"
+        },
+        {
+            "panel_id": "351",
+            "x": 670.4041461443711,
+            "y": 729.0431945478671,
+            "panel_name": "Content",
+            "width": 202.26857771236482,
+            "height": 64.55191220232187,
+            "figure_id": 0,
+            "figure_name": "p<Content>_f0",
+            "figure_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-6.png"
+        },
+        {
+            "panel_id": "352",
+            "x": 903.9676789893209,
+            "y": 729.0431945478671,
+            "panel_name": "Content [2]",
+            "width": 120.7373658780941,
+            "height": 114.95680545213295,
+            "figure_id": 0,
+            "figure_name": "p<Content [2]>_f0",
+            "figure_path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-7.png"
+        }
+    ],
+    "text_arrangement": [
+        {
+            "panel_id": 0,
+            "x": 0.0,
+            "y": 0.0,
+            "width": 1200.0,
+            "height": 54.74918918918919,
+            "textbox_id": 0,
+            "textbox_name": "p<Title>_t0",
+            "content": null,
+            "is_title": 40,
+            "content_for_ppt": [
+                {
+                    "alignment": "center",
+                    "bullet": false,
+                    "level": 0,
+                    "font_size": 60,
+                    "runs": [
+                        {
+                            "text": "PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation",
+                            "bold": true,
+                            "color": [
+                                255,
+                                255,
+                                255
+                            ],
+                            "fill_color": [
+                                63,
+                                86,
+                                147
+                            ]
+                        }
+                    ],
+                    "font_name": "Arial"
+                }
+            ]
+        },
+        {
+            "panel_id": 0,
+            "x": 0.0,
+            "y": 54.74918918918919,
+            "width": 1200.0,
+            "height": 64.41081081081082,
+            "textbox_id": 0,
+            "textbox_name": "p<Title>_t1",
+            "content": null,
+            "content_for_ppt": [
+                {
+                    "alignment": "center",
+                    "bullet": false,
+                    "level": 0,
+                    "font_size": 40,
+                    "runs": [
+                        {
+                            "text": "Jiho Choi¹, Seojeong Park¹, Seongjong Song², Hyunjung Shim²",
+                            "color": [
+                                255,
+                                255,
+                                255
+                            ],
+                            "fill_color": [
+                                63,
+                                86,
+                                147
+                            ]
+                        }
+                    ],
+                    "font_name": "Arial"
+                },
+                {
+                    "alignment": "center",
+                    "bullet": false,
+                    "level": 0,
+                    "font_size": 40,
+                    "runs": [
+                        {
+                            "text": "Graduate School of Artificial Intelligence, KAIST, Republic of Korea¹; School of Integrated Technology, Yonsei University, Republic of Korea²",
+                            "color": [
+                                255,
+                                255,
+                                255
+                            ],
+                            "fill_color": [
+                                63,
+                                86,
+                                147
+                            ]
+                        }
+                    ],
+                    "font_name": "Arial"
+                }
+            ]
+        },
+        {
+            "panel_id": "1",
+            "x": 6.0,
+            "y": 131.16000000000003,
+            "width": 652.4041461443711,
+            "height": 30.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Introduction>_title",
+            "content": "Introduction",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 48,
+                    "runs": [
+                        {
+                            "text": "Introduction",
+                            "bold": true,
+                            "color": [
+                                255,
+                                255,
+                                255
+                            ],
+                            "fill_color": [
+                                63,
+                                86,
+                                147
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "11",
+            "x": 6.0,
+            "y": 324.08701262516445,
+            "width": 652.4041461443711,
+            "height": 40.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Content>_body",
+            "content": "Scientific poster generation plays a vital role in effective knowledge sharing at conferences and academic events, yet current methods often fail to capture the hierarchical nature of scientific documents. Existing approaches typically treat content as a linear sequence, leading to fragmented structure and poor contextual understanding. They also decouple content creation from layout design, resulting in misaligned or visually inconsistent posters. Furthermore, many solutions rely on large-scale training, which demands significant computational resources and limits accessibility. These limitations hinder the generation of coherent, professional-quality posters that reflect the intended scholarly narrative. The authors identify these gaps as key barriers to advancing automated scientific communication tools. This work addresses them through a novel, training-free architecture grounded in hierarchical reasoning and collaborative agent design.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "Addresses critical gaps in scientific poster generation"
+                        }
+                    ],
+                    "font_name": "Arial"
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "Fails to capture hierarchical document structure"
+                        }
+                    ],
+                    "font_name": "Arial"
+                }
+            ]
+        },
+        {
+            "panel_id": "2",
+            "x": 6.0,
+            "y": 380.0870126251644,
+            "width": 652.4041461443711,
+            "height": 30.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Proposed Method>_title",
+            "content": "Proposed Method",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 48,
+                    "runs": [
+                        {
+                            "text": "Proposed Method",
+                            "bold": true,
+                            "color": [
+                                255,
+                                255,
+                                255
+                            ],
+                            "fill_color": [
+                                63,
+                                86,
+                                147
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "21",
+            "x": 6.0,
+            "y": 587.8450815383453,
+            "width": 175.34625386628895,
+            "height": 22.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Preliminaries>_title",
+            "content": "Preliminaries",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 42,
+                    "runs": [
+                        {
+                            "text": "Preliminaries",
+                            "bold": true,
+                            "color": [
+                                32,
+                                56,
+                                100
+                            ],
+                            "fill_color": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "211",
+            "x": 6.0,
+            "y": 618.8450815383453,
+            "width": 175.34625386628895,
+            "height": 271.15491846165474,
+            "textbox_id": 1,
+            "textbox_name": "p<Content>_body",
+            "content": "Traditional single-page generation (SPG) methods treat documents as flat sequences, failing to capture hierarchical structures and cross-modal alignment between content and layout. PosterForest addresses this limitation by modeling documents as a Raw Doc Tree, preserving the original structural hierarchy of the input paper. This Raw Doc Tree is then refined into a Content Tree through redundancy pruning and semantic summarization. Simultaneously, a Layout Tree is constructed to represent spatial relationships and visual organization. The integration of these two trees forms a unified Poster Tree that aligns semantic content with layout structure. This approach enables more coherent and semantically informed poster synthesis. By explicitly modeling hierarchy and cross-modal alignment, PosterForest overcomes key limitations of prior flat-sequence methods.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Models documents as a Raw Doc Tree to preserve hierarchy."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Separates content and layout into distinct trees for semantic and spatial modeling."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Unifies trees into a Poster Tree for aligned synthesis."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "Retains original input structure without flattening."
+                        }
+                    ],
+                    "font_name": "Arial"
+                }
+            ]
+        },
+        {
+            "panel_id": "22",
+            "x": 193.34625386628895,
+            "y": 587.8450815383453,
+            "width": 465.05789227808214,
+            "height": 22.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Hierarchical Paper-to-Poster>_title",
+            "content": "Hierarchical Paper-to-Poster",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 42,
+                    "runs": [
+                        {
+                            "text": "Hierarchical Paper-to-Poster",
+                            "bold": true,
+                            "color": [
+                                32,
+                                56,
+                                100
+                            ],
+                            "fill_color": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "221",
+            "x": 193.34625386628895,
+            "y": 751.8662930824596,
+            "width": 465.05789227808214,
+            "height": 40.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Content>_body",
+            "content": "The Hierarchical Paper-to-Poster pipeline begins by constructing a Content Tree through semantic summarization and redundancy removal, preserving key information while reducing noise. This Content Tree reflects the logical hierarchy of the paper, such as sections, subsections, and key findings. A corresponding Layout Tree is generated based on the content hierarchy, assigning spatial roles to each node according to importance and relationships. These two trees are merged into a unified Poster Tree, where each node encodes both semantic meaning and spatial attributes like position, size, and alignment. This integration enables structure-aware poster synthesis that respects both content flow and visual balance. The resulting Poster Tree serves as a high-level blueprint for generating visually coherent and semantically meaningful posters. This hierarchical approach ensures that the final poster maintains logical structure while optimizing for aesthetic and readability goals.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Builds a Content Tree via semantic summarization and redundancy removal."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                }
+            ]
+        },
+        {
+            "panel_id": "23",
+            "x": 193.34625386628895,
+            "y": 804.8662930824596,
+            "width": 465.05789227808214,
+            "height": 22.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Hierarchical Modification Planning>_title",
+            "content": "Hierarchical Modification Planning",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 42,
+                    "runs": [
+                        {
+                            "text": "Hierarchical Modification Planning",
+                            "bold": true,
+                            "color": [
+                                32,
+                                56,
+                                100
+                            ],
+                            "fill_color": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "231",
+            "x": 193.34625386628895,
+            "y": 835.8662930824596,
+            "width": 465.05789227808214,
+            "height": 54.13370691754051,
+            "textbox_id": 1,
+            "textbox_name": "p<Content>_body",
+            "content": "The hierarchical modification planning framework employs a root-to-leaf traversal strategy to systematically update poster components. The Layout Agent dynamically optimizes spatial attributes such as positioning and scaling, while the Content Agent adjusts text density to maintain readability and visual balance. By leveraging parent and descendant context at each node, structural and semantic consistency is preserved throughout the poster. This top-down propagation enables coherent, context-aware refinements that align layout with content intent. The iterative nature of the process ensures gradual improvement in visual quality and compositional harmony. Global feedback is integrated after each full traversal to guide further optimization, minimizing redundant changes and accelerating convergence. This structured approach supports high-fidelity poster generation with minimal user intervention.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Root-to-leaf traversal enables systematic poster updates."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "runs": [
+                        {
+                            "text": "Layout Agent optimizes positioning and scaling."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Content Agent adjusts text density for readability."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                }
+            ]
+        },
+        {
+            "panel_id": "3",
+            "x": 670.4041461443711,
+            "y": 131.16000000000003,
+            "width": 373.5958538556289,
+            "height": 30.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Experiments>_title",
+            "content": "Experiments",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 48,
+                    "runs": [
+                        {
+                            "text": "Experiments",
+                            "bold": true,
+                            "color": [
+                                255,
+                                255,
+                                255
+                            ],
+                            "fill_color": [
+                                63,
+                                86,
+                                147
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "31",
+            "x": 670.4041461443711,
+            "y": 161.16000000000003,
+            "width": 159.32727614326407,
+            "height": 41.6875,
+            "textbox_id": 0,
+            "textbox_name": "p<Experimental Setup>_title",
+            "content": "Experimental Setup",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 42,
+                    "runs": [
+                        {
+                            "text": "Experimental Setup",
+                            "bold": true,
+                            "color": [
+                                32,
+                                56,
+                                100
+                            ],
+                            "fill_color": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "311",
+            "x": 670.4041461443711,
+            "y": 211.84750000000003,
+            "width": 159.32727614326407,
+            "height": 267.9054127842033,
+            "textbox_id": 1,
+            "textbox_name": "p<Content>_body",
+            "content": "The experimental evaluation is conducted using the Paper2Poster benchmark and a curated dataset of real-world papers from top-tier AI conferences such as NeurIPS, ICML, and CVPR. All models are evaluated under standardized visual conditions to ensure fair comparison, including fixed poster dimensions, consistent font sizes, and uniform layout constraints. Baselines include state-of-the-art end-to-end generative models, multi-agent collaborative frameworks, and specialized poster-generation agents. This setup enables rigorous assessment of layout planning, content prioritization, and visual harmony. The use of real-world papers ensures practical relevance and tests the model’s adaptability to diverse content structures and domain-specific conventions.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Evaluated on real-world AI papers from NeurIPS, ICML, CVPR."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "runs": [
+                        {
+                            "text": "Uses Paper2Poster benchmark with fixed visual constraints."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Compared against SOTA generative and collaborative models."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Tests layout, content, and visual harmony under fixed constraints."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                }
+            ]
+        },
+        {
+            "panel_id": "32",
+            "x": 841.7314222876352,
+            "y": 161.16000000000003,
+            "width": 202.26857771236482,
+            "height": 22.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Qualitative Evaluation>_title",
+            "content": "Qualitative Evaluation",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 42,
+                    "runs": [
+                        {
+                            "text": "Qualitative Evaluation",
+                            "bold": true,
+                            "color": [
+                                32,
+                                56,
+                                100
+                            ],
+                            "fill_color": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "321",
+            "x": 841.7314222876352,
+            "y": 358.25606654675573,
+            "width": 202.26857771236482,
+            "height": 121.49684623744758,
+            "textbox_id": 0,
+            "textbox_name": "p<Content>_body",
+            "content": "Qualitative comparisons reveal that PosterForest generates well-balanced, visually coherent posters with optimal space utilization and logical content hierarchy. It effectively scales figures and tables without distortion, ensuring readability and visual impact across different sections. Unlike baselines that often omit critical content or misalign elements, PosterForest retains all key information while maintaining aesthetic consistency. The generated posters exhibit strong structural clarity, with clear section separation and intuitive flow from introduction to results. These visual advantages are consistent across diverse domains, demonstrating the model’s ability to generalize and adapt to varying content complexity and presentation styles.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "PosterForest produces visually coherent, well-balanced posters."
+                        }
+                    ],
+                    "font_name": "Arial"
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "Optimal space utilization across sections."
+                        }
+                    ],
+                    "font_name": "Arial"
+                }
+            ]
+        },
+        {
+            "panel_id": "33",
+            "x": 670.4041461443711,
+            "y": 492.7529127842033,
+            "width": 139.2258287204075,
+            "height": 41.6875,
+            "textbox_id": 0,
+            "textbox_name": "p<Quantitative Evaluation>_title",
+            "content": "Quantitative Evaluation",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 42,
+                    "runs": [
+                        {
+                            "text": "Quantitative Evaluation",
+                            "bold": true,
+                            "color": [
+                                32,
+                                56,
+                                100
+                            ],
+                            "fill_color": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "331",
+            "x": 670.4041461443711,
+            "y": 543.4404127842033,
+            "width": 139.2258287204075,
+            "height": 141.60278176366378,
+            "textbox_id": 1,
+            "textbox_name": "p<Content>_body",
+            "content": "PosterForest achieves the highest MLLM-as-a-Judge scores in informativeness, closely aligning with human-created ground truth. It outperforms all baselines in clarity, content completeness, and logical flow, indicating strong semantic fidelity. The quantitative results demonstrate that PosterForest effectively captures complex research content while maintaining coherent structure. These metrics reflect its ability to generate posters that are both informative and well-organized. The consistent superiority across multiple evaluation dimensions underscores its robustness. The model’s performance suggests it can reliably produce high-quality academic posters without human intervention. This quantitative validation supports its potential for real-world deployment in research communication.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "PosterForest achieves top MLLM-as-a-Judge scores in informativeness."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "runs": [
+                        {
+                            "text": "Closely matches human ground truth."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                }
+            ]
+        },
+        {
+            "panel_id": "34",
+            "x": 821.6299748647787,
+            "y": 492.7529127842033,
+            "width": 222.3700251352214,
+            "height": 22.0,
+            "textbox_id": 0,
+            "textbox_name": "p<User Study>_title",
+            "content": "User Study",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 42,
+                    "runs": [
+                        {
+                            "text": "User Study",
+                            "bold": true,
+                            "color": [
+                                32,
+                                56,
+                                100
+                            ],
+                            "fill_color": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "341",
+            "x": 821.6299748647787,
+            "y": 598.3150993623806,
+            "width": 222.3700251352214,
+            "height": 86.7280951854865,
+            "textbox_id": 0,
+            "textbox_name": "p<Content>_body",
+            "content": "A user study involving 25 AI graduate students confirms PosterForest is consistently preferred over existing baselines. Participants rated it highest in content fidelity, aesthetic quality, structural clarity, and overall quality. It achieved a peak preference rate of 59.2% in pairwise comparisons, significantly outperforming alternatives. The results indicate strong alignment with expert expectations for academic poster design. Users appreciated the balance between visual appeal and technical accuracy. This human evaluation validates the model’s effectiveness in producing publication-ready outputs. The high preference rate demonstrates its practical value in real-world research settings.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "PosterForest preferred by 25 AI graduate students over baselines."
+                        }
+                    ],
+                    "font_name": "Arial"
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "Peak preference rate: 59.2% in pairwise comparisons."
+                        }
+                    ],
+                    "font_name": "Arial"
+                }
+            ]
+        },
+        {
+            "panel_id": "35",
+            "x": 670.4041461443711,
+            "y": 698.0431945478671,
+            "width": 373.5958538556289,
+            "height": 22.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Ablation Study>_title",
+            "content": "Ablation Study",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 42,
+                    "runs": [
+                        {
+                            "text": "Ablation Study",
+                            "bold": true,
+                            "color": [
+                                32,
+                                56,
+                                100
+                            ],
+                            "fill_color": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "351",
+            "x": 670.4041461443711,
+            "y": 799.595106750189,
+            "width": 202.26857771236482,
+            "height": 90.40489324981104,
+            "textbox_id": 0,
+            "textbox_name": "p<Content>_body",
+            "content": "Ablation studies reveal that both the hierarchical Content Tree and dual-agent collaboration are critical to PosterForest’s performance. Removing the hierarchical Content Tree leads to fragmented structure and reduced coherence in poster content. Disabling dual-agent collaboration results in suboptimal content generation and weaker semantic alignment.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "Hierarchical Content Tree essential for structural coherence."
+                        }
+                    ],
+                    "font_name": "Arial"
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "Removal causes fragmented content."
+                        }
+                    ],
+                    "font_name": "Arial"
+                }
+            ]
+        },
+        {
+            "panel_id": "352",
+            "x": 884.672723856736,
+            "y": 850.0,
+            "width": 159.32727614326407,
+            "height": 40.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Content [2]>_body",
+            "content": "The combined effect of both components ensures structured, logically consistent, and semantically rich outputs. These findings confirm that structural organization and collaborative reasoning are essential for high-quality poster generation. The ablation results highlight the design’s synergy and reinforce the necessity of both components for optimal performance.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Component synergy enables structured, consistent, and semantically rich outputs."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                }
+            ]
+        },
+        {
+            "panel_id": "4",
+            "x": 1056.0,
+            "y": 131.16000000000003,
+            "width": 138.0,
+            "height": 30.0,
+            "textbox_id": 0,
+            "textbox_name": "p<Conclusion>_title",
+            "content": "Conclusion",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": false,
+                    "level": 0,
+                    "font_name": "Arial",
+                    "font_size": 48,
+                    "runs": [
+                        {
+                            "text": "Conclusion",
+                            "bold": true,
+                            "color": [
+                                255,
+                                255,
+                                255
+                            ],
+                            "fill_color": [
+                                63,
+                                86,
+                                147
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "panel_id": "41",
+            "x": 1056.0,
+            "y": 167.16000000000003,
+            "width": 138.0,
+            "height": 722.84,
+            "textbox_id": 1,
+            "textbox_name": "p<Content>_body",
+            "content": "PosterForest presents a novel, training-free framework for generating scientific posters by modeling them through a hierarchical Poster Tree and leveraging multi-agent collaboration. The hierarchical structure captures the logical flow of research, ensuring content coherence and spatial alignment of figures with text. By integrating content and layout agents that work in tandem, the system jointly optimizes semantic accuracy and visual design. This approach achieves state-of-the-art performance in both automated evaluations (e.g., layout correctness, content relevance) and human assessments (e.g., readability, aesthetic quality). The framework eliminates the need for large-scale training data, making it highly adaptable across domains. Its success lies in the principled integration of structure and collaboration, enabling scalable, high-quality poster generation. PosterForest sets a new benchmark for automated scientific visualization tools.",
+            "content_for_ppt": [
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Introduces training-free scientific poster generation using hierarchical structure."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "runs": [
+                        {
+                            "text": "Hierarchical Poster Tree ensures logical flow and spatial coherence."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "runs": [
+                        {
+                            "text": "Captures research narrative from abstract to conclusion."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Employs multi-agent collaboration for layout and content optimization."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "runs": [
+                        {
+                            "text": "Content agent: ensures semantic accuracy and relevance."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "runs": [
+                        {
+                            "text": "Layout agent: enforces visual balance and alignment."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 0,
+                    "runs": [
+                        {
+                            "text": "Achieves SOTA in layout correctness and content relevance."
+                        }
+                    ],
+                    "font_name": "Arial",
+                    "font_size": 36
+                },
+                {
+                    "alignment": "left",
+                    "bullet": true,
+                    "level": 1,
+                    "font_size": 36,
+                    "runs": [
+                        {
+                            "text": "Uses hierarchical Poster Tree structure."
+                        }
+                    ],
+                    "font_name": "Arial"
+                }
+            ]
+        }
+    ]
+}

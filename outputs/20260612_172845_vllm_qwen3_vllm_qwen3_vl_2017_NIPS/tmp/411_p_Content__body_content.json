@@ -1,0 +1,14 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Trained on WMT 2014 corpus with BPE tokenization."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

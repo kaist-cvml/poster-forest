@@ -1,0 +1,38 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "FFN enables non-linear processing at each sequence position."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Uses two linear layers with ReLU activation."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Implemented via efficient 1D convolutions for parallel processing."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

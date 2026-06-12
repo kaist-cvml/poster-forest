@@ -1,0 +1,14 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Builds a Content Tree via semantic summarization and redundancy removal."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

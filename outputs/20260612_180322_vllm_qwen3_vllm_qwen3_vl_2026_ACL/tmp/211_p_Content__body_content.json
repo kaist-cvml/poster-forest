@@ -1,0 +1,50 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Models documents as a Raw Doc Tree to preserve hierarchy."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Separates content and layout into distinct trees for semantic and spatial modeling."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Unifies trees into a Poster Tree for aligned synthesis."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Retains original input structure without flattening."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

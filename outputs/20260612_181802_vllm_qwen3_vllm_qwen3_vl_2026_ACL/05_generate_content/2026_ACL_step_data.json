@@ -1,0 +1,11 @@
+{
+    "step_info.json": {
+        "step": 5,
+        "name": "content_generation",
+        "description": "Poster content generation",
+        "input_tokens_text": 9454,
+        "output_tokens_text": 3703,
+        "input_tokens_vision": 0,
+        "output_tokens_vision": 0
+    }
+}

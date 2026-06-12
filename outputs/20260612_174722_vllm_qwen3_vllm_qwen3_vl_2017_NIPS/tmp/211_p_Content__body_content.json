@@ -1,0 +1,38 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Encoder and decoder each have six identical layers."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Each layer includes self-attention and feed-forward networks."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Residual connections and layer normalization enable stable training."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

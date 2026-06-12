@@ -1,0 +1,38 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Uses sinusoidal positional encodings to inject token position information."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Added to input embeddings directly."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Enables generalization to longer sequences than seen in training."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

@@ -1,0 +1,120 @@
+You are a document structure analysis expert who creates hierarchical tree representations of academic papers for poster generation.
+
+Given a markdown document and extracted figure/table captions, analyze the structure and create a hierarchical tree representation focusing on the logical flow guided by visual elements.
+
+## Section & Asset Strategy:
+- **PRIMARY GUIDANCE**: Preserve the paper's original section structure exactly as written
+- **ASSET ASSIGNMENT (primary)**: Assign each figure/table to the section whose body text explicitly cites it (e.g., "as shown in Table 2", "Figure 3 illustrates", "see Figure 3"). The section that *mentions* the asset in its body text takes priority over caption similarity.
+- **ASSET ASSIGNMENT (fallback)**: If no explicit citation is found in any section's body text, assign to the section whose content is most semantically related to the figure/table caption.
+- **CONTENT MAPPING**: Map text content to sections based on the paper's own headings — do not rearrange based on figure themes
+
+## Available Figure/Table Information:
+{% if figures_info %}
+**Figures:**
+{% for fig_id, fig_info in figures_info.items() %}
+- Figure {{ fig_id }}{% if fig_info.caption_number %} (from "Figure {{ fig_info.caption_number }}" in caption){% endif %}: {{ fig_info.caption }}
+{% endfor %}
+{% endif %}
+
+{% if tables_info %}
+**Tables:**
+{% for table_id, table_info in tables_info.items() %}
+- Table {{ table_id }}{% if table_info.caption_number %} (from "Table {{ table_info.caption_number }}" in caption){% endif %}: {{ table_info.caption }}
+{% endfor %}
+{% endif %}
+
+## Requirements:
+- **PRESERVE PAPER STRUCTURE**: Maintain the original paper's hierarchical structure (sections, subsections, sub-subsections, etc.) without depth limitations
+- **PAPER-DRIVEN SECTIONS**: Preserve the paper's own section titles and structure
+- **SUMMARIZE CONTENT**: Write a concise 2-3 sentence summary for each section's content field — do NOT copy verbatim text from the document
+- **NO DEPTH LIMITS**: Allow arbitrary nesting depth to match the paper's structure
+- Each node needs: id, title, type, content, assets, children
+- **ASSET REFERENCE FORMAT**: Use the actual figure/table IDs shown above (e.g., "2", "3", "1" etc.)
+- **ASSET ASSIGNMENT**: First check which section's body text explicitly cites each figure/table (e.g., "Table 2 shows...", "in Figure 3"). Assign based on that citation. Only use caption similarity as a fallback if no explicit mention exists.
+
+## Asset ID Reference Rules:
+{% if figures_info %}
+- For figures, use these exact IDs in the "figures" array: [{% for fig_id in figures_info.keys() %}"{{ fig_id }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+{% endif %}
+{% if tables_info %}
+- For tables, use these exact IDs in the "tables" array: [{% for table_id in tables_info.keys() %}"{{ table_id }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+{% endif %}
+
+## Asset Assignment Strategy:
+1. **Scan body text** for explicit citations of each figure/table (e.g., "Figure 3 shows", "as shown in Table 2", "see Fig. 3", "Table 2 demonstrates")
+2. **Assign by citation**: Place the figure/table in the section whose body text contains that explicit mention
+3. **Fallback to caption similarity**: Only if no explicit mention exists in any section, use caption semantics to pick the most relevant section
+4. **Preserve paper sections**: Use the paper's own heading titles, not themes derived from captions
+5. **Preserve hierarchical depth** as found in the original paper structure
+
+## Structure Rules:
+- **Root**: Contains title, authors, abstract, and full paper metadata
+- **Sections**: Can contain content and/or subsections based on paper structure
+- **Subsections**: Can contain content and/or further subsections (unlimited depth)
+- **Content summary**: Provide a concise 2-3 sentence summary of each section's key points
+- **Asset assignment**: Assign each figure/table to the section that explicitly cites it in body text; fall back to caption similarity only if no explicit citation exists
+
+## Example (Multi-level hierarchy with preserved structure):
+```json
+{
+  "tree": {
+    "id": "root",
+    "title": "Paper Title: Subtitle",
+    "type": "title",
+    "content": "Complete paper title, authors, affiliations, and full abstract content...",
+    "assets": {"figures": [], "tables": [], "references": []},
+    "children": [
+      {
+        "id": "1",
+        "title": "Introduction",
+        "type": "section",
+        "content": "Full introduction content...",
+        "assets": {"figures": ["1"], "tables": [], "references": []},
+        "children": [
+          {
+            "id": "1.1",
+            "title": "Problem Statement",
+            "type": "subsection",
+            "content": "Detailed problem statement content...",
+            "assets": {"figures": [], "tables": [], "references": []},
+            "children": [
+              {
+                "id": "1.1.1",
+                "title": "Current Limitations",
+                "type": "subsubsection",
+                "content": "Detailed limitations content...",
+                "assets": {"figures": [], "tables": [], "references": []},
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "title": "Methodology",
+        "type": "section",
+        "content": "Full methodology overview...",
+        "assets": {"figures": ["2"], "tables": [], "references": []},
+        "children": [
+          {
+            "id": "2.1",
+            "title": "Model Architecture",
+            "type": "subsection",
+            "content": "Detailed architecture description...",
+            "assets": {"figures": [], "tables": [], "references": []},
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Document to analyze:
+```markdown
+{{ markdown_document }}
+```
+
+Generate the hierarchical tree structure as JSON. Each section's "content" must be a 2-3 sentence summary — do NOT copy verbatim text. Keep the total JSON output under 4,000 tokens: 

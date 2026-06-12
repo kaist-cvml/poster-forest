@@ -1,0 +1,33 @@
+{
+    "meta": {
+        "poster_title": "Attention Is All You Need",
+        "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, Illia Polosukhin",
+        "affiliations": "Google Brain, Google Research"
+    },
+    "sections": [
+        {
+            "title": "Poster Title & Author",
+            "content": "Attention Is All You Need\nAshish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, Illia Polosukhin\nGoogle Brain, Google Research"
+        },
+        {
+            "title": "Transformer Architecture",
+            "content": "The Transformer is a novel sequence transduction model based entirely on attention mechanisms, eliminating recurrence and convolutions. It follows an encoder-decoder structure with six identical layers in both encoder and decoder stacks. Each layer contains two sub-layers: multi-head self-attention and a position-wise feed-forward network. Residual connections and layer normalization are applied around each sub-layer. The model uses scaled dot-product attention with eight parallel heads, each operating on 64-dimensional projections. Queries, keys, and values are projected via learned linear transformations. The output is concatenated and projected back to the original dimension. The model relies on positional encodings using sine and cosine functions of varying frequencies to inject sequence order information, enabling it to process all positions in parallel without recurrence."
+        },
+        {
+            "title": "Self-Attention Mechanism",
+            "content": "Self-attention allows each position in a sequence to attend to all other positions, capturing global dependencies regardless of distance. The scaled dot-product attention computes attention weights by taking dot products of queries and keys, scaling by √d_k to prevent large gradients, and applying softmax. This approach is computationally efficient and enables parallelization. Multi-head attention enhances representation by allowing the model to jointly attend to information from different subspaces. In the encoder, self-attention operates over input tokens; in the decoder, it attends to previous outputs with masking to preserve auto-regressive properties. Encoder-decoder attention enables the decoder to attend to all encoder outputs, mimicking traditional attention but with full parallelism. This design drastically reduces sequential computation and improves long-range dependency learning."
+        },
+        {
+            "title": "Training & Optimization",
+            "content": "We trained on WMT 2014 English-German (4.5M sentence pairs) and English-French (36M sentence pairs) datasets using byte-pair encoding. Batches were grouped by approximate sequence length, containing ~25,000 source and target tokens. Training was performed on 8 P100 GPUs. Base models trained for 100,000 steps (12 hours), big models for 300,000 steps (3.5 days). We used the Adam optimizer with β1=0.9, β2=0.98, ϵ=1e-9, and a learning rate schedule that increases linearly for 4,000 warmup steps, then decreases proportionally to the inverse square root of the step number. Regularization included residual dropout (p=0.1 for base, p=0.3 for big) and label smoothing (ϵ_ls=0.1). The model was evaluated using beam search with beam size 4 and length penalty α=0.6."
+        },
+        {
+            "title": "Results & Performance",
+            "content": "On WMT 2014 English-to-German translation, the Transformer (big) achieved 28.4 BLEU, surpassing all prior models including ensembles by over 2.0 BLEU. On English-to-French, it reached 41.0 BLEU, setting a new single-model state-of-the-art. Training was significantly faster: 3.5 days on 8 GPUs, less than 1/4 the cost of prior models. The base model outperformed previous single models at a fraction of the training cost. Ablation studies (Table 3) showed that multi-head attention with 8 heads performs best, while reducing key dimensionality or increasing dropout hurts performance. Learned positional embeddings yielded nearly identical results to sinusoidal encodings, confirming the robustness of positional encoding design. The model's efficiency and performance demonstrate the power of pure attention in sequence modeling."
+        },
+        {
+            "title": "Impact & Future Work",
+            "content": "The Transformer redefines sequence modeling by replacing recurrence and convolution with pure attention, enabling unprecedented parallelization and faster training. It achieves state-of-the-art results in machine translation with significantly reduced training costs. The model’s interpretability is enhanced by attention distributions, which reveal syntactic and semantic patterns. Future work includes extending the Transformer to multimodal tasks (images, audio, video), developing local attention mechanisms for long sequences, and reducing sequential generation bottlenecks. The code is publicly available at https://github.com/tensorflow/tensor2tensor. This work marks a foundational shift toward attention-only architectures in deep learning."
+        }
+    ]
+}

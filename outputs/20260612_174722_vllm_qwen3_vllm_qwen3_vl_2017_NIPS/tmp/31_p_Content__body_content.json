@@ -1,0 +1,38 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Enables constant path length between sequence positions."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Supports full parallelization in training and inference."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Models long-range dependencies via direct token interactions."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Evaluated on real-world AI papers from NeurIPS, ICML, CVPR."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Uses Paper2Poster benchmark with fixed visual constraints."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Compared against SOTA generative and collaborative models."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Tests layout, content, and visual harmony under fixed constraints."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Attention enables dynamic focus on relevant input parts via weighted value sums."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Uses query-key compatibility to compute weights."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Replaces RNNs and convolutions in Transformer architecture."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

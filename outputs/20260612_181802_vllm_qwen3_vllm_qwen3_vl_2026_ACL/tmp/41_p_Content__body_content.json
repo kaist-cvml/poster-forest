@@ -1,0 +1,38 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Training-free AI poster generation with hierarchical Poster Tree."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Joint content-layout optimization preserves structure and coherence."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Outperforms baselines in automated and human evaluations."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

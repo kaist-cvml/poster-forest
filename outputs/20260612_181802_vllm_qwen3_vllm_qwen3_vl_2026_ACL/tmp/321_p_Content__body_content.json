@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "PosterForest generates balanced, space-efficient posters with high visual coherence."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Preserves tables, figures, and key equations."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

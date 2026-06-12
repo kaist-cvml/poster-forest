@@ -1,0 +1,38 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Transformer replaces RNNs and CNNs with pure attention-based architecture."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Enables fully parallelizable training."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Achieves state-of-the-art accuracy in machine translation."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

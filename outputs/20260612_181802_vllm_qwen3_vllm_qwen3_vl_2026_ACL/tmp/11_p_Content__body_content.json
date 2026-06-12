@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Introduces PosterForest for automated scientific poster generation."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Uses a hierarchical Poster Tree structure."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

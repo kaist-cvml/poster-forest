@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Multi-head attention enhances representation learning by focusing on input subspaces."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Larger models and optimal dropout boost accuracy."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

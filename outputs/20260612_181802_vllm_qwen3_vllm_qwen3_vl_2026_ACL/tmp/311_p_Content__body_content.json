@@ -1,0 +1,38 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Evaluated on Paper2Poster and real-world poster pairs from NeurIPS, ICML, CVPR."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Includes oracle, LLM, SPG, and general-purpose baselines."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Standardized color, font, and layout for fair comparison."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

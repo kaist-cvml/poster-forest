@@ -1,0 +1,496 @@
+{
+    "poster_tree": {
+        "panel_id": "root",
+        "section_name": "Attention Is All You Need",
+        "node_type": "root",
+        "children": [
+            {
+                "panel_id": "title",
+                "section_name": "Content",
+                "node_type": "content",
+                "tp": 0.06821745948771563,
+                "gp": 0.0,
+                "text_len": 842,
+                "figure_size": 0,
+                "figure_aspect": 1.0,
+                "is_main_figure": false,
+                "is_table": false,
+                "content": "This paper introduces the Transformer, a groundbreaking sequence transduction model that replaces recurrent and convolutional layers with a pure attention mechanism. By relying exclusively on self-attention, the model eliminates sequential dependencies, enabling full parallelization during training. This architectural shift results in significantly faster training times and improved scalability across multiple GPUs. The Transformer achieves state-of-the-art performance in machine translation tasks, outperforming previous models in both speed and accuracy. Its design supports efficient handling of long-range dependencies, a key challenge in sequence modeling. The model's success demonstrates the power of attention-based architectures in natural language processing. This work has become foundational for modern large language models.",
+                "assets": {},
+                "asset_path": null,
+                "children": []
+            },
+            {
+                "panel_id": "1",
+                "section_name": "Introduction",
+                "node_type": "section",
+                "children": [
+                    {
+                        "panel_id": "11",
+                        "section_name": "Content",
+                        "node_type": "content",
+                        "tp": 0.06638787245164662,
+                        "gp": 0.0,
+                        "text_len": 800,
+                        "figure_size": 0,
+                        "figure_aspect": 1.0,
+                        "is_main_figure": false,
+                        "is_table": false,
+                        "content": "Traditional sequence transduction models rely on recurrent or convolutional layers, which inherently limit parallelization due to sequential computation. This sequential nature slows down training and restricts scalability, especially for long sequences. The Transformer proposes a fully attention-based architecture that processes entire input sequences in parallel. By replacing recurrence with self-attention, the model captures dependencies between all positions simultaneously. This design enables faster training and higher efficiency without compromising translation quality. The approach also simplifies the architecture by eliminating the need for encoding-decoding pipelines with fixed-size context. The result is a more scalable, efficient, and effective model for sequence modeling tasks.",
+                        "assets": {},
+                        "asset_path": null,
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "panel_id": "2",
+                "section_name": "Model Architecture",
+                "node_type": "section",
+                "children": [
+                    {
+                        "panel_id": "21",
+                        "section_name": "Encoder and Decoder Stacks",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "211",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.07710402509147936,
+                                "gp": 0.28571428571428575,
+                                "text_len": 1079,
+                                "figure_size": 1776236,
+                                "figure_aspect": 0.688667496886675,
+                                "is_main_figure": true,
+                                "is_table": false,
+                                "content": "Both the encoder and decoder consist of six identical layers, each containing a multi-head self-attention sub-layer and a position-wise feed-forward network. Residual connections are applied around each sub-layer, followed by layer normalization to ensure stable and efficient training of deep networks. The encoder processes input sequences in parallel, with self-attention allowing each token to attend to all others, capturing global context. In contrast, the decoder includes an additional encoder-decoder attention layer that enables it to attend to the encoder’s output, integrating source information during target generation. To maintain auto-regressive properties, the decoder uses masked self-attention, preventing tokens from attending to future positions during training. This masking ensures that predictions are made only from previously generated tokens, preserving the sequential generation constraint. The consistent stacking of these layers across both components allows for deep, hierarchical representation learning while maintaining computational efficiency.",
+                                "assets": {
+                                    "figures": [
+                                        "1"
+                                    ],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "asset_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-1.png",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "panel_id": "22",
+                        "section_name": "Attention",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "221",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.06246732880292734,
+                                "gp": 0.28571428571428575,
+                                "text_len": 706,
+                                "figure_size": 1368603,
+                                "figure_aspect": 1.7713310580204777,
+                                "is_main_figure": true,
+                                "is_table": false,
+                                "content": "Attention mechanisms enable models to dynamically focus on relevant parts of input by computing a weighted sum of values based on the compatibility between queries and keys. This allows for flexible modeling of long-range dependencies and contextual relationships in sequences. The Transformer architecture leverages attention as its core component, replacing recurrent and convolutional structures. By capturing diverse contextual patterns, attention improves performance across a wide range of natural language tasks. Its parallelizable nature also enhances training efficiency compared to sequential models. This foundational mechanism underpins the success of modern deep learning architectures in NLP.",
+                                "assets": {
+                                    "figures": [
+                                        "2"
+                                    ],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "asset_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-2.png",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "panel_id": "23",
+                        "section_name": "Position-wise Feed-Forward Networks",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "231",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.06795608991113435,
+                                "gp": 0.0,
+                                "text_len": 837,
+                                "figure_size": 0,
+                                "figure_aspect": 1.0,
+                                "is_main_figure": false,
+                                "is_table": false,
+                                "content": "Each layer incorporates a position-wise feed-forward network (FFN) composed of two linear transformations separated by a ReLU activation function. The FFN is applied independently to each position in the sequence, allowing for non-linear processing without altering positional relationships. This design enables the model to learn complex feature representations at each token location. The network is efficiently implemented using 1D convolutions, which maintain computational efficiency and support parallel processing. Despite its simplicity, the FFN significantly enhances the model’s representational capacity. It operates identically across all positions, ensuring parameter efficiency and consistency. This component complements the attention layers by introducing additional non-linear transformations to refine learned features.",
+                                "assets": {},
+                                "asset_path": null,
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "panel_id": "24",
+                        "section_name": "Embeddings and Softmax",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "241",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.0669106116048092,
+                                "gp": 0.0,
+                                "text_len": 813,
+                                "figure_size": 0,
+                                "figure_aspect": 1.0,
+                                "is_main_figure": false,
+                                "is_table": false,
+                                "content": "Input and output tokens are embedded into 512-dimensional vectors using learned embedding matrices, providing dense semantic representations. The model shares the same embedding matrix between the input and output layers, along with the softmax layer, reducing the number of parameters and improving training efficiency. Embeddings are scaled by the square root of the embedding dimension (sqrt(512)) to prevent gradient vanishing during early training phases. This scaling maintains the magnitude of activations and stabilizes the learning process. The shared weights also promote consistency between encoding and decoding phases. This design choice enhances model generalization and reduces overfitting. The combination of scaled embeddings and weight sharing leads to a more compact and effective architecture.",
+                                "assets": {},
+                                "asset_path": null,
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "panel_id": "25",
+                        "section_name": "Positional Encoding",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "251",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.06926293779404077,
+                                "gp": 0.0,
+                                "text_len": 872,
+                                "figure_size": 0,
+                                "figure_aspect": 1.0,
+                                "is_main_figure": false,
+                                "is_table": false,
+                                "content": "Since the Transformer model does not rely on recurrence, it incorporates positional encodings into input embeddings to preserve sequence order information. These encodings are based on sinusoidal functions with varying frequencies, enabling the model to learn relative positions of tokens. This design allows the model to generalize effectively to sequences longer than those seen during training. The use of fixed, deterministic positional signals ensures consistency and scalability across different sequence lengths. By leveraging periodic patterns, the model can extrapolate positional information beyond the training context. This approach supports efficient and accurate representation of sequential data without relying on recurrence. The sinusoidal positional encodings are additive to the input embeddings, maintaining compatibility with the model's architecture.",
+                                "assets": {},
+                                "asset_path": null,
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "panel_id": "3",
+                "section_name": "Why Self-Attention",
+                "node_type": "section",
+                "children": [
+                    {
+                        "panel_id": "31",
+                        "section_name": "Content",
+                        "node_type": "content",
+                        "tp": 0.06978567694720335,
+                        "gp": 0.14285714285714288,
+                        "text_len": 881,
+                        "figure_size": 712152,
+                        "figure_aspect": 4.984126984126984,
+                        "is_main_figure": false,
+                        "is_table": true,
+                        "content": "Self-attention mechanisms provide a constant path length between any two positions in a sequence, unlike recurrent or convolutional layers which require sequential processing. This enables high levels of parallelization during both training and inference, significantly improving computational efficiency. Self-attention excels at modeling long-range dependencies by directly computing relationships between all tokens, regardless of distance. Compared to RNNs and CNNs, it avoids gradient vanishing issues and reduces training time for long sequences. The mechanism computes attention scores using query, key, and value vectors, allowing dynamic focus on relevant parts of the input. This leads to better performance on tasks requiring contextual understanding across extended spans. As a result, self-attention is particularly well-suited for large-scale sequence modeling tasks.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [
+                                "1"
+                            ],
+                            "references": []
+                        },
+                        "asset_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-2.png",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "panel_id": "4",
+                "section_name": "Training",
+                "node_type": "section",
+                "children": [
+                    {
+                        "panel_id": "41",
+                        "section_name": "Training Data and Batching",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "411",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.061944589649764764,
+                                "gp": 0.0,
+                                "text_len": 699,
+                                "figure_size": 0,
+                                "figure_aspect": 1.0,
+                                "is_main_figure": false,
+                                "is_table": false,
+                                "content": "Training utilized the WMT 2014 English-German and English-French datasets, which were preprocessed using byte-pair encoding (BPE) to handle out-of-vocabulary tokens effectively. Batches were carefully constructed to maintain a balanced token count, with each batch containing approximately 25,000 source and target tokens. This batching strategy ensured efficient memory utilization and stable gradient updates during training. The use of BPE enabled consistent tokenization across languages, improving model generalization. Data was shuffled per epoch to prevent overfitting and enhance convergence. This setup provided a robust foundation for training high-performance sequence-to-sequence models.",
+                                "assets": {},
+                                "asset_path": null,
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "panel_id": "42",
+                        "section_name": "Hardware and Schedule",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "421",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.05906952430737062,
+                                "gp": 0.0,
+                                "text_len": 633,
+                                "figure_size": 0,
+                                "figure_aspect": 1.0,
+                                "is_main_figure": false,
+                                "is_table": false,
+                                "content": "All models were trained on eight NVIDIA P100 GPUs, leveraging parallel computation to accelerate training. The base model was trained for 100,000 steps, completing in approximately 12 hours. The larger model required 300,000 steps, extending training to about 3.5 days due to increased model complexity and longer step times. This scaling allowed for deeper learning and improved representation capacity. The hardware setup supported mixed-precision training, enhancing throughput without sacrificing accuracy. Efficient data loading and gradient synchronization were critical to maintaining high GPU utilization throughout training.",
+                                "assets": {},
+                                "asset_path": null,
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "panel_id": "43",
+                        "section_name": "Optimizer",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "431",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.059592263460533194,
+                                "gp": 0.0,
+                                "text_len": 647,
+                                "figure_size": 0,
+                                "figure_aspect": 1.0,
+                                "is_main_figure": false,
+                                "is_table": false,
+                                "content": "The Adam optimizer was employed with a dynamic learning rate schedule to improve training stability and convergence. A warm-up phase gradually increased the learning rate over the first 4,000 steps to prevent initial instability. After warm-up, the learning rate decayed proportionally to the inverse square root of the step number, enabling fine-tuning in later stages. This adaptive schedule balanced fast early progress with precise convergence. It significantly reduced training oscillations and improved final model performance. The combination of warm-up and inverse square root decay proved essential for achieving state-of-the-art results.",
+                                "assets": {},
+                                "asset_path": null,
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "panel_id": "44",
+                        "section_name": "Regularization",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "441",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.06377417668583377,
+                                "gp": 0.0,
+                                "text_len": 740,
+                                "figure_size": 0,
+                                "figure_aspect": 1.0,
+                                "is_main_figure": false,
+                                "is_table": false,
+                                "content": "Regularization in the Transformer model was enhanced through dropout applied to sub-layer outputs and input embeddings, which improved generalization and reduced overfitting. Label smoothing was incorporated during training to prevent overconfidence in predictions, leading to better calibration of output probabilities. Despite a slight increase in perplexity, this approach significantly improved both accuracy and BLEU scores. The combination of dropout and label smoothing contributed to more robust and stable training dynamics. These techniques were critical in achieving superior performance without excessive model complexity. Their integration reflects a balanced trade-off between training stability and final translation quality.",
+                                "assets": {},
+                                "asset_path": null,
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "panel_id": "5",
+                "section_name": "Results",
+                "node_type": "section",
+                "children": [
+                    {
+                        "panel_id": "51",
+                        "section_name": "Machine Translation",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "511",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.06351280710925249,
+                                "gp": 0.14285714285714288,
+                                "text_len": 730,
+                                "figure_size": 1313435,
+                                "figure_aspect": 2.366442953020134,
+                                "is_main_figure": false,
+                                "is_table": true,
+                                "content": "The large-scale Transformer model achieves a BLEU score of 28.4 on English-to-German translation and 41.0 on English-to-French, outperforming all previously published single models and ensembles. These results mark a new benchmark in machine translation performance, demonstrating the model’s ability to capture complex linguistic patterns. Training was completed in just 3.5 days using eight GPUs, highlighting its computational efficiency. The model’s architecture enables faster convergence and better utilization of parallel hardware. These findings validate the Transformer’s superiority in both accuracy and training speed. The results confirm its potential for real-world deployment in high-performance translation systems.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [
+                                        "2"
+                                    ],
+                                    "references": []
+                                },
+                                "asset_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-3.png",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "panel_id": "52",
+                        "section_name": "Model Variations",
+                        "node_type": "subsection",
+                        "children": [
+                            {
+                                "panel_id": "521",
+                                "section_name": "Content",
+                                "node_type": "content",
+                                "tp": 0.07370622059592263,
+                                "gp": 0.14285714285714288,
+                                "text_len": 988,
+                                "figure_size": 2583962,
+                                "figure_aspect": 1.5697583787996883,
+                                "is_main_figure": false,
+                                "is_table": true,
+                                "content": "Ablation studies reveal that multi-head attention is essential for capturing complex dependencies across sequence positions, significantly boosting model performance. Proper attention dimensionality ensures optimal representation capacity without overfitting, with suboptimal settings leading to noticeable degradation in translation quality. Dropout regularization plays a critical role in preventing overfitting, especially in large-scale training scenarios. Interestingly, replacing sinusoidal positional encodings with learned positional embeddings yields nearly identical performance, indicating that the choice of positional encoding method is less sensitive than architectural components like attention and dimensionality. These findings highlight that attention mechanisms and structural design choices are more impactful than specific encoding strategies. The robustness of learned positional encodings also enhances model flexibility across diverse sequence lengths and domains.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [
+                                        "3"
+                                    ],
+                                    "references": []
+                                },
+                                "asset_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-4.png",
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "panel_id": "6",
+                "section_name": "Conclusion",
+                "node_type": "section",
+                "children": [
+                    {
+                        "panel_id": "61",
+                        "section_name": "Content",
+                        "node_type": "content",
+                        "tp": 0.07030841610036592,
+                        "gp": 0.0,
+                        "text_len": 895,
+                        "figure_size": 0,
+                        "figure_aspect": 1.0,
+                        "is_main_figure": false,
+                        "is_table": false,
+                        "content": "The Transformer architecture demonstrates that attention mechanisms alone can effectively replace recurrence and convolution in sequence modeling, challenging long-standing assumptions in neural network design. By relying solely on self-attention, the model achieves state-of-the-art translation quality across multiple benchmark datasets. Its fully parallelizable structure enables significantly faster training compared to recurrent models, reducing training time while maintaining high performance. This architectural shift opens new research avenues in efficient sequence modeling, including long-range dependency capture and scalable language generation. The success of the Transformer has inspired a wave of follow-up models across NLP, vision, and multimodal tasks. Its core principles—attention, parallelization, and scalability—have become foundational in modern deep learning research.",
+                        "assets": {},
+                        "asset_path": null,
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "filtered_figures": {
+        "Content_fig_1": {
+            "image": "1",
+            "path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-1.png"
+        },
+        "Content_fig_2": {
+            "image": "2",
+            "path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-2.png"
+        },
+        "Content_table_1": {
+            "table": "1",
+            "path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-2.png"
+        },
+        "Content_table_2": {
+            "table": "2",
+            "path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-3.png"
+        },
+        "Content_table_3": {
+            "table": "3",
+            "path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-4.png"
+        }
+    },
+    "figures": {
+        "1": {
+            "caption": "Figure 1: The Transformer - model architecture.",
+            "figure_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-1.png",
+            "width": 1106,
+            "height": 1606,
+            "figure_size": 1776236,
+            "figure_aspect": 0.688667496886675,
+            "original_index": 1,
+            "caption_number": "1",
+            "is_compound": false,
+            "subfigure_count": 1
+        },
+        "2": {
+            "caption": "Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel.",
+            "figure_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-2.png",
+            "width": 1557,
+            "height": 879,
+            "figure_size": 1368603,
+            "figure_aspect": 1.7713310580204777,
+            "original_index": 2,
+            "caption_number": "2",
+            "is_compound": true,
+            "subfigure_count": 2
+        }
+    },
+    "tables": {
+        "1": {
+            "caption": "Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. n is the sequence length, d is the representation dimension, k is the kernel size of convolutions and r the size of the neighborhood in restricted self-attention.",
+            "table_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-2.png",
+            "width": 1884,
+            "height": 378,
+            "figure_size": 712152,
+            "figure_aspect": 4.984126984126984,
+            "original_index": 2,
+            "caption_number": "1"
+        },
+        "2": {
+            "caption": "Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost.",
+            "table_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-3.png",
+            "width": 1763,
+            "height": 745,
+            "figure_size": 1313435,
+            "figure_aspect": 2.366442953020134,
+            "original_index": 3,
+            "caption_number": "2"
+        },
+        "3": {
+            "caption": "Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.",
+            "table_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-4.png",
+            "width": 2014,
+            "height": 1283,
+            "figure_size": 2583962,
+            "figure_aspect": 1.5697583787996883,
+            "original_index": 4,
+            "caption_number": "3"
+        }
+    },
+    "poster_dimensions": {
+        "width": 900,
+        "height": 1200,
+        "width_inches": 36.0,
+        "height_inches": 48.0
+    },
+    "token_usage": {
+        "total_input": 16469,
+        "total_output": 6790,
+        "detail_log": {
+            "hierarchical_parse_in_t": 12693,
+            "hierarchical_parse_out_t": 3461,
+            "tree_refinement_in_t": 3776,
+            "tree_refinement_out_t": 3329,
+            "panel_generation_in_t": 0,
+            "panel_generation_out_t": 0
+        }
+    }
+}

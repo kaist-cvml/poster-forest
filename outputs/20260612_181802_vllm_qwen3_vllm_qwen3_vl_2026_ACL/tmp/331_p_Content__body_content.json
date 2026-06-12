@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "PosterForest achieves high performance in quantitative evaluation."
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Scores strongly on informativeness and flow."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

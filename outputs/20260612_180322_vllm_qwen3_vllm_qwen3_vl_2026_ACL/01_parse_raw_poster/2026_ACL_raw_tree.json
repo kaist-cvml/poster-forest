@@ -1,0 +1,245 @@
+{
+    "tree_type": "document",
+    "timestamp": "2026-06-12T18:06:41.017508",
+    "tree_data": {
+        "id": "root",
+        "title": "PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation",
+        "type": "title",
+        "content": "This paper presents PosterForest, a training-free framework for scientific poster generation that addresses key limitations in existing methods, including shallow document understanding, weak content-layout integration, and high training overhead. By introducing a hierarchical Poster Tree and a multi-agent collaboration system, PosterForest enables joint optimization of content and layout through iterative refinement, achieving superior semantic coherence and visual harmony.",
+        "assets": {
+            "figures": [],
+            "tables": [],
+            "references": []
+        },
+        "children": [
+            {
+                "id": "1",
+                "title": "Introduction",
+                "type": "section",
+                "content": "Scientific poster generation is crucial for efficient knowledge dissemination, yet current methods suffer from poor hierarchical understanding, disconnected content-layout planning, and reliance on training. The authors identify three main limitations: shallow document parsing, decoupled content and layout optimization, and high resource demands from model training.",
+                "assets": {
+                    "figures": [
+                        "1"
+                    ],
+                    "tables": [],
+                    "references": []
+                },
+                "children": []
+            },
+            {
+                "id": "2",
+                "title": "Related Work",
+                "type": "section",
+                "content": "Prior work in scientific poster generation has evolved from rule-based layout assignment to multi-agent pipelines using LLMs, but still treats documents as linear sequences. Advances in hierarchical document parsing and multi-agent reasoning provide foundational support, yet remain underutilized in poster-specific contexts.",
+                "assets": {
+                    "figures": [
+                        "2"
+                    ],
+                    "tables": [],
+                    "references": []
+                },
+                "children": []
+            },
+            {
+                "id": "3",
+                "title": "Proposed Method",
+                "type": "section",
+                "content": "PosterForest introduces a two-stage framework: first constructing a hierarchical Poster Tree that unifies semantic content and layout structure, then iteratively refining it via collaborative content and layout agents. This enables holistic optimization of both information flow and visual balance without training.",
+                "assets": {
+                    "figures": [
+                        "3"
+                    ],
+                    "tables": [],
+                    "references": []
+                },
+                "children": [
+                    {
+                        "id": "3.1",
+                        "title": "Preliminaries",
+                        "type": "subsection",
+                        "content": "Existing SPG methods treat documents as flat sequences, ignoring structural hierarchies and cross-modal alignment. PosterForest overcomes this by modeling the document as a Raw Doc Tree, refining it into a Content Tree, and integrating it with a Layout Tree to form a unified Poster Tree.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "3.2",
+                        "title": "Hierarchical Paper-to-Poster",
+                        "type": "subsection",
+                        "content": "The method constructs a Content Tree by pruning redundancy and summarizing content, then generates a Layout Tree based on content hierarchy. These are merged into a Poster Tree where each node encodes both semantic and spatial attributes, enabling structure-aware poster synthesis.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "3.3",
+                        "title": "Hierarchical Modification Planning",
+                        "type": "subsection",
+                        "content": "A hierarchical traversal updates nodes from root to leaves, with the Layout Agent optimizing spatial attributes and the Content Agent adjusting text density. Iterative refinement with global feedback ensures consistent, high-quality poster evolution.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": [
+                            {
+                                "id": "3.3.1",
+                                "title": "Poster Tree Traversal (Node-level)",
+                                "type": "subsubsection",
+                                "content": "Each node is updated using parent and descendant context, enabling top-down propagation of structural and semantic changes. The Layout Agent refines geometry based on descendant statistics, while the Content Agent adjusts text to fit layout constraints.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "children": []
+                            },
+                            {
+                                "id": "3.3.2",
+                                "title": "Iterative Tree Refinement (Tree-level)",
+                                "type": "subsubsection",
+                                "content": "After each full traversal, a Global Feedback Agent evaluates the poster and decides whether to continue refining. This iterative loop stabilizes the output, ensuring visual harmony and content coherence with minimal iterations.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "4",
+                "title": "Experiments",
+                "type": "section",
+                "content": "Extensive experiments validate PosterForest against multiple baselines across quantitative, qualitative, and human evaluation metrics. Results show significant improvements in content fidelity, structural clarity, and overall quality, especially in preserving complex information and maintaining visual balance.",
+                "assets": {
+                    "figures": [
+                        "4",
+                        "5",
+                        "6"
+                    ],
+                    "tables": [
+                        "2"
+                    ],
+                    "references": []
+                },
+                "children": [
+                    {
+                        "id": "4.1",
+                        "title": "Experimental Setup",
+                        "type": "subsection",
+                        "content": "The study uses the Paper2Poster benchmark and additional real-world papers from top AI conferences. Baselines include end-to-end models, multi-agent workflows, and poster-specialized agents, all evaluated under standardized visual conditions.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "4.2",
+                        "title": "Qualitative Evaluation",
+                        "type": "subsection",
+                        "content": "Visual comparisons show PosterForest produces well-balanced posters with efficient space usage, proper figure scaling, and full retention of critical content like tables. It outperforms baselines across diverse domains including NLP, CV, and RL.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "4.3",
+                        "title": "Quantitative Evaluation",
+                        "type": "subsection",
+                        "content": "MLLM-as-a-Judge scores show PosterForest performs best in informativeness and closely matches human-created ground truth. It achieves superior scores in clarity, content completeness, and logical flow, demonstrating strong semantic fidelity.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "4.4",
+                        "title": "User Study",
+                        "type": "subsection",
+                        "content": "A human evaluation with 25 AI graduate students confirms PosterForest is consistently preferred over baselines in content fidelity, aesthetic quality, structural clarity, and overall quality. It achieves up to 59.2% preference in user rankings.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "4.5",
+                        "title": "Ablation Study",
+                        "type": "subsection",
+                        "content": "Ablation studies verify the importance of the hierarchical Content Tree and dual-agent collaboration. Removing either component degrades performance, proving that both structure and joint optimization are essential for high-quality poster generation.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": [
+                            {
+                                "id": "4.5.1",
+                                "title": "Effect of Hierarchical Content Tree",
+                                "type": "subsubsection",
+                                "content": "Without hierarchical parsing, content becomes disorganized and spatial coherence is lost. With the hierarchical structure, logical grouping is preserved, and figures are correctly aligned with their explanatory text.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "children": []
+                            },
+                            {
+                                "id": "4.5.2",
+                                "title": "Effect of Content and Layout Agents",
+                                "type": "subsubsection",
+                                "content": "Using only one agent leads to either poor layout or suboptimal content. Only when both agents collaborate do posters achieve balanced information density, proper scaling, and strong visual harmony.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "5",
+                "title": "Conclusion",
+                "type": "section",
+                "content": "PosterForest introduces a novel training-free framework that models scientific posters through a hierarchical Poster Tree and multi-agent collaboration. It achieves state-of-the-art performance in both automated and human evaluations by jointly optimizing content and layout.",
+                "assets": {
+                    "figures": [],
+                    "tables": [],
+                    "references": []
+                },
+                "children": []
+            }
+        ]
+    },
+    "basic_stats": {
+        "estimated_nodes": 1
+    },
+    "metadata": {
+        "parsing_method": "caption_based",
+        "figures_found": 6,
+        "tables_found": 1
+    }
+}

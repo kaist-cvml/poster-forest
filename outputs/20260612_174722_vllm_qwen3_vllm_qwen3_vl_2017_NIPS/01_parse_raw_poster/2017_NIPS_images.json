@@ -1,0 +1,26 @@
+{
+    "1": {
+        "caption": "Figure 1: The Transformer - model architecture.",
+        "figure_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-1.png",
+        "width": 1106,
+        "height": 1606,
+        "figure_size": 1776236,
+        "figure_aspect": 0.688667496886675,
+        "original_index": 1,
+        "caption_number": "1",
+        "is_compound": false,
+        "subfigure_count": 1
+    },
+    "2": {
+        "caption": "Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel.",
+        "figure_path": "outputs/20260612_174722_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-2.png",
+        "width": 1557,
+        "height": 879,
+        "figure_size": 1368603,
+        "figure_aspect": 1.7713310580204777,
+        "original_index": 2,
+        "caption_number": "2",
+        "is_compound": true,
+        "subfigure_count": 2
+    }
+}

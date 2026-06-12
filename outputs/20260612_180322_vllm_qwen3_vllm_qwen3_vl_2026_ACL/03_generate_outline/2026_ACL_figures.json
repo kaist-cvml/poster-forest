@@ -1,0 +1,30 @@
+{
+    "Content_fig_1": {
+        "image": "1",
+        "path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-1.png"
+    },
+    "Content_fig_2": {
+        "image": "2",
+        "path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-2.png"
+    },
+    "Content_fig_3": {
+        "image": "3",
+        "path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-3.png"
+    },
+    "Content_fig_4": {
+        "image": "4",
+        "path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-4.png"
+    },
+    "Content_table_2": {
+        "table": "2",
+        "path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-table-2.png"
+    },
+    "Content_fig_5": {
+        "image": "5",
+        "path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-6.png"
+    },
+    "Content [2]_fig_6": {
+        "image": "6",
+        "path": "outputs/20260612_180322_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-7.png"
+    }
+}

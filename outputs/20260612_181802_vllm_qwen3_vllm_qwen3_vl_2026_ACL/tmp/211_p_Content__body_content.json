@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "PosterForest unifies content and layout via a structured Poster Tree."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Parses documents into Raw Doc Tree."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

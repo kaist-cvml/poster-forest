@@ -1,0 +1,22 @@
+{
+    "Content_fig_1": {
+        "image": "1",
+        "path": "outputs/20260612_172845_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-1.png"
+    },
+    "Content_fig_2": {
+        "image": "2",
+        "path": "outputs/20260612_172845_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-figure-2.png"
+    },
+    "Content_table_1": {
+        "table": "1",
+        "path": "outputs/20260612_172845_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-2.png"
+    },
+    "Content_table_2": {
+        "table": "2",
+        "path": "outputs/20260612_172845_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-3.png"
+    },
+    "Content_table_3": {
+        "table": "3",
+        "path": "outputs/20260612_172845_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-4.png"
+    }
+}

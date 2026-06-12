@@ -1,0 +1,46 @@
+[
+    {
+        "alignment": "center",
+        "bullet": false,
+        "level": 0,
+        "font_size": 40,
+        "runs": [
+            {
+                "text": "Ashish Vaswani\u00b9, Noam Shazeer\u00b9, Niki Parmar\u00b9, Jakob Uszkoreit\u00b9, Llion Jones\u00b9, Aidan N. Gomez\u00b9, Lukasz Kaiser\u00b9, Illia Polosukhin\u00b9",
+                "color": [
+                    255,
+                    255,
+                    255
+                ],
+                "fill_color": [
+                    63,
+                    86,
+                    147
+                ]
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "center",
+        "bullet": false,
+        "level": 0,
+        "font_size": 40,
+        "runs": [
+            {
+                "text": "Google Brain\u00b9, Google Research\u00b9",
+                "color": [
+                    255,
+                    255,
+                    255
+                ],
+                "fill_color": [
+                    63,
+                    86,
+                    147
+                ]
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

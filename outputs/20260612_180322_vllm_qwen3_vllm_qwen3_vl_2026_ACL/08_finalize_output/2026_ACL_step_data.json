@@ -1,0 +1,55 @@
+{
+    "step_info.json": {
+        "step": 8,
+        "name": "final_results",
+        "description": "Final poster and output artifacts saved",
+        "total_time_taken": 869.0761427879333,
+        "total_tokens_used": {
+            "text_model": {
+                "input": 40118,
+                "output": 12102
+            },
+            "vision_model": {
+                "input": 127854,
+                "output": 1919
+            }
+        }
+    },
+    "final_log.json": {
+        "input_tokens_t": 40118,
+        "output_tokens_t": 12102,
+        "input_tokens_v": 127854,
+        "output_tokens_v": 1919,
+        "time_taken": 869.0761427879333,
+        "poster_name": "2026_ACL",
+        "paper_path": "papers/2026_ACL/PosterForest.pdf",
+        "poster_size": {
+            "width_inches": 48.0,
+            "height_inches": 36.0
+        },
+        "parameters": {
+            "model_name_t": "vllm_qwen3",
+            "model_name_v": "vllm_qwen3_vl",
+            "ablation_no_tree_layout": false,
+            "ablation_no_commenter": false,
+            "ablation_no_example": false,
+            "ablation_flat_tree": false
+        }
+    },
+    "detail_log.json": {
+        "hierarchical_parse_in_t": 14575,
+        "hierarchical_parse_out_t": 3120,
+        "tree_refinement_in_t": 3049,
+        "tree_refinement_out_t": 2720,
+        "panel_generation_in_t": 0,
+        "panel_generation_out_t": 0,
+        "content_in_t": 9450,
+        "content_out_t": 3722,
+        "content_in_v": 0,
+        "content_out_v": 0,
+        "feedback_in_t": 13044,
+        "feedback_out_t": 2540,
+        "feedback_in_v": 127854,
+        "feedback_out_v": 1919
+    }
+}

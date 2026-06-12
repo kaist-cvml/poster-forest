@@ -1,0 +1,14 @@
+{
+    "no_caption_5": {
+        "caption": "Table 1: MLLM-as-a-Judge score across four categories of baselines. The average score serves as a fine-grained assessment of 6 different perspectives. The best score is bold , and the second is underlined for each criterion. 'TF' denotes Training-free methods.",
+        "figure_path": "outputs/20260612_181802_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-5.png",
+        "width": 1090,
+        "height": 446,
+        "figure_size": 486140,
+        "figure_aspect": 2.4439461883408073,
+        "original_index": 5,
+        "caption_number": null,
+        "is_compound": false,
+        "subfigure_count": 1
+    }
+}

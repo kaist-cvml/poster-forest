@@ -1,0 +1,302 @@
+{
+    "tree_type": "document",
+    "timestamp": "2026-06-12T17:34:22.265971",
+    "tree_data": {
+        "id": "root",
+        "title": "Attention Is All You Need",
+        "type": "title",
+        "content": "This paper introduces the Transformer, a novel neural network architecture for sequence transduction that relies entirely on attention mechanisms, eliminating recurrence and convolutions. The model achieves state-of-the-art performance in machine translation tasks with significantly improved training efficiency and parallelization capabilities.",
+        "assets": {
+            "figures": [],
+            "tables": [],
+            "references": []
+        },
+        "children": [
+            {
+                "id": "abstract",
+                "title": "Abstract",
+                "type": "section",
+                "content": "The Transformer architecture replaces traditional recurrent and convolutional layers with self-attention mechanisms, enabling faster training and superior translation quality. It achieves new state-of-the-art BLEU scores on English-to-German and English-to-French translation benchmarks with substantially reduced training costs.",
+                "assets": {
+                    "figures": [],
+                    "tables": [],
+                    "references": []
+                },
+                "children": []
+            },
+            {
+                "id": "1",
+                "title": "Introduction",
+                "type": "section",
+                "content": "The paper identifies limitations in recurrent and convolutional models, particularly their sequential computation constraints, and proposes the Transformer as a fully attention-based alternative. This architecture enables greater parallelization and faster training while maintaining or improving translation quality.",
+                "assets": {
+                    "figures": [],
+                    "tables": [],
+                    "references": []
+                },
+                "children": []
+            },
+            {
+                "id": "2",
+                "title": "Background",
+                "type": "section",
+                "content": "The paper reviews prior approaches like recurrent networks and convolutional models, highlighting their limitations in handling long-range dependencies and parallelization. It establishes the motivation for self-attention by comparing computational efficiency and path length across different layer types.",
+                "assets": {
+                    "figures": [],
+                    "tables": [],
+                    "references": []
+                },
+                "children": []
+            },
+            {
+                "id": "3",
+                "title": "Model Architecture",
+                "type": "section",
+                "content": "The Transformer employs an encoder-decoder structure with stacked self-attention and feed-forward layers. It uses residual connections, layer normalization, and positional encodings to maintain sequence order without recurrence.",
+                "assets": {
+                    "figures": [
+                        "1"
+                    ],
+                    "tables": [],
+                    "references": []
+                },
+                "children": [
+                    {
+                        "id": "3.1",
+                        "title": "Encoder and Decoder Stacks",
+                        "type": "subsection",
+                        "content": "The encoder and decoder each consist of six identical layers with multi-head self-attention and feed-forward sub-layers. Residual connections and layer normalization are applied to stabilize training and improve gradient flow.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "3.2",
+                        "title": "Attention",
+                        "type": "subsection",
+                        "content": "Attention mechanisms compute output as a weighted sum of values based on query-key compatibility. The paper introduces scaled dot-product attention and multi-head attention to enable parallel processing across multiple representation subspaces.",
+                        "assets": {
+                            "figures": [
+                                "2"
+                            ],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": [
+                            {
+                                "id": "3.2.1",
+                                "title": "Scaled Dot-Product Attention",
+                                "type": "subsubsection",
+                                "content": "This mechanism computes attention scores via dot products of queries and keys, scaled by the square root of key dimensionality to prevent gradient vanishing. It enables efficient matrix-based computation with high parallelization potential.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "children": []
+                            },
+                            {
+                                "id": "3.2.2",
+                                "title": "Multi-Head Attention",
+                                "type": "subsubsection",
+                                "content": "By projecting queries, keys, and values into multiple subspaces, the model can attend to different features simultaneously. The outputs from each head are concatenated and projected to form the final representation.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "children": []
+                            },
+                            {
+                                "id": "3.2.3",
+                                "title": "Applications of Attention in our Model",
+                                "type": "subsubsection",
+                                "content": "The Transformer uses multi-head attention in three ways: encoder self-attention, decoder self-attention with masking, and encoder-decoder attention. These allow global context modeling while preserving auto-regressive generation constraints.",
+                                "assets": {
+                                    "figures": [],
+                                    "tables": [],
+                                    "references": []
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3.3",
+                        "title": "Position-wise Feed-Forward Networks",
+                        "type": "subsection",
+                        "content": "Each layer includes a feed-forward network applied independently to each position, consisting of two linear transformations with a ReLU activation. This introduces non-linearity while maintaining position-wise processing.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "3.4",
+                        "title": "Embeddings and Softmax",
+                        "type": "subsection",
+                        "content": "Input and output tokens are converted to fixed-dimensional vectors using shared embeddings. The model uses a linear transformation and softmax to predict next-token probabilities, with weights shared between embedding and output layers.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "3.5",
+                        "title": "Positional Encoding",
+                        "type": "subsection",
+                        "content": "Since the model lacks recurrence, sinusoidal positional encodings are added to input embeddings to provide information about token positions. This allows the model to learn relative positions and generalize to longer sequences.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": "4",
+                "title": "Why Self-Attention",
+                "type": "section",
+                "content": "The paper compares self-attention to recurrent and convolutional layers across three criteria: computational complexity, parallelization potential, and path length for long-range dependencies. Self-attention offers constant path length and superior parallelization.",
+                "assets": {
+                    "figures": [],
+                    "tables": [
+                        "1"
+                    ],
+                    "references": []
+                },
+                "children": []
+            },
+            {
+                "id": "5",
+                "title": "Training",
+                "type": "section",
+                "content": "The model is trained on large-scale machine translation datasets using the Adam optimizer with a learning rate schedule. Regularization techniques include residual dropout and label smoothing to improve generalization.",
+                "assets": {
+                    "figures": [],
+                    "tables": [],
+                    "references": []
+                },
+                "children": [
+                    {
+                        "id": "5.1",
+                        "title": "Training Data and Batching",
+                        "type": "subsection",
+                        "content": "The model is trained on WMT 2014 datasets with byte-pair encoding. Sentence pairs are batched by approximate sequence length to balance computational load and training efficiency.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "5.2",
+                        "title": "Hardware and Schedule",
+                        "type": "subsection",
+                        "content": "Training is performed on 8 P100 GPUs. Base models are trained for 12 hours (100k steps), while larger models require 3.5 days (300k steps) with longer step times.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "5.3",
+                        "title": "Optimizer",
+                        "type": "subsection",
+                        "content": "The Adam optimizer is used with a warmup schedule that increases the learning rate initially before decreasing it proportionally to the inverse square root of step number.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "5.4",
+                        "title": "Regularization",
+                        "type": "subsection",
+                        "content": "Residual dropout is applied to sub-layer outputs and embedding-position combinations. Label smoothing is used during training to improve model uncertainty and final BLEU scores.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": "6",
+                "title": "Results",
+                "type": "section",
+                "content": "The Transformer achieves state-of-the-art performance on both English-to-German and English-to-French translation tasks, outperforming previous models and ensembles with significantly less training time and cost.",
+                "assets": {
+                    "figures": [],
+                    "tables": [
+                        "2",
+                        "3"
+                    ],
+                    "references": []
+                },
+                "children": [
+                    {
+                        "id": "6.1",
+                        "title": "Machine Translation",
+                        "type": "subsection",
+                        "content": "On English-to-German translation, the model achieves 28.4 BLEU, surpassing all previous models by over 2.0 BLEU. On English-to-French, it reaches 41.0 BLEU with less than 1/4 the training cost of prior state-of-the-art models.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    },
+                    {
+                        "id": "6.2",
+                        "title": "Model Variations",
+                        "type": "subsection",
+                        "content": "Ablation studies show that multi-head attention, model size, and dropout significantly impact performance. Positional encoding type has minimal effect, with learned embeddings performing nearly identically to sinusoidal encodings.",
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": "7",
+                "title": "Conclusion",
+                "type": "section",
+                "content": "The Transformer establishes a new paradigm for sequence transduction by relying entirely on attention mechanisms, enabling faster training and superior performance. The model's success opens avenues for applying attention-based architectures to diverse modalities beyond text.",
+                "assets": {
+                    "figures": [],
+                    "tables": [],
+                    "references": []
+                },
+                "children": []
+            }
+        ]
+    },
+    "basic_stats": {
+        "estimated_nodes": 1
+    },
+    "metadata": {
+        "parsing_method": "caption_based",
+        "figures_found": 2,
+        "tables_found": 3
+    }
+}

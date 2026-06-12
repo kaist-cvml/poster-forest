@@ -1,0 +1,14 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Synergy between components enables balanced, coherent, and semantically rich outputs."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

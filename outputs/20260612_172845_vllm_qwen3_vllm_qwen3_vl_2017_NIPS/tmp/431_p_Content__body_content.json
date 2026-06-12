@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Adam uses adaptive gradients and dynamic learning rate."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Warmup: 4,000 steps linearly."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

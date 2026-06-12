@@ -1,0 +1,46 @@
+[
+    {
+        "alignment": "center",
+        "bullet": false,
+        "level": 0,
+        "font_size": 40,
+        "runs": [
+            {
+                "text": "Jiho Choi\u00b9, Seojeong Park\u00b9, Seongjong Song\u00b2, Hyunjung Shim\u00b2",
+                "color": [
+                    255,
+                    255,
+                    255
+                ],
+                "fill_color": [
+                    63,
+                    86,
+                    147
+                ]
+            }
+        ],
+        "font_name": "Arial"
+    },
+    {
+        "alignment": "center",
+        "bullet": false,
+        "level": 0,
+        "font_size": 40,
+        "runs": [
+            {
+                "text": "Graduate School of Artificial Intelligence, KAIST, Republic of Korea\u00b9; School of Integrated Technology, Yonsei University, Republic of Korea\u00b2",
+                "color": [
+                    255,
+                    255,
+                    255
+                ],
+                "fill_color": [
+                    63,
+                    86,
+                    147
+                ]
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

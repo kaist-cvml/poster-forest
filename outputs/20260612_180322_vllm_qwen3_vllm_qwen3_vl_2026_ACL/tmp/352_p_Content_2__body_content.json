@@ -1,0 +1,14 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Component synergy enables structured, consistent, and semantically rich outputs."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

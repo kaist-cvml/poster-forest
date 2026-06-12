@@ -1,0 +1,14 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "font_size": 36,
+        "runs": [
+            {
+                "text": "Encoder and decoder each use six identical layers."
+            }
+        ],
+        "font_name": "Arial"
+    }
+]

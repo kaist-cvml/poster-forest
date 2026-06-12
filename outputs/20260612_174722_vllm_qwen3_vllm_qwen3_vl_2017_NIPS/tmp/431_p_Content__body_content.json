@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Adaptive learning rate with warm-up and decay ensured stable training."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Warm-up over 4,000 steps."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

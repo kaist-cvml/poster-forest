@@ -1,0 +1,265 @@
+{
+    "tree_type": "refined",
+    "timestamp": "2026-06-12T18:23:38.097121",
+    "tree_data": {
+        "panel_id": "0",
+        "section_name": "PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation",
+        "tp": 0.08,
+        "text_len": 898,
+        "gp": 0,
+        "figure_size": 0,
+        "figure_aspect": 1,
+        "content": "PosterForest is a training-free framework for automated scientific poster generation that overcomes critical limitations in existing approaches, including shallow document comprehension, weak content-layout integration, and high training costs. It introduces a hierarchical Poster Tree as a unified intermediate representation, enabling structured modeling of both semantic content and spatial layout. Through a multi-agent collaboration system, PosterForest facilitates iterative refinement of content and layout in a coordinated manner, ensuring semantic coherence, logical flow, and visual harmony. The framework operates without fine-tuning or training data, leveraging large language models for reasoning and layout planning. Extensive experiments and human evaluations demonstrate consistent superiority over state-of-the-art baselines in both quantitative metrics and qualitative assessment.",
+        "importance": 1.0,
+        "assets": {
+            "figures": [],
+            "tables": [],
+            "references": []
+        },
+        "asset_path": null,
+        "children": [
+            {
+                "panel_id": "1",
+                "section_name": "Introduction",
+                "tp": 0,
+                "text_len": 725,
+                "gp": 0,
+                "figure_size": 0,
+                "figure_aspect": 1,
+                "content": "The increasing volume and complexity of academic research have created a pressing need for automated scientific poster generation tools. Current methods often rely on flat document representations and treat content and layout as separate components, leading to poor semantic integration and suboptimal visual design. These approaches typically require extensive training data and are limited in their ability to capture hierarchical document structures. PosterForest addresses these challenges by introducing a hierarchical Poster Tree and a collaborative multi-agent system that jointly optimize content and layout. This enables more natural, coherent, and visually appealing poster generation without any training overhead.",
+                "importance": 0.8,
+                "assets": {
+                    "figures": [
+                        "1"
+                    ],
+                    "tables": [],
+                    "references": []
+                },
+                "asset_path": "outputs/20260612_181802_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-1.png",
+                "children": [],
+                "node_type": "content"
+            },
+            {
+                "panel_id": "2",
+                "section_name": "Proposed Method",
+                "tp": 0,
+                "text_len": 0,
+                "gp": 0,
+                "figure_size": 0,
+                "figure_aspect": 1,
+                "content": "",
+                "importance": 0.8,
+                "assets": {
+                    "figures": [
+                        "2"
+                    ],
+                    "tables": [],
+                    "references": []
+                },
+                "asset_path": null,
+                "children": [
+                    {
+                        "panel_id": "21",
+                        "section_name": "Preliminaries",
+                        "tp": 0,
+                        "text_len": 933,
+                        "gp": 0,
+                        "figure_size": 0,
+                        "figure_aspect": 1,
+                        "content": "Existing SPG methods typically overlook hierarchical document structure and treat content and layout as independent components. PosterForest overcomes this limitation with a training-free pipeline that begins by parsing documents into a Raw Doc Tree. This raw structure is then refined into a Content Tree through semantic pruning and summarization, while a Layout Tree is derived from the original spatial organization. The two trees are aligned and merged into a unified Poster Tree, creating a structured representation that captures both meaning and spatial relationships. This integration enables joint optimization of content and layout, ensuring that visual design reflects document hierarchy. The approach avoids reliance on training data, making it adaptable across diverse academic and technical documents. By preserving structural integrity, PosterForest supports more coherent and semantically grounded poster generation.",
+                        "importance": 0.7,
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "asset_path": null,
+                        "children": []
+                    },
+                    {
+                        "panel_id": "22",
+                        "section_name": "Hierarchical Paper-to-Poster",
+                        "tp": 0,
+                        "text_len": 937,
+                        "gp": 0,
+                        "figure_size": 0,
+                        "figure_aspect": 1,
+                        "content": "The Hierarchical Paper-to-Poster method constructs a Content Tree by removing redundant information and summarizing key ideas while preserving the original document hierarchy. Simultaneously, a Layout Tree is initialized based on the structural organization of content, reflecting intended spatial relationships. These two trees are merged into a unified Poster Tree, where each node encodes both semantic meaning and spatial attributes such as position, size, and alignment. This integration ensures that content placement is semantically informed and visually coherent with the document’s logical flow. The resulting structure enables precise, context-aware layout decisions during poster generation. By maintaining hierarchical consistency, the method supports scalable and interpretable design refinement. This dual-tree framework provides a robust foundation for generating posters that are both informative and visually harmonious.",
+                        "importance": 0.7,
+                        "assets": {
+                            "figures": [
+                                "3"
+                            ],
+                            "tables": [],
+                            "references": []
+                        },
+                        "asset_path": "outputs/20260612_181802_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-3.png",
+                        "children": []
+                    },
+                    {
+                        "panel_id": "23",
+                        "section_name": "Hierarchical Modification Planning",
+                        "tp": 0,
+                        "text_len": 834,
+                        "gp": 0,
+                        "figure_size": 0,
+                        "figure_aspect": 1,
+                        "content": "Hierarchical Modification Planning enables systematic poster refinement through a top-down traversal from root to leaf nodes. The Layout Agent optimizes spatial attributes by leveraging context from parent and descendant nodes, ensuring structural coherence. Simultaneously, the Content Agent adjusts textual density and abstraction levels to align with visual constraints. This dual-agent approach ensures that local modifications are informed by global poster architecture. Iterative refinement is guided by a Global Feedback Agent, which assesses overall quality and determines the need for additional passes. The process maintains a balance between content fidelity and aesthetic appeal throughout the hierarchy. This structured approach supports dynamic, context-aware poster generation with high visual and semantic consistency.",
+                        "importance": 0.7,
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "asset_path": null,
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "panel_id": "3",
+                "section_name": "Experiments",
+                "tp": 0,
+                "text_len": 0,
+                "gp": 0,
+                "figure_size": 0,
+                "figure_aspect": 1,
+                "content": "",
+                "importance": 0.8,
+                "assets": {
+                    "figures": [],
+                    "tables": [],
+                    "references": []
+                },
+                "asset_path": null,
+                "children": [
+                    {
+                        "panel_id": "31",
+                        "section_name": "Experimental Setup",
+                        "tp": 0,
+                        "text_len": 831,
+                        "gp": 0,
+                        "figure_size": 0,
+                        "figure_aspect": 1,
+                        "content": "Experiments are conducted on the Paper2Poster benchmark and real-world paper-poster pairs collected from top-tier AI conferences such as NeurIPS, ICML, and CVPR. A diverse set of baselines is evaluated, including oracle methods, end-to-end LLM-based approaches, general-purpose converters, and specialized SPG agents. All generated posters are standardized in color scheme, font size, and layout to ensure fair and consistent comparison. This controlled setup enables reliable assessment of content fidelity, visual quality, and structural coherence. The inclusion of real-world data enhances the practical relevance of the evaluation. Standardization minimizes confounding variables, allowing a clear focus on the core capabilities of PosterForest. The experimental design supports both quantitative analysis and human evaluation.",
+                        "importance": 0.7,
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "asset_path": null,
+                        "children": []
+                    },
+                    {
+                        "panel_id": "32",
+                        "section_name": "Qualitative Evaluation",
+                        "tp": 0,
+                        "text_len": 844,
+                        "gp": 0,
+                        "figure_size": 0,
+                        "figure_aspect": 1,
+                        "content": "Visual comparisons reveal that PosterForest produces more balanced and space-efficient posters compared to baselines. It effectively preserves critical content such as tables, figures, and key equations, which are often omitted or oversimplified by other methods. The generated posters maintain high information richness while ensuring strong visual coherence across different research domains. Unlike end-to-end models that struggle with layout consistency, PosterForest leverages its hierarchical structure to organize content logically. The multi-agent design enables better分工 in content extraction, summarization, and layout planning. This results in posters that are both informative and aesthetically pleasing. These qualitative advantages are consistently observed across NLP, CV, and RL papers, highlighting its cross-domain robustness.",
+                        "importance": 0.7,
+                        "assets": {
+                            "figures": [
+                                "4"
+                            ],
+                            "tables": [],
+                            "references": []
+                        },
+                        "asset_path": "outputs/20260612_181802_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-4.png",
+                        "children": []
+                    },
+                    {
+                        "panel_id": "33",
+                        "section_name": "Quantitative Evaluation",
+                        "tp": 0,
+                        "text_len": 866,
+                        "gp": 0,
+                        "figure_size": 0,
+                        "figure_aspect": 1,
+                        "content": "PosterForest achieves high performance in quantitative evaluation using MLLM-as-a-Judge, scoring strongly on informativeness and logical flow, closely aligning with human-created ground truth. It matches or exceeds baselines in aesthetic quality while significantly outperforming them in content completeness and clarity. These results highlight its superior semantic fidelity in generating coherent and informative poster content. The evaluation confirms that PosterForest effectively captures both structural and semantic nuances required for high-quality academic posters. Its strong performance across multiple metrics underscores its robustness and reliability. The use of advanced MLLM-based scoring ensures objective, scalable assessment of poster quality. This quantitative validation supports its effectiveness in real-world academic presentation scenarios.",
+                        "importance": 0.7,
+                        "assets": {
+                            "figures": [],
+                            "tables": [],
+                            "references": []
+                        },
+                        "asset_path": null,
+                        "children": []
+                    },
+                    {
+                        "panel_id": "34",
+                        "section_name": "User Study",
+                        "tp": 0,
+                        "text_len": 822,
+                        "gp": 0,
+                        "figure_size": 0,
+                        "figure_aspect": 1,
+                        "content": "A user study involving 25 AI graduate students demonstrates consistent preference for PosterForest across all evaluation criteria: content fidelity, aesthetic quality, structural clarity, and overall quality. PosterForest achieved up to 59.2% preference in pairwise comparisons, significantly outperforming existing baselines. Participants rated its content as more accurate, well-organized, and visually appealing than generated alternatives. The results indicate strong human alignment with the system’s design goals and output quality. This preference is attributed to improved semantic coherence and layout effectiveness. The study confirms that PosterForest not only performs well objectively but also resonates with expert users. These findings validate its practical utility in academic poster generation workflows.",
+                        "importance": 0.7,
+                        "assets": {
+                            "figures": [],
+                            "tables": [
+                                "2"
+                            ],
+                            "references": []
+                        },
+                        "asset_path": "outputs/20260612_181802_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-table-2.png",
+                        "children": []
+                    },
+                    {
+                        "panel_id": "35",
+                        "section_name": "Ablation Study",
+                        "tp": 0,
+                        "text_len": 793,
+                        "gp": 0,
+                        "figure_size": 0,
+                        "figure_aspect": 1,
+                        "content": "Ablation studies reveal that both the hierarchical structure and multi-agent collaboration are essential for optimal poster generation. Removing the hierarchy results in disorganized content and poor spatial coherence, undermining structural integrity. Eliminating either the content agent or layout agent leads to content redundancy or suboptimal spatial arrangements, respectively. Only when both components are used together does the system achieve balanced, coherent, and semantically rich outputs. This demonstrates the synergistic effect of structured planning and collaborative refinement. The results emphasize the importance of architectural design in multi-agent systems for complex creative tasks. These findings guide future improvements in automated content generation frameworks.",
+                        "importance": 0.7,
+                        "assets": {
+                            "figures": [
+                                "5",
+                                "6"
+                            ],
+                            "tables": [],
+                            "references": []
+                        },
+                        "asset_path": "outputs/20260612_181802_vllm_qwen3_vllm_qwen3_vl_2026_ACL/01_parse_raw_poster/2026_ACL/2026_ACL-figure-6.png",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "panel_id": "4",
+                "section_name": "Conclusion",
+                "tp": 0,
+                "text_len": 811,
+                "gp": 0,
+                "figure_size": 0,
+                "figure_aspect": 1,
+                "content": "PosterForest introduces a novel, training-free framework for automated scientific poster generation using a hierarchical Poster Tree and multi-agent collaboration. It enables joint optimization of content and layout, preserving document structure while enhancing visual coherence. The system maintains semantic integrity through structured content placement and intelligent spatial arrangement. Extensive evaluations demonstrate its superiority in both automated metrics and human assessments across diverse research domains. Its scalability and zero-training requirement make it accessible for researchers without technical expertise. PosterForest offers a practical, efficient solution for rapid, high-quality poster creation. It represents a significant advancement in AI-driven academic communication tools.",
+                "importance": 0.8,
+                "assets": {
+                    "figures": [],
+                    "tables": [],
+                    "references": []
+                },
+                "asset_path": null,
+                "children": [],
+                "node_type": "content"
+            }
+        ]
+    },
+    "basic_stats": {
+        "estimated_nodes": 1
+    },
+    "metadata": {
+        "main_sections": 4,
+        "total_subsections": 8,
+        "refinement_operations": "merge_and_prune",
+        "ablation_flat_tree": false
+    }
+}

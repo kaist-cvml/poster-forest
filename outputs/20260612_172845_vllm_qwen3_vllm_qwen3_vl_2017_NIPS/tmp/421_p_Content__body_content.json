@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Trained on 8 NVIDIA P100 GPUs with distributed computation."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "12 hours for 100,000 steps."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PosterForest Viewer</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f0fdf4; color: #1e293b;
+  height: 100vh; display: flex; flex-direction: column;
+}
+
+/* ── Header ── */
+header {
+  background: #fff; border-bottom: 1px solid #e2e8f0;
+  padding: 10px 20px; display: flex; align-items: center; gap: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.logo { color: #10b981; }
+header h1 { font-size: 15px; font-weight: 700; color: #1e293b; letter-spacing: .3px; }
+.refresh-btn {
+  margin-left: auto; background: #f8fafc; border: 1px solid #e2e8f0;
+  color: #64748b; padding: 5px 12px; border-radius: 6px; cursor: pointer;
+  font-size: 12px; transition: all .15s;
+}
+.refresh-btn:hover { background: #d1fae5; border-color: #10b981; color: #059669; }
+
+/* ── Layout ── */
+.layout { display: flex; flex: 1; overflow: hidden; }
+
+/* ── Sidebar ── */
+aside {
+  width: 280px; min-width: 240px; background: #fff;
+  border-right: 1px solid #e2e8f0; overflow-y: auto;
+}
+.sidebar-label {
+  padding: 8px 12px 8px 16px; font-size: 10px; font-weight: 700; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 1px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 10;
+  background: #fff; border-bottom: 1px solid #e2e8f0;
+}
+.sidebar-refresh-btn {
+  background: none; border: 1px solid #e2e8f0; border-radius: 5px;
+  color: #94a3b8; padding: 2px 8px; cursor: pointer; font-size: 11px;
+  transition: all .15s; line-height: 1.6; text-transform: none; letter-spacing: 0;
+}
+.sidebar-refresh-btn:hover { background: #d1fae5; border-color: #10b981; color: #059669; }
+.run-item {
+  padding: 12px 16px; border-bottom: 1px solid #f1f5f9; cursor: pointer;
+  transition: background .1s; position: relative;
+}
+.run-item:hover  { background: #f8fafc; }
+.run-item.active { background: #f0fdf4; border-left: 3px solid #10b981; padding-left: 13px; }
+.run-ts    { font-size: 10px; color: #94a3b8; margin-bottom: 3px; }
+.run-paper { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 1px; }
+.run-model { font-size: 11px; color: #64748b; white-space: nowrap; overflow: hidden;
+             text-overflow: ellipsis; margin-bottom: 6px; }
+.run-folder { font-size: 10px; color: #94a3b8; margin-bottom: 2px; font-family: monospace; }
+.mini-bar  { height: 3px; background: #e2e8f0; border-radius: 2px; overflow: hidden; }
+.mini-fill { height: 100%; border-radius: 2px;
+             background: linear-gradient(90deg, #10b981, #34d399); transition: width .4s; }
+.mini-label { font-size: 10px; color: #94a3b8; margin-top: 3px; }
+
+/* ── Main panel ── */
+main { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
+/* Tab content wrappers that need explicit flex sizing */
+#slideshow-wrap { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+#filmstrip-wrap { flex-shrink: 0; }
+.empty-state {
+  display: flex; align-items: center; justify-content: center;
+  flex: 1; color: #94a3b8; font-size: 14px;
+}
+
+/* ── Run header ── */
+.run-header {
+  background: #fff; border-bottom: 1px solid #e2e8f0;
+  padding: 8px 24px 0;
+}
+.run-title { font-size: 15px; font-weight: 700; color: #1e293b; }
+.run-folder-inline { font-size: 10px; color: #94a3b8; font-weight: 500; font-family: monospace; }
+.run-meta  { font-size: 11px; color: #64748b; margin-top: 1px; }
+
+/* ── Pipeline Stepper ── */
+.stepper {
+  display: flex; align-items: flex-start;
+  padding: 8px 0 0; overflow-x: auto;
+}
+.stepper::-webkit-scrollbar { height: 3px; }
+.stepper::-webkit-scrollbar-thumb { background: #6ee7b7; border-radius: 2px; }
+
+.step-node {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; min-width: 58px; cursor: default;
+}
+.step-node.clickable { cursor: pointer; }
+.step-node.clickable:hover .step-circle { transform: scale(1.12); box-shadow: 0 0 0 4px rgba(16,185,129,.15); }
+
+.step-connector {
+  flex: 1; height: 2px; min-width: 4px;
+  background: #e2e8f0; align-self: center;
+  margin-bottom: 16px; transition: background .4s;
+}
+.step-connector.done { background: #10b981; }
+.step-connector.flowing {
+  background: linear-gradient(90deg, #10b981, #10b981, #d1fae5, #d1fae5);
+  background-size: 300% 100%; animation: flow 1.6s linear infinite;
+}
+@keyframes flow { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+
+.step-circle {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid #e2e8f0; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: #94a3b8;
+  transition: all .2s; flex-shrink: 0;
+}
+.step-circle.done    { background: #10b981; border-color: #10b981; color: #fff; }
+.step-circle.running { border-color: #10b981; color: #059669;
+  animation: pulse-ring 1.4s ease-in-out infinite; }
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(16,185,129,0); }
+}
+
+.step-label {
+  font-size: 9px; color: #94a3b8; text-align: center;
+  margin-top: 5px; line-height: 1.3; max-width: 64px; padding-bottom: 2px;
+}
+.step-label.done    { color: #059669; font-weight: 500; }
+.step-label.running { color: #059669; font-weight: 700; }
+.step-view-hint {
+  font-size: 8px; color: #10b981; margin-top: 1px; opacity: 0;
+  transition: opacity .15s;
+}
+.step-node.clickable:hover .step-view-hint { opacity: 1; }
+.step-info {
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+  margin-top: 3px; width: 100%;
+}
+.step-stats {
+  display: flex; flex-direction: row; align-items: center; gap: 3px; flex-wrap: wrap; justify-content: center;
+}
+.step-stat {
+  font-size: 8px; color: #64748b; white-space: nowrap;
+  background: #f1f5f9; border-radius: 3px; padding: 0 4px; line-height: 1.6;
+}
+.step-stat.done { background: #d1fae5; color: #047857; }
+.step-time {
+  font-size: 7.5px; color: #475569; text-align: center;
+  line-height: 1.5; font-variant-numeric: tabular-nums;
+}
+.step-time.done { color: #059669; font-weight: 500; }
+
+/* ── Progress strip ── */
+.progress-strip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 24px 10px; background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+}
+.progress-bar-wrap {
+  flex: 1; height: 4px; background: #e2e8f0; border-radius: 2px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, #10b981, #34d399); transition: width .5s;
+}
+.progress-text { font-size: 11px; color: #94a3b8; white-space: nowrap; }
+.running-badge {
+  display: flex; align-items: center; gap: 5px;
+  background: #d1fae5; border: 1px solid #6ee7b7; border-radius: 99px;
+  padding: 2px 10px; font-size: 10px; font-weight: 600; color: #059669; white-space: nowrap;
+}
+.running-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #10b981;
+  animation: pulse-ring 1.4s ease-in-out infinite;
+}
+
+/* ── Token strip ── */
+.token-strip {
+  display: flex; gap: 6px; padding: 10px 24px; background: #fff;
+  border-bottom: 1px solid #e2e8f0; flex-wrap: wrap;
+}
+.token-chip {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px;
+  padding: 4px 10px; font-size: 11px; color: #475569;
+}
+.token-chip b { color: #059669; }
+
+/* ── Tabs ── */
+.tab-bar {
+  display: flex; gap: 4px; padding: 0 24px 0;
+  border-bottom: 1px solid #e2e8f0; background: #fff;
+  align-items: center;
+}
+.tab-zoom {
+  margin-left: auto; display: flex; align-items: center; gap: 6px;
+  padding-right: 4px;
+}
+.tab-btn {
+  padding: 8px 16px; font-size: 12px; font-weight: 600; color: #64748b;
+  border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -1px; transition: all .15s; white-space: nowrap;
+}
+.tab-btn:hover { color: #059669; }
+.tab-btn.active { color: #059669; border-bottom-color: #10b981; }
+.tab-count {
+  display: inline-block; background: #f1f5f9; color: #64748b;
+  border-radius: 10px; padding: 0 6px; font-size: 10px; margin-left: 4px;
+}
+.tab-btn.active .tab-count { background: #d1fae5; color: #059669; }
+
+/* ── Slideshow ── */
+.slideshow-area {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 20px; gap: 16px; min-height: 0;
+}
+
+.slide-counter {
+  font-size: 12px; color: #64748b; font-weight: 500; letter-spacing: .5px;
+}
+
+.slide-main {
+  display: flex; align-items: center; gap: 12px; max-width: 100%; flex: 1; min-height: 0;
+}
+.nav-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e2e8f0;
+  background: #fff; color: #475569; font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  position: relative; z-index: 20;
+}
+.nav-btn:hover:not(:disabled) { background: #d1fae5; border-color: #10b981; color: #059669; }
+.nav-btn:disabled { opacity: .3; cursor: default; }
+
+.slide-frame {
+  flex: 1; min-width: 0; min-height: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  overflow: auto; contain: paint;
+}
+.slide-frame img {
+  max-width: 100%; max-height: 58vh;
+  object-fit: contain; border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.12); background: #fff;
+  cursor: zoom-in; transition: box-shadow .15s;
+  flex-shrink: 0;
+}
+.slide-frame img:hover { box-shadow: 0 6px 28px rgba(0,0,0,.18); }
+.zoom-controls {
+  display: flex; align-items: center; gap: 4px;
+}
+.zoom-btn {
+  width: 22px; height: 22px; border-radius: 4px; border: 1px solid #e2e8f0;
+  background: #fff; color: #475569; font-size: 15px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; line-height: 1; padding: 0;
+}
+.zoom-btn:hover { background: #d1fae5; border-color: #10b981; color: #059669; }
+.zoom-level {
+  font-size: 11px; color: #64748b; min-width: 36px; text-align: center;
+  font-weight: 500;
+}
+.slide-caption-info {
+  font-size: 11px; color: #475569; font-weight: 500;
+  max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  background: #f1f5f9; border-radius: 5px; padding: 2px 8px;
+}
+
+/* ── Filmstrip ── */
+.filmstrip {
+  display: flex; gap: 8px; overflow-x: scroll; padding: 0 24px 18px;
+  scroll-behavior: smooth;
+  scrollbar-width: auto; scrollbar-color: #6ee7b7 #e2e8f0;
+}
+.filmstrip::-webkit-scrollbar { height: 16px; }
+.filmstrip::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 8px; }
+.filmstrip::-webkit-scrollbar-thumb { background: #34d399; border-radius: 8px; border: 3px solid #e2e8f0; }
+
+/* ── Two-row filmstrip (applied + iter) ── */
+.filmstrip-2row-outer {
+  padding: 0 24px; background: #fff;
+}
+.filmstrip-row-label {
+  position: sticky; left: 0; z-index: 2;
+  background: #fff;
+  align-self: stretch; display: flex; align-items: center; justify-content: flex-end;
+  flex-shrink: 0; width: 52px; padding: 0 8px 0 0;
+  font-size: 9px; font-weight: 700; white-space: nowrap;
+  letter-spacing: .5px; text-transform: uppercase;
+}
+.filmstrip-row-label.final-label   { color: #d97706; }
+.filmstrip-row-label.applied-label { color: #1d4ed8; }
+.filmstrip-row-label.iter-label    { color: #10b981; }
+.filmstrip-2row-scroll {
+  overflow-x: scroll; overflow-y: hidden;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 8px 0 18px; scroll-behavior: smooth;
+  scrollbar-width: auto; scrollbar-color: #34d399 #e2e8f0;
+}
+.filmstrip-2row-scroll::-webkit-scrollbar { height: 16px; }
+.filmstrip-2row-scroll::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 8px; }
+.filmstrip-2row-scroll::-webkit-scrollbar-thumb { background: #34d399; border-radius: 8px; border: 3px solid #e2e8f0; }
+.filmstrip-row { display: flex; gap: 8px; }
+
+
+.thumb-placeholder {
+  width: 104px; height: 72px; flex-shrink: 0;
+  background: #f8fafc; border-radius: 6px; border: 2px dashed #e2e8f0;
+}
+
+.filmstrip-posbar {
+  padding: 4px 24px 12px; font-size: 11px; color: #64748b;
+  display: flex; align-items: center; gap: 8px;
+}
+.filmstrip-posbar .fp-num {
+  background: #f1f5f9; border-radius: 10px; padding: 1px 8px;
+  font-size: 11px; font-weight: 700; color: #475569; white-space: nowrap;
+}
+.filmstrip-posbar .fp-cap {
+  color: #64748b; font-size: 11px; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+
+.thumb {
+  flex-shrink: 0; cursor: pointer; border-radius: 6px; overflow: hidden;
+  border: 2px solid transparent; transition: border-color .15s;
+  background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.thumb.active { border-color: #10b981; }
+.thumb:hover  { border-color: #6ee7b7; }
+.thumb.final-thumb { border-color: #d97706; }
+.thumb.final-thumb:hover { border-color: #f59e0b; }
+.thumb img { width: 100px; height: 68px; object-fit: contain; display: block; padding: 4px; }
+.filmstrip-col-sep { width: 1px; background: #e2e8f0; flex-shrink: 0; margin: 0 4px; align-self: stretch; }
+
+/* ── Grid (panel groups) ── */
+.panel-grid {
+  flex: 1; min-height: 0; display: flex; flex-wrap: wrap; gap: 10px;
+  padding: 16px 24px; overflow-y: auto; align-content: flex-start;
+}
+/* ── Grid (assets) ── */
+.asset-grid {
+  flex: 1; min-height: 0; display: flex; flex-wrap: wrap; gap: 12px;
+  padding: 16px 24px; overflow-y: auto; align-content: flex-start;
+}
+/* ── Panel group ── */
+.panel-group {
+  border: 1px solid #e2e8f0; border-radius: 8px;
+  background: #fff; overflow: hidden;
+}
+.panel-group-header {
+  padding: 8px 14px; font-size: 11px; font-weight: 700; color: #059669;
+  background: #f0fdf4; border-bottom: 1px solid #e2e8f0; letter-spacing: .3px;
+}
+.panel-group-sims {
+  display: flex; flex-wrap: wrap; gap: 8px; padding: 10px;
+}
+.panel-sim-card {
+  cursor: pointer; border-radius: 6px; overflow: hidden;
+  border: 2px solid #e2e8f0; background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05); transition: border-color .15s;
+  display: flex; flex-direction: column; align-items: center;
+}
+.panel-sim-card:hover { border-color: #6ee7b7; }
+.panel-sim-card img { width: 180px; height: 140px; object-fit: contain; display: block; padding: 4px; }
+.panel-sim-label { padding: 3px 8px; font-size: 9px; color: #64748b; text-align: center;
+  border-top: 1px solid #f1f5f9; background: #f8fafc;
+  max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Panel comparison card: before → after */
+.panel-card {
+  border-radius: 8px; overflow: hidden; border: 2px solid #e2e8f0; background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06); display: flex; flex-direction: column;
+  transition: border-color .15s;
+}
+.panel-card:hover { border-color: #6ee7b7; }
+.panel-card.active { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,.18); }
+.pc-compare {
+  display: flex; align-items: stretch; gap: 0;
+}
+.pc-half {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  padding: 4px; gap: 2px; cursor: pointer;
+}
+.pc-half:hover img { opacity: .85; }
+.pc-half img { width: 110px; height: 86px; object-fit: contain; display: block; border-radius: 4px; }
+.pc-half-label { font-size: 8px; color: #94a3b8; }
+.pc-arrow {
+  display: flex; align-items: center; padding: 0 2px;
+  font-size: 14px; color: #cbd5e1; flex-shrink: 0;
+}
+.pc-footer {
+  padding: 3px 8px; font-size: 9px; font-weight: 600; color: #64748b;
+  border-top: 1px solid #f1f5f9; background: #f8fafc;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.pc-badge {
+  font-size: 8px; padding: 1px 5px; border-radius: 4px;
+  background: #f1f5f9; color: #64748b;
+}
+
+/* Panels tab — textbox border legend */
+.panel-legend {
+  width: 100%; margin-bottom: 4px; display: flex; align-items: center; gap: 14px;
+  padding: 7px 12px; border-radius: 8px;
+  background: #f8fafc; border: 1px solid #e2e8f0;
+  font-size: 10px; color: #64748b; flex-shrink: 0; flex-wrap: wrap;
+}
+.panel-legend-title { font-weight: 700; color: #475569; margin-right: 4px; }
+.pl-item { display: flex; align-items: center; gap: 5px; }
+.pl-swatch {
+  width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0;
+  border: 2.5px solid currentColor;
+}
+.pl-swatch.fit      { color: #16a34a; background: #dcfce7; }
+.pl-swatch.overflow { color: #2563eb; background: #dbeafe; }
+.pl-swatch.underflow{ color: #d97706; background: #fef3c7; }
+
+/* Single-state panel card (no change) */
+.panel-card-single {
+  border-radius: 8px; overflow: hidden; border: 2px solid #e2e8f0; background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06); display: flex; flex-direction: column;
+  transition: border-color .15s; cursor: pointer;
+}
+.panel-card-single:hover { border-color: #6ee7b7; }
+.panel-card-single img { width: 100px; height: 78px; object-fit: contain; display: block; padding: 4px; }
+.panel-card-single-label {
+  padding: 3px 8px; font-size: 9px; color: #64748b;
+  border-top: 1px solid #f1f5f9; background: #f8fafc;
+}
+
+/* Asset grid card */
+.asset-card {
+  cursor: pointer; border-radius: 8px; overflow: hidden;
+  border: 2px solid #e2e8f0; background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06); transition: border-color .15s;
+  display: flex; flex-direction: column; align-items: center;
+}
+.asset-card:hover { border-color: #6ee7b7; }
+.asset-card img { width: 140px; height: 110px; object-fit: contain; display: block; padding: 6px; }
+.asset-card-label {
+  padding: 3px 8px; font-size: 9px; color: #64748b; text-align: center;
+  border-top: 1px solid #f1f5f9; background: #f8fafc;
+  max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── Lightbox ── */
+#lightbox {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75);
+  z-index: 100; align-items: center; justify-content: center;
+}
+#lightbox.open { display: flex; }
+#lightbox img { max-width: 92vw; max-height: 92vh; border-radius: 8px;
+                box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+#lb-close {
+  position: absolute; top: 18px; right: 24px; font-size: 26px;
+  color: #e2e8f0; cursor: pointer; line-height: 1;
+}
+#lb-prev, #lb-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.15); border: none; color: #fff;
+  font-size: 32px; cursor: pointer; padding: 12px 18px; border-radius: 8px;
+  transition: background .15s;
+}
+#lb-prev:hover, #lb-next:hover { background: rgba(255,255,255,.25); }
+#lb-prev { left: 16px; }
+#lb-next { right: 16px; }
+#lb-caption {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  color: #e2e8f0; font-size: 13px; background: rgba(0,0,0,.5);
+  padding: 4px 14px; border-radius: 20px;
+}
+
+.loading-msg { padding: 20px 16px; color: #94a3b8; font-size: 13px; }
+
+/* ── Outline Tab ── */
+.outline-container { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+.outline-scroll    { flex:1; min-height:0; overflow-y:auto; padding:14px 20px 24px; }
+.outline-empty     { color:#94a3b8; font-size:13px; text-align:center; padding:40px; }
+
+/* Step sections */
+.pipe-step {
+  border:1px solid #e2e8f0; border-radius:10px; overflow:hidden; background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.04); flex-shrink:0; margin-bottom:10px;
+}
+.pipe-step-hd {
+  display:flex; align-items:center; gap:8px; padding:10px 14px;
+  cursor:pointer; user-select:none;
+  background: linear-gradient(135deg,#f8fafc,#fff);
+  border-bottom:1px solid #e2e8f0;
+}
+.pipe-step-hd:hover { background:linear-gradient(135deg,#f1f5f9,#f8fafc); }
+.pipe-step-num {
+  width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; flex-shrink:0;
+  background:#e2e8f0; color:#94a3b8;
+}
+.pipe-step-num.done    { background:#10b981; color:#fff; }
+.pipe-step-num.pending { background:#fbbf24; color:#fff; }
+.pipe-step-title { font-size:12px; font-weight:700; color:#1e293b; flex:1; }
+.pipe-step-badge { font-size:10px; color:#64748b; flex-shrink:0; display:flex; gap:5px; flex-wrap:wrap; }
+.pipe-badge-chip {
+  font-size:9px; font-weight:600; padding:1px 7px; border-radius:6px;
+  background:#f1f5f9; color:#475569; white-space:nowrap;
+}
+.pipe-badge-chip.green  { background:#d1fae5; color:#047857; }
+.pipe-badge-chip.red    { background:#fee2e2; color:#b91c1c; }
+.pipe-badge-chip.blue   { background:#dbeafe; color:#1d4ed8; }
+.pipe-step-caret { font-size:10px; color:#94a3b8; flex-shrink:0; transition:transform .18s; }
+.pipe-step-caret.closed { transform:rotate(-90deg); }
+.pipe-step-body { padding:12px 14px; display:flex; flex-direction:column; gap:8px; }
+.pipe-step-body.collapsed { display:none; }
+.pipe-step-pending { font-size:11px; color:#94a3b8; font-style:italic; padding:4px 0; }
+
+/* Step 1 – asset thumbnails */
+.ps-type-label { font-size:9px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:.8px; margin-bottom:5px; }
+.ps-thumb-grid { display:flex; flex-wrap:wrap; gap:7px; }
+.ps-thumb {
+  border:1px solid #e2e8f0; border-radius:6px; overflow:hidden; background:#fff;
+  cursor:pointer; transition:border-color .15s; flex-shrink:0;
+}
+.ps-thumb:hover { border-color:#10b981; }
+.ps-thumb img { width:100px; height:72px; object-fit:contain; display:block; padding:3px; }
+.ps-thumb-cap { font-size:8px; color:#64748b; padding:2px 5px; background:#f8fafc; border-top:1px solid #f1f5f9; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ps-thumb-empty { width:100px; height:72px; background:#f8fafc; display:flex; align-items:center; justify-content:center; color:#cbd5e1; font-size:20px; }
+
+/* Step 2 – section tree */
+.ps-sec-tree { display:flex; flex-direction:column; gap:3px; }
+.ps-sec-row { display:flex; align-items:baseline; gap:6px; padding:3px 6px; border-radius:4px; }
+.ps-sec-row:hover { background:#f8fafc; }
+.ps-sec-name { font-weight:600; color:#1e293b; }
+.ps-sec-name.d0 { font-size:12px; color:#1e3a5f; }
+.ps-sec-name.d1 { font-size:11px; color:#1d4ed8; }
+.ps-sec-name.d2 { font-size:11px; color:#0369a1; }
+.ps-sec-name.d3 { font-size:10px; color:#047857; }
+.ps-sec-pid  { font-size:9px; color:#94a3b8; flex-shrink:0; }
+.ps-sec-meta { font-size:9px; color:#10b981; flex-shrink:0; display:flex; gap:4px; }
+.ps-sec-chip { background:#f0fdf4; border-radius:3px; padding:0 5px; color:#059669; }
+.ps-sec-chip.asset { background:#dbeafe; color:#1d4ed8; }
+.ps-sec-bullets { padding:2px 0 3px 20px; display:flex; flex-direction:column; gap:1px; }
+.ps-bullet-row { font-size:10px; color:#475569; line-height:1.5; }
+.ps-child-wrap { padding-left:16px; border-left:2px solid #f1f5f9; margin-left:8px; }
+
+/* Step 2 – dropped assets */
+.ps-dropped-label { font-size:9px; font-weight:700; color:#dc2626; margin-top:8px; margin-bottom:4px; }
+.ps-dropped-grid  { display:flex; flex-wrap:wrap; gap:5px; }
+.ps-dropped-chip  { font-size:9px; color:#64748b; background:#fef2f2; border:1px solid #fecaca; border-radius:4px; padding:2px 7px; max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+/* Step 3 – horizontal panel tree table */
+.ps3-htree { width:100%; border-collapse:collapse; }
+.ps3-htree-td {
+  vertical-align:top; padding:4px 8px 4px 6px;
+  border:1px solid #f1f5f9; background:#fff;
+  min-width:80px;
+}
+.ps3-htree-td:first-child { min-width:54px; max-width:64px; }
+.ps3-htree-pid {
+  font-size:11px; font-weight:700; color:#047857; margin-bottom:2px;
+  white-space:nowrap;
+}
+.ps3-htree-secs { display:flex; flex-direction:column; gap:1px; }
+.ps3-sec-row { display:flex; align-items:baseline; gap:6px; padding:2px 4px; border-radius:4px; }
+.ps3-sec-row:hover { background:#f8fafc; }
+.ps3-thumbs { display:flex; gap:4px; padding:2px 4px 4px; }
+.ps3-badges { display:flex; gap:4px; flex-wrap:wrap; }
+
+
+/* ── Activity Log ── */
+.activity-feed {
+  flex: 1; min-height: 0; overflow-y: auto; padding: 16px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.activity-running-bar {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; color: #059669;
+  margin-bottom: 4px;
+}
+.activity-empty { color: #94a3b8; font-size: 13px; text-align: center; padding: 40px 0; }
+
+.attempt-block {
+  border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05); flex-shrink: 0;
+}
+.attempt-hd {
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: #f1f5f9; font-size: 12px; font-weight: 700; letter-spacing: .4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.attempt-phase-badge {
+  background: rgba(255,255,255,.18); border-radius: 4px;
+  padding: 1px 7px; font-size: 9px; font-weight: 600; letter-spacing: .3px;
+}
+
+.phase-section { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; }
+.phase-label {
+  font-size: 9px; font-weight: 700; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+}
+
+/* Layout iter cards */
+.layout-iter-card {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px;
+  padding: 8px 12px; margin-bottom: 6px; display: flex; flex-direction: column; gap: 6px;
+}
+.layout-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.layout-node { font-size: 11px; font-weight: 600; color: #1e293b; }
+.layout-type-badge {
+  font-size: 9px; padding: 1px 6px; border-radius: 4px;
+  background: #dbeafe; color: #1d4ed8; font-weight: 600;
+}
+.layout-dir-badge {
+  font-size: 9px; padding: 1px 6px; border-radius: 4px;
+  background: #ede9fe; color: #6d28d9; font-weight: 600;
+}
+.layout-nochange { font-size: 9px; color: #94a3b8; font-style: italic; }
+.ratio-row { display: flex; align-items: center; gap: 6px; }
+.ratio-label { font-size: 10px; color: #64748b; width: 30px; text-align: right; flex-shrink: 0; }
+.ratio-track {
+  flex: 1; height: 10px; background: #e2e8f0; border-radius: 4px; overflow: hidden; position: relative;
+}
+.ratio-fill {
+  position: absolute; left: 0; top: 0; height: 100%; border-radius: 4px;
+}
+.ratio-fill.before { background: #94a3b8; }
+.ratio-fill.after  { background: #10b981; }
+.ratio-arrow { font-size: 11px; color: #94a3b8; flex-shrink: 0; }
+.ratio-val { font-size: 10px; color: #475569; width: 34px; flex-shrink: 0; font-weight: 600; }
+
+/* Content panel cards */
+.content-panel-card {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px;
+  padding: 8px 12px; margin-bottom: 6px;
+}
+.content-panel-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.panel-name-chip {
+  font-size: 11px; font-weight: 700; color: #1e293b;
+  background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 5px; padding: 1px 8px;
+}
+.iter-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.iter-num { font-size: 9px; color: #94a3b8; width: 34px; flex-shrink: 0; }
+.status-pill {
+  font-size: 9px; font-weight: 700; padding: 1px 8px; border-radius: 10px;
+  flex-shrink: 0; min-width: 66px; text-align: center;
+}
+.status-pill.fit       { background: #d1fae5; color: #047857; }
+.status-pill.overflow  { background: #fee2e2; color: #b91c1c; }
+.status-pill.underflow { background: #fef3c7; color: #b45309; }
+.vol-track { flex: 1; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+.vol-fill  { height: 100%; border-radius: 4px; transition: width .3s; }
+.vol-fill.fit       { background: #10b981; }
+.vol-fill.overflow  { background: #ef4444; }
+.vol-fill.underflow { background: #f59e0b; }
+.vol-pct { font-size: 10px; color: #64748b; width: 34px; text-align: right; flex-shrink: 0; font-weight: 600; }
+
+/* Section info inside content panel card */
+.sec-info-row {
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  padding: 4px 0 4px; margin-bottom: 5px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.sec-info-name {
+  font-size: 11px; font-weight: 700; color: #1d4ed8; flex: 1; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sec-info-meta { font-size: 9px; color: #64748b; flex-shrink: 0; display: flex; gap: 6px; }
+.sec-info-tag {
+  background: #f1f5f9; border-radius: 3px; padding: 1px 5px;
+  font-size: 9px; color: #475569; white-space: nowrap;
+}
+.sec-info-tag.has-asset { background: #d1fae5; color: #047857; }
+.sec-asset-row {
+  display: flex; gap: 5px; margin-bottom: 6px; flex-wrap: wrap;
+}
+.sec-mini-thumb {
+  width: 54px; height: 42px; object-fit: contain; border-radius: 3px;
+  border: 1px solid #e2e8f0; background: #f8fafc; cursor: pointer;
+}
+.sec-mini-thumb:hover { border-color: #10b981; }
+
+/* Critic card */
+.critic-card {
+  display: flex; align-items: center; gap: 10px; padding: 8px 14px;
+  background: #fafafa;
+}
+.critic-label { font-size: 11px; color: #64748b; }
+.critic-badge { font-size: 11px; font-weight: 700; padding: 2px 12px; border-radius: 10px; }
+.critic-badge.none   { background: #d1fae5; color: #047857; }
+.critic-badge.text   { background: #fef3c7; color: #b45309; }
+.critic-badge.layout { background: #dbeafe; color: #1d4ed8; }
+.critic-badge.both   { background: #fee2e2; color: #b91c1c; }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+    <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+  </svg>
+  <h1>PosterForest Viewer</h1>
+</header>
+
+<div class="layout">
+  <aside id="sidebar"><div class="sidebar-label">Runs<button class="sidebar-refresh-btn" onclick="manualRefresh()">↻</button></div><div class="loading-msg">Loading runs…</div></aside>
+  <main id="main"><div class="empty-state">← Select a run from the sidebar</div></main>
+</div>
+
+<div id="lightbox">
+  <span id="lb-close" onclick="closeLightbox()">✕</span>
+  <button id="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next" onclick="lbNav(+1)">›</button>
+  <div id="lb-caption"></div>
+</div>
+
+<script>
+// ── Config ─────────────────────────────────────────────────────────────────
+// Auto-detect API base: if served by the FastAPI server itself, use same-origin.
+// If opened from a different port (e.g. VS Code Live Server), fall back to 8081.
+const _VIEWER_PORTS = new Set(['8080', '8081']);
+const API_BASE = (_VIEWER_PORTS.has(location.port) || !location.port)
+  ? ''
+  : `${location.protocol}//${location.hostname}:8081`;
+
+// ── State ──────────────────────────────────────────────────────────────────
+let activeRun      = null;
+let slides         = [];   // [{src, caption}]
+let slideIdx       = 0;
+let panelIdx       = 0;
+let activeTab      = 'poster';   // 'poster' | 'panels' | 'assets'
+let autoRefreshing = false;      // suppress viewport jumps during silent refresh
+let posterZoom     = 1.0;
+let finalPosterIdx = -1;
+let lbSlides       = [];   // current lightbox navigation context [{src, caption}]
+let lbIdx          = -1;   // current index within lbSlides
+
+// ── API ────────────────────────────────────────────────────────────────────
+async function api(path) {
+  const r = await fetch(API_BASE + path);
+  if (!r.ok) throw new Error(r.statusText);
+  return r.json();
+}
+
+// ── Run list ───────────────────────────────────────────────────────────────
+async function loadRuns() {
+  const sidebar = document.getElementById('sidebar');
+  const hdr = '<div class="sidebar-label">Runs<button class="sidebar-refresh-btn" onclick="manualRefresh()">↻</button></div>';
+  sidebar.innerHTML = hdr + '<div class="loading-msg">Loading…</div>';
+  let runs;
+  try { runs = await api('/api/runs'); }
+  catch(e) {
+    sidebar.innerHTML = hdr + `<div class="loading-msg" style="color:#ef4444">
+      Cannot reach API at ${API_BASE || location.origin}<br>
+      Make sure uvicorn is running on port 8081.</div>`;
+    return;
+  }
+  if (!runs.length) {
+    sidebar.innerHTML = hdr + '<div class="loading-msg">No runs found in outputs/</div>';
+    return;
+  }
+  sidebar.innerHTML = hdr +
+    runs.map(r => {
+      const pct   = Math.round(r.completed / r.total * 100);
+      const done  = r.completed === r.total;
+      const cls   = r.id === activeRun ? ' active' : '';
+      const stall = !done && r.stalled;
+      const statusTag = done
+        ? '<span style="font-size:9px;color:#10b981;font-weight:700">✓ done</span>'
+        : stall
+          ? '<span style="font-size:9px;color:#d97706;font-weight:700">⚠ stalled</span>'
+          : '<span style="font-size:9px;color:#3b82f6;font-weight:700">⏳ running</span>';
+      const fillColor = done ? 'linear-gradient(90deg,#10b981,#34d399)'
+                      : stall ? '#fbbf24' : '#3b82f6';
+      return `<div class="run-item${cls}" onclick="selectRun('${r.id}')">
+        <div class="run-ts">${r.timestamp} &nbsp;${statusTag}</div>
+        ${r.paper_folder ? `<div class="run-folder">📁 ${r.paper_folder}</div>` : ''}
+        <div class="run-paper">${r.paper}</div>
+        <div class="run-model">${r.models}</div>
+        <div class="mini-bar"><div class="mini-fill" style="width:${pct}%;background:${fillColor}"></div></div>
+        <div class="mini-label">${r.completed}/${r.total} steps</div>
+      </div>`;
+    }).join('');
+
+  if (activeRun) selectRun(activeRun, true);
+}
+
+// ── Manual refresh ─────────────────────────────────────────────────────────
+async function manualRefresh() {
+  await loadRuns();
+}
+
+// ── Select run ─────────────────────────────────────────────────────────────
+async function selectRun(id, preserveSlide = false) {
+  activeRun = id;
+  document.querySelectorAll('.run-item').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('onclick').includes(`'${id}'`));
+  });
+  const data = await api(`/api/runs/${id}`);
+  autoRefreshing = preserveSlide; // silent update: suppress scroll jumps
+  renderRun(id, data, preserveSlide);
+  autoRefreshing = false;
+}
+
+// ── Render run ─────────────────────────────────────────────────────────────
+function buildStatusHtml(data, stepFirstSlide) {
+  // Use server-parsed paper/models if available; fallback to ID parsing
+  const _rawPaper     = data.paper  || (() => { const p = data._id.split('_'); return p[p.length - 1]; })();
+  const models        = data.models || (() => { const p = data._id.split('_'); return p.slice(2, -1).join('_'); })();
+  const paper_folder  = data.paper_folder || null;
+  // "Attention_Is_All_You_Need" → "Attention Is All You Need"
+  const paper = _rawPaper;
+  const parts = data._id.split('_');
+  const ts = parts.length >= 2
+    ? `${parts[0].slice(0,4)}-${parts[0].slice(4,6)}-${parts[0].slice(6,8)} ${parts[1].slice(0,2)}:${parts[1].slice(2,4)}:${parts[1].slice(4,6)}`
+    : '';
+  const pct = Math.round(data.completed / data.total * 100);
+  const isComplete = data.completed === data.total;
+
+  const SHORT = ['Parse','Filter','Outline','Layout','Content','Feedback','PowerPoint','Final'];
+  let currentStepLabel = null;
+  const st = data.stats || {};
+  const STEP_STATS = {
+    0: st.step1 ? [
+        st.step1.figures != null ? `${st.step1.figures} fig` : null,
+        st.step1.tables  != null ? `${st.step1.tables} tbl`  : null,
+        st.step1.words   != null ? `${st.step1.words} wds`   : null,
+       ].filter(Boolean) : [],
+    1: st.step2 ? [
+        (st.step2.fig_kept != null && st.step2.tbl_kept != null) ? `${st.step2.fig_kept} fig · ${st.step2.tbl_kept} tbl` : null,
+        st.step2.sections    != null ? `${st.step2.sections} sec`    : null,
+        st.step2.subsections != null ? `${st.step2.subsections} sub` : null,
+       ].filter(Boolean) : [],
+    2: st.step3 ? [
+        st.step3.panels != null ? `${st.step3.panels} panels` : null,
+        st.step3.assets != null ? `${st.step3.assets} assets` : null,
+       ].filter(Boolean) : [],
+    5: st.step6 ? [`${st.step6.attempts} tries`] : [],
+  };
+
+  let stepperHtml = '<div class="stepper">';
+  data.steps.forEach((s, i) => {
+    const isDone = s.done;
+    const isRunning = !isDone && (i === 0 || data.steps[i-1].done) && !isComplete;
+    if (isRunning) currentStepLabel = s.label;
+    const hasSlide = stepFirstSlide[i] !== undefined;
+    const circleClass = isDone ? 'done' : isRunning ? 'running' : '';
+    const labelClass  = isDone ? 'done' : isRunning ? 'running' : '';
+    const icon = isDone ? '✓' : isRunning ? '●' : String(i + 1);
+    const statClass = isDone ? 'done' : '';
+    const statLines = (STEP_STATS[i] || []).map(t =>
+      `<span class="step-stat ${statClass}">${t}</span>`).join('');
+
+    // Step timing: HH:MM:SS local time + elapsed duration
+    const _fmtTs = ts => {
+      if (!ts) return null;
+      const d = new Date(ts * 1000);
+      return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`;
+    };
+    const _fmtElapsed = secs => {
+      if (secs == null || secs < 0) return null;
+      if (secs < 0.05)  return '< 0.1s';
+      if (secs < 1)     return `${secs.toFixed(1)}s`;
+      if (secs < 60)    return `${Math.round(secs)}s`;
+      const m = Math.floor(secs / 60), s2 = Math.round(secs % 60);
+      return `${m}m${String(s2).padStart(2,'0')}s`;
+    };
+    const startStr   = _fmtTs(s.start_ts);
+    const endStr     = _fmtTs(s.end_ts);
+    const elapsedStr = (s.start_ts && s.end_ts) ? _fmtElapsed(s.end_ts - s.start_ts) : null;
+    // Time block: start / → end / (elapsed)
+    const timeHtml = startStr
+      ? `<div class="step-time${isDone ? ' done' : ''}">${startStr}${endStr ? ` → ${endStr}` : ''}${elapsedStr ? `<br><span style="opacity:.75">(${elapsedStr})</span>` : ''}</div>`
+      : '';
+
+    if (i > 0) {
+      const prevDone = data.steps[i-1].done;
+      const connClass = (prevDone && isDone) ? 'done' : (prevDone && isRunning) ? 'flowing' : '';
+      stepperHtml += `<div class="step-connector ${connClass}"></div>`;
+    }
+    const clickAttr = hasSlide ? `onclick="switchTabAndJump('poster', ${stepFirstSlide[i]})"` : '';
+    stepperHtml += `<div class="step-node${hasSlide ? ' clickable' : ''}" ${clickAttr} title="${s.label}${hasSlide ? ' — click to view' : ''}">
+      <div class="step-circle ${circleClass}">${icon}</div>
+      <div class="step-label ${labelClass}">${SHORT[i]}</div>
+      <div class="step-info">
+        ${timeHtml}
+        ${statLines ? `<div class="step-stats">${statLines}</div>` : ''}
+      </div>
+      ${hasSlide ? '<div class="step-view-hint">view</div>' : ''}
+    </div>`;
+  });
+  stepperHtml += '</div>';
+
+  const badgeHtml = isComplete
+    ? `<div class="running-badge" style="background:#dcfce7;border-color:#bbf7d0;color:#16a34a">✓ Complete</div>`
+    : data.stalled
+      ? `<div class="running-badge" style="background:#fef3c7;border-color:#fcd34d;color:#92400e">⚠ Stalled — pipeline stopped</div>`
+      : currentStepLabel
+        ? `<div class="running-badge"><div class="running-dot"></div>${currentStepLabel}</div>`
+        : '';
+
+  let tokenHtml = '';
+  if (data.tokens) {
+    const t = data.tokens;
+    const timeStr = t.time_taken != null ? fmtTime(t.time_taken) : null;
+    tokenHtml = `<div class="token-strip">
+      <div class="token-chip">LLM in <b>${fmt(t.input_t)}</b></div>
+      <div class="token-chip">LLM out <b>${fmt(t.output_t)}</b></div>
+      <div class="token-chip">VLM in <b>${fmt(t.input_v)}</b></div>
+      <div class="token-chip">VLM out <b>${fmt(t.output_v)}</b></div>
+      ${timeStr ? `<div class="token-chip">Time <b>${timeStr}</b></div>` : ''}
+    </div>`;
+  }
+
+  return {
+    header: `<div class="run-header">
+      <div class="run-title">${paper_folder ? `<span class="run-folder-inline">📁 ${paper_folder} / </span>` : ''}${paper}</div>
+      <div class="run-meta" style="display:flex;align-items:center;gap:8px;">${ts} &nbsp;·&nbsp; ${models}${badgeHtml ? `&nbsp;${badgeHtml}` : ''}</div>
+      ${stepperHtml}
+    </div>
+    ${tokenHtml}`,
+    isComplete,
+  };
+}
+
+// ── Tab data (set per render) ───────────────────────────────────────────────
+let tabData = { poster: [], panels: [], assets: [], activity: null, pipeline: null };
+
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.tab === tab));
+  const mainEl = document.getElementById('main');
+  const sw = mainEl.querySelector('#slideshow-wrap');
+  const fw = mainEl.querySelector('#filmstrip-wrap');
+  const pg = mainEl.querySelector('#panel-grid-wrap');
+  const ag = mainEl.querySelector('#asset-grid-wrap');
+  const aw = mainEl.querySelector('#activity-wrap');
+  const ow = mainEl.querySelector('#outline-wrap');
+  const tz = mainEl.querySelector('#tab-zoom');
+  const hideAll = () => {
+    if (sw) sw.style.display = 'none'; if (fw) fw.style.display = 'none';
+    if (pg) pg.style.display = 'none'; if (ag) ag.style.display = 'none';
+    if (aw) aw.style.display = 'none'; if (ow) ow.style.display = 'none';
+    if (tz) tz.style.display = 'none';
+  };
+  if (tab === 'panels') {
+    hideAll(); if (pg) pg.style.display = 'flex';
+    selectPanelCard(panelIdx);
+  } else if (tab === 'assets') {
+    hideAll(); if (ag) ag.style.display = 'flex';
+  } else if (tab === 'log') {
+    hideAll();
+    if (aw) { aw.style.display = 'flex'; aw.innerHTML = _buildActivityLog(tabData.activity, tabData.pipeline); }
+  } else if (tab === 'outline') {
+    hideAll();
+    if (ow) { ow.style.display = 'flex'; ow.innerHTML = _buildOutlineFull(tabData.pipeline); }
+  } else {
+    slides = tabData.poster;
+    if (finalPosterIdx >= 0 && finalPosterIdx < slides.length) {
+      slideIdx = finalPosterIdx;
+    } else {
+      slideIdx = Math.max(0, Math.min(slideIdx, slides.length - 1));
+    }
+    hideAll();
+    if (sw) sw.style.display = '';
+    if (fw) fw.style.display = '';
+    if (tz) tz.style.display = '';
+    rebuildFilmstrip();
+    if (slides.length) updateSlide();
+    else if (sw) sw.innerHTML = '<div class="slideshow-area"><div style="color:#94a3b8;font-size:13px">No images yet — pipeline running.</div></div>';
+  }
+}
+
+function switchTabAndJump(tab, idx) {
+  switchTab(tab);
+  jumpSlide(idx);
+}
+
+function _posterCaption(src) {
+  const f = src.split('/').pop();
+  if (f === 'poster_final.jpg') return 'Final Poster';
+  const mS = f.match(/attempt_(\d+)_start/);
+  if (mS) return `Attempt ${+mS[1]+1} · start`;
+  // end is saved after incrementing num_attempts, so N already equals pass+1
+  const mE = f.match(/attempt_(\d+)_end/);
+  if (mE) return `Attempt ${+mE[1]} · end`;
+  const mAp = f.match(/attempt_(\d+)_iter_(\d+).*_applied/);
+  if (mAp) return `Attempt ${+mAp[1]+1} · iter ${+mAp[2]+1} · applied`;
+  const mAv = f.match(/attempt_(\d+)_iter_(\d+).*_after_viz/);
+  if (mAv) return `Attempt ${+mAv[1]+1} · iter ${+mAv[2]+1} · after`;
+  const mA = f.match(/attempt_(\d+)_iter_(\d+)/);
+  if (mA) return `Attempt ${+mA[1]+1} · iter ${+mA[2]+1}`;
+  return f.replace(/\.(jpg|png)$/i,'').replace(/_/g,' ');
+}
+
+function renderRun(id, data, preserveSlide = false) {
+  data._id = id;
+
+  // ── Build per-tab slide arrays
+  const posterSlides   = [];
+  const assetSlides    = [];
+  const panelSims      = data.panel_sims || [];
+  const stepFirstSlide = {};
+
+  // Tab "poster": intermediate full-poster snapshots + final.
+  // Order: (1) all _applied frames first (show layout evolution at a glance),
+  //        (2) then all iter-visualization frames (green-highlighted VLM views).
+  // Skip _start, _end (redundant bookmarks) and _cropped (raw VLM input crops).
+  const _allInter = (data.intermediate || []).filter(src => {
+    const f = src.split('/').pop();
+    return !f.match(/attempt_\d+_start/) &&
+           !f.match(/attempt_\d+_end/)   &&
+           !f.match(/_cropped\.jpg$/);
+  });
+  const _appliedFrames  = _allInter.filter(src =>  src.split('/').pop().match(/_applied\.jpg$/i));
+  const _afterVizFrames = _allInter.filter(src =>  src.split('/').pop().match(/_after_viz\.jpg$/i));
+  const _iterFrames     = _allInter.filter(src => {
+    const f = src.split('/').pop();
+    return !f.match(/_applied\.jpg$/i) && !f.match(/_after_viz\.jpg$/i);
+  });
+  // Interleave: each before-viz is immediately followed by its after-viz (if exists)
+  const _interleaved = [];
+  _iterFrames.forEach(iterSrc => {
+    _interleaved.push(iterSrc);
+    const expectedAv = iterSrc.replace(/\.jpg$/i, '_after_viz.jpg');
+    const av = _afterVizFrames.find(s => s === expectedAv);
+    if (av) _interleaved.push(av);
+  });
+  const intermediates  = [..._appliedFrames, ..._interleaved];
+  if (intermediates.length) {
+    stepFirstSlide[5] = posterSlides.length;
+    intermediates.forEach(src => posterSlides.push({ src, caption: _posterCaption(src) }));
+  }
+  finalPosterIdx = -1;
+  if (data.final) {
+    finalPosterIdx = posterSlides.length;
+    stepFirstSlide[7] = posterSlides.length;
+    posterSlides.push({ src: data.final, caption: 'Final Poster' });
+  }
+
+  // Tab "assets": extracted paper figures + tables
+  data.figures.forEach(src => {
+    const fname = src.split('/').pop().replace(/\.(png|jpg)$/i,'').replace(/_/g,' ');
+    assetSlides.push({ src, caption: fname });
+  });
+
+  tabData = { poster: posterSlides, panels: panelSims, assets: assetSlides, activity: data.activity || null, pipeline: data.pipeline || null };
+
+  const { header } = buildStatusHtml(data, stepFirstSlide);
+  const mainEl = document.getElementById('main');
+
+  // ── Tab bar
+  const actEvtCount = (data.activity && data.activity.events) ? data.activity.events.filter(e => e.type === 'content_check' || e.type === 'layout_iter').length : 0;
+  const _pl = data.pipeline || {};
+  const _plSecs = (_pl.step2?.sections) || _pl.sections || [];
+  const outlineCount = _pl.step1 ? (_plSecs.length || (_pl.step1.figures?.length + _pl.step1.tables?.length) || 1) : 0;
+  // Count distinct panels (not raw simulation file count)
+  const panelCount = (() => {
+    const seen = new Set();
+    panelSims.forEach(src => {
+      const m = src.split('/').pop().match(/step6_panel_(\w+)_textbox_/);
+      if (m) seen.add(m[1]);
+    });
+    return seen.size;
+  })();
+  const tabs = [
+    { key: 'poster',  label: 'Poster',   count: posterSlides.length },
+    { key: 'panels',  label: 'Panels',   count: panelCount },
+    { key: 'outline', label: 'Outline',  count: outlineCount },
+    { key: 'assets',  label: 'Assets',   count: assetSlides.length },
+    { key: 'log',     label: 'Activity', count: actEvtCount },
+  ];
+  const tabBarHtml = `<div class="tab-bar">
+    ${tabs.map(t =>
+      `<button class="tab-btn${activeTab===t.key?' active':''}" data-tab="${t.key}" onclick="switchTab('${t.key}')">
+         ${t.label}<span class="tab-count">${t.count}</span>
+       </button>`).join('')}
+    <div class="tab-zoom" id="tab-zoom"${activeTab !== 'poster' ? ' style="display:none"' : ''}>
+      <span class="slide-counter" id="slide-counter"></span>
+      <span class="slide-caption-info" id="slide-caption-info"></span>
+      <div class="zoom-controls">
+        <button class="zoom-btn" onclick="adjustZoom(-1)" title="Zoom out (−)">−</button>
+        <span class="zoom-level" id="zoom-level">${Math.round(posterZoom * 100)}%</span>
+        <button class="zoom-btn" onclick="adjustZoom(+1)" title="Zoom in (+)">+</button>
+      </div>
+    </div>
+  </div>`;
+
+  // ── First render (or run switch)
+  if (!preserveSlide || !mainEl.querySelector('#run-status')) {
+    if (!preserveSlide) {
+      activeTab = posterSlides.length ? 'poster' : (panelSims.length ? 'panels' : 'assets');
+      slides = tabData.poster;
+      slideIdx = finalPosterIdx >= 0 ? finalPosterIdx : 0;
+    } else {
+      slides = activeTab === 'poster' ? tabData.poster : [];
+      slideIdx = Math.min(slideIdx, Math.max(slides.length - 1, 0));
+    }
+
+    mainEl.innerHTML = `
+      <div id="run-status">${header}</div>
+      ${tabBarHtml}
+      <div id="slideshow-wrap">${slides.length ? _buildSlideshowHtml() : '<div class="slideshow-area"><div style="color:#94a3b8;font-size:13px">No images yet — pipeline running.</div></div>'}</div>
+      <div id="filmstrip-wrap">${slides.length ? _buildFilmstripHtml() : ''}</div>
+      <div id="panel-grid-wrap" class="panel-grid" style="display:none" data-sim-count="${panelSims.length}">${_buildPanelGrid(panelSims)}</div>
+      <div id="asset-grid-wrap" class="asset-grid" style="display:none">${_buildAssetGrid(assetSlides)}</div>
+      <div id="activity-wrap" class="activity-feed" style="display:none">${_buildActivityLog(tabData.activity, tabData.pipeline)}</div>
+      <div id="outline-wrap" class="outline-container" style="display:none">${_buildOutlineFull(tabData.pipeline)}</div>
+    `;
+    if (activeTab === 'panels') switchTab('panels');
+    else if (activeTab === 'assets') switchTab('assets');
+    else if (activeTab === 'log') switchTab('log');
+    else if (activeTab === 'outline') switchTab('outline');
+    else if (slides.length) { updateSlide(); _bindFilmstripWheel(); }
+    return;
+  }
+
+  // ── Auto-refresh: update status + tab bar + append new slides
+  document.getElementById('run-status').innerHTML = header;
+  const existingTabBar = mainEl.querySelector('.tab-bar');
+  if (existingTabBar) existingTabBar.outerHTML = tabBarHtml;
+  // Repopulate counter/caption in the new tab bar
+  if (activeTab === 'poster' && slides.length) updateSlide();
+
+  if (activeTab === 'poster') {
+    const current = tabData.poster;
+    // Full rebuild when count changes: reordering (applied-first) means we can't
+    // simply append by index — the position of a given image may shift.
+    if (current.length !== slides.length) {
+      slides = current;
+      slideIdx = Math.min(slideIdx, Math.max(slides.length - 1, 0));
+      // Preserve filmstrip scroll position when silently refreshing
+      const strip = mainEl.querySelector('.filmstrip, .filmstrip-2row-scroll');
+      const savedScrollLeft = (autoRefreshing && strip) ? strip.scrollLeft : -1;
+      rebuildFilmstrip();
+      if (savedScrollLeft >= 0) {
+        const newStrip = mainEl.querySelector('.filmstrip, .filmstrip-2row-scroll');
+        if (newStrip) newStrip.scrollLeft = savedScrollLeft;
+      }
+      updateSlide();
+    }
+  }
+  // Refresh panel grid (preserve scroll)
+  const pg = mainEl.querySelector('#panel-grid-wrap');
+  if (pg && panelSims.length !== +pg.dataset.simCount) {
+    const pgSt = pg.scrollTop;
+    pg.dataset.simCount = panelSims.length;
+    pg.innerHTML = _buildPanelGrid(panelSims);
+    pg.scrollTop = pgSt;
+    // Don't scrollIntoView during silent refresh — user keeps their scroll position
+    if (activeTab === 'panels' && !autoRefreshing) selectPanelCard(panelIdx);
+  } else if (pg) {
+    // Retry any broken images (may have failed before file was ready during step 6)
+    pg.querySelectorAll('img').forEach(img => {
+      if (!img.complete || img.naturalWidth === 0) {
+        const s = img.src; img.src = ''; img.src = s;
+      }
+    });
+  }
+  // Refresh asset grid (preserve scroll)
+  const ag = mainEl.querySelector('#asset-grid-wrap');
+  if (ag && assetSlides.length !== ag.querySelectorAll('.asset-card').length) {
+    const agSt = ag.scrollTop;
+    ag.innerHTML = _buildAssetGrid(assetSlides);
+    ag.scrollTop = agSt;
+  }
+  // Refresh activity log (preserve scroll)
+  if (activeTab === 'log') {
+    const aw = mainEl.querySelector('#activity-wrap');
+    if (aw) {
+      const awSt = aw.scrollTop;
+      aw.innerHTML = _buildActivityLog(tabData.activity, tabData.pipeline);
+      aw.scrollTop = awSt;
+    }
+  }
+  // Refresh outline (preserve scroll)
+  if (activeTab === 'outline') {
+    const ow2 = mainEl.querySelector('#outline-wrap');
+    if (ow2) {
+      const owInner = ow2.querySelector('.outline-scroll');
+      const owSt = owInner ? owInner.scrollTop : 0;
+      ow2.innerHTML = _buildOutlineFull(tabData.pipeline);
+      const owInnerAfter = ow2.querySelector('.outline-scroll');
+      if (owInnerAfter) owInnerAfter.scrollTop = owSt;
+    }
+  }
+}
+
+function _buildSlideshowHtml() {
+  return `<div class="slideshow-area">
+    <div class="slide-main">
+      <button class="nav-btn" id="btn-prev" onclick="goSlide(-1)">‹</button>
+      <div class="slide-frame" id="slide-frame">
+        <img id="slide-img" src="" alt="" onclick="openLightbox()">
+      </div>
+      <button class="nav-btn" id="btn-next" onclick="goSlide(+1)">›</button>
+    </div>
+  </div>`;
+}
+
+function _buildFilmstripHtml() {
+  const applied   = [];
+  const iters     = [];
+  const afterVizs = [];
+  const others    = [];
+
+  slides.forEach((s, i) => {
+    const f  = s.src.split('/').pop();
+    const mA  = f.match(/attempt_(\d+)_iter_(\d+).*_applied\.jpg$/i);
+    const mAv = f.match(/attempt_(\d+)_iter_(\d+).*_after_viz\.jpg$/i);
+    const mI  = !mA && !mAv && f.match(/attempt_(\d+)_iter_(\d+)/);
+    if (mA)       applied  .push({ src: s.src, i, attempt: +mA[1],  iter: +mA[2]  });
+    else if (mAv) afterVizs.push({ src: s.src, i, attempt: +mAv[1], iter: +mAv[2] });
+    else if (mI)  iters    .push({ src: s.src, i, attempt: +mI[1],  iter: +mI[2]  });
+    else          others   .push({ src: s.src, i });
+  });
+
+  const posbar = `<div class="filmstrip-posbar" id="filmstrip-posbar">
+    <span class="fp-num" id="fp-num"></span>
+    <span class="fp-cap" id="fp-cap"></span>
+  </div>`;
+
+  function thumbHtml(item) {
+    if (!item) return `<div class="thumb-placeholder"></div>`;
+    return `<div class="thumb" id="thumb-${item.i}" onclick="jumpSlide(${item.i})"><img src="${item.src}" loading="lazy" alt=""></div>`;
+  }
+
+  // Two-row layout when both applied and iter frames exist
+  if (applied.length > 0 && iters.length > 0) {
+    const sortKey = a => a.attempt * 10000 + a.iter;
+    applied  .sort((a, b) => sortKey(a) - sortKey(b));
+    iters    .sort((a, b) => sortKey(a) - sortKey(b));
+    afterVizs.sort((a, b) => sortKey(a) - sortKey(b));
+
+    const toKey      = a => `${a.attempt}_${a.iter}`;
+    const appliedMap  = Object.fromEntries(applied  .map(a => [toKey(a), a]));
+    const iterMap     = Object.fromEntries(iters    .map(a => [toKey(a), a]));
+    const afterVizMap = Object.fromEntries(afterVizs.map(a => [toKey(a), a]));
+    const allKeys     = [...new Set([...applied.map(toKey), ...iters.map(toKey)])]
+      .sort((a, b) => {
+        const [aa, ai] = a.split('_').map(Number);
+        const [ba, bi] = b.split('_').map(Number);
+        return aa - ba || ai - bi;
+      });
+
+    // Separate final poster from other non-iter/applied items
+    const finals         = others.filter(item => item.src.split('/').pop() === 'poster_final.jpg');
+    const nonFinalOthers = others.filter(item => item.src.split('/').pop() !== 'poster_final.jpg');
+
+    // Applied row: [placeholder][applied] — applied aligns with the "after" iter cell
+    const appliedRow = allKeys.map(k => {
+      const ap = appliedMap[k];
+      return `<div class="thumb-placeholder"></div>` + thumbHtml(ap);
+    }).join('') + nonFinalOthers.map(item => thumbHtml(item)).join('');
+
+    // Iter row: [before][after] — two separate thumb cells per key
+    const iterRow    = allKeys.map(k => {
+      const it = iterMap[k];
+      const ap = appliedMap[k];
+      const av = afterVizMap[k];
+      if (!it) return `<div class="thumb-placeholder"></div><div class="thumb-placeholder"></div>`;
+      if (!ap) return thumbHtml(it) + `<div class="thumb-placeholder"></div>`;
+      return thumbHtml(it) + thumbHtml(av || ap);
+    }).join('') + nonFinalOthers.map(() => `<div class="thumb-placeholder"></div>`).join('');
+
+    // Final poster: shown as the first column (before iteration cols) with a separator
+    let finalColApplied = '', finalColIter = '', colSep = '';
+    if (finals.length > 0) {
+      const f = finals[0];
+      finalColApplied = `<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0">
+        <div class="thumb final-thumb" id="thumb-${f.i}" onclick="jumpSlide(${f.i})"><img src="${f.src}" loading="lazy" alt=""></div>
+        <span style="font-size:7px;font-weight:700;color:#d97706;letter-spacing:.5px;text-transform:uppercase">FINAL</span>
+      </div>`;
+      finalColIter = `<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0">
+        <div class="thumb-placeholder"></div>
+        <span style="font-size:7px;color:transparent">FINAL</span>
+      </div>`;
+      colSep = `<div class="filmstrip-col-sep"></div>`;
+    }
+
+    return `<div class="filmstrip-2row-outer">
+      <div class="filmstrip filmstrip-2row-scroll">
+        <div class="filmstrip-row"><div class="filmstrip-row-label applied-label">applied</div>${finalColApplied}${colSep}${appliedRow}</div>
+        <div class="filmstrip-row"><div class="filmstrip-row-label iter-label">iter</div>${finalColIter}${colSep}${iterRow}</div>
+      </div>
+    </div>${posbar}`;
+  }
+
+  // Fallback: single-row filmstrip
+  return `<div class="filmstrip" id="filmstrip">
+    ${slides.map((s, i) => `
+      <div class="thumb" id="thumb-${i}" onclick="jumpSlide(${i})">
+        <img src="${s.src}" loading="lazy" alt="">
+      </div>`).join('')}
+  </div>${posbar}`;
+}
+
+function rebuildFilmstrip() {
+  const wrap = document.getElementById('filmstrip-wrap');
+  if (wrap) wrap.innerHTML = slides.length ? _buildFilmstripHtml() : '';
+  if (slides.length) _bindFilmstripWheel();
+}
+
+function _buildPanelGrid(sims) {
+  if (!sims.length) return `<div style="padding:20px;color:#94a3b8;font-size:13px">
+    No panel simulations yet.<br>
+    <span style="font-size:11px">These appear after Step 6 (Feedback) runs. Sub-panels (IDs with 2+ chars, e.g. "11", "12") generate simulation images.</span>
+  </div>`;
+  const legend = `<div class="panel-legend">
+    <span class="panel-legend-title">Textbox border:</span>
+    <span class="pl-item"><span class="pl-swatch fit"></span>Fit — text fills the box</span>
+    <span class="pl-item"><span class="pl-swatch overflow"></span>Overflow — text exceeds box height</span>
+    <span class="pl-item"><span class="pl-swatch underflow"></span>Underflow — too much empty space (&gt;1.5 lines)</span>
+  </div>`;
+  const groups = {};
+  sims.forEach(src => {
+    const f = src.split('/').pop();
+    const m = f.match(/step6_panel_(\w+)_textbox_(\d+)/);
+    const panelId = m ? m[1] : 'other';
+    const tbxId   = m ? +m[2] : 0;
+    if (!groups[panelId]) groups[panelId] = [];
+    groups[panelId].push({ src, tbxId });
+  });
+  const cards = Object.entries(groups).map(([panelId, items], idx) => {
+    items.sort((a, b) => a.tbxId - b.tbxId);
+    const before = items.find(x => x.tbxId === 0);
+    const after  = items.find(x => x.tbxId === 99);
+    const nIter  = items.filter(x => x.tbxId !== 0 && x.tbxId !== 99).length;
+    const badge  = after
+      ? `<span class="pc-badge" style="background:#d1fae5;color:#047857">${nIter} iter${nIter!==1?'s':''}</span>`
+      : `<span class="pc-badge">no change</span>`;
+    const body = (before && after) ? `
+      <div class="pc-compare">
+        <div class="pc-half" onclick="showLightboxAt(-1,'${before.src}','Panel ${panelId} · before')">
+          <img src="${before.src}" loading="lazy"><div class="pc-half-label">before</div>
+        </div>
+        <div class="pc-arrow">→</div>
+        <div class="pc-half" onclick="showLightboxAt(-1,'${after.src}','Panel ${panelId} · after')">
+          <img src="${after.src}" loading="lazy"><div class="pc-half-label">after</div>
+        </div>
+      </div>` : before ? `
+      <div class="pc-compare">
+        <div class="pc-half" onclick="showLightboxAt(-1,'${before.src}','Panel ${panelId}')">
+          <img src="${before.src}" loading="lazy"><div class="pc-half-label" style="color:#10b981">✓ ok</div>
+        </div>
+      </div>` : '';
+    return `<div class="panel-card" onclick="selectPanelCard(${idx})">${body}
+      <div class="pc-footer">Panel <b>${panelId}</b> ${badge}</div>
+    </div>`;
+  }).join('');
+  return legend + cards;
+
+}
+
+function _buildAssetGrid(assets) {
+  if (!assets.length) return '<div style="padding:20px;color:#94a3b8;font-size:13px">No assets extracted yet.</div>';
+  return assets.map((item, i) => `
+    <div class="asset-card" onclick="openAssetLightbox(${i})">
+      <img src="${item.src}" loading="lazy" alt="${item.caption}">
+      <div class="asset-card-label">${item.caption}</div>
+    </div>`).join('');
+}
+
+// ── Outline tab ────────────────────────────────────────────────────────────
+function _pipeStepToggle(hd) {
+  const body = hd.nextElementSibling;
+  const caret = hd.querySelector('.pipe-step-caret');
+  const col = body.classList.toggle('collapsed');
+  if (caret) caret.classList.toggle('closed', col);
+}
+
+function _buildStep1(s1) {
+  const figs = s1.figures || [];
+  const tbls = s1.tables  || [];
+  const numState = (figs.length || tbls.length) ? 'done' : 'pending';
+  const badge = figs.length || tbls.length
+    ? `<span class="pipe-badge-chip green">${figs.length} fig</span><span class="pipe-badge-chip blue">${tbls.length} tbl</span>`
+    : `<span class="pipe-badge-chip">waiting…</span>`;
+
+  function thumbGrid(items, icon) {
+    if (!items.length) return `<div class="pipe-step-pending">${icon} No items yet.</div>`;
+    return `<div class="ps-thumb-grid">${items.map(a => {
+      const cap = (a.caption || '').replace(/'/g,'').slice(0, 50);
+      const capShort = cap.slice(0, 22) + (cap.length > 22 ? '…' : '');
+      const img = a.url
+        ? `<img src="${a.url}" loading="lazy" alt="">`
+        : `<div class="ps-thumb-empty">${icon}</div>`;
+      return `<div class="ps-thumb" onclick="openOutlineLightbox('${a.url||''}','${cap}')">
+        ${img}<div class="ps-thumb-cap">${capShort || '—'}</div>
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  let body = '';
+  if (figs.length) body += `<div class="ps-type-label">Figures (${figs.length})</div>${thumbGrid(figs,'⊡')}`;
+  if (tbls.length) body += `<div class="ps-type-label" style="margin-top:8px">Tables (${tbls.length})</div>${thumbGrid(tbls,'⊞')}`;
+  if (!body) body = '<div class="pipe-step-pending">Waiting for Step 1…</div>';
+
+  return `<div class="pipe-step">
+    <div class="pipe-step-hd" onclick="_pipeStepToggle(this)">
+      <div class="pipe-step-num ${numState}">1</div>
+      <div class="pipe-step-title">Parse Paper</div>
+      <div class="pipe-step-badge">${badge}</div>
+      <span class="pipe-step-caret">▾</span>
+    </div>
+    <div class="pipe-step-body">${body}</div>
+  </div>`;
+}
+
+function _buildStep2(s2) {
+  const sections = s2 ? (s2.sections || []) : [];
+  const meta     = s2 ? (s2.meta || {}) : {};
+  const numState = sections.length ? 'done' : 'pending';
+  const kf = s2 ? (s2.kept_figs || 0) : 0;
+  const kt = s2 ? (s2.kept_tbls || 0) : 0;
+  const dr = s2 ? (s2.dropped_total || 0) : 0;
+  const badge = sections.length
+    ? `<span class="pipe-badge-chip green">${kf}fig · ${kt}tbl kept</span>${dr?`<span class="pipe-badge-chip red">−${dr} dropped</span>`:''}`
+    : `<span class="pipe-badge-chip">waiting…</span>`;
+
+  let body = '';
+  if (sections.length) {
+    body += '<div class="ps-sec-tree">';
+    function walkSec(sec, depth) {
+      const nc  = `d${Math.min(depth, 3)}`;
+      const pid = sec.pid ? `<span class="ps-sec-pid">[${sec.pid}]</span>` : '';
+      const am  = sec.assets?.length  ? `<span class="ps-sec-chip asset">${sec.assets.length} asset${sec.assets.length>1?'s':''}</span>` : '';
+      const bm  = sec.bullets?.length ? `<span class="ps-sec-chip">${sec.bullets.length} pt</span>` : '';
+      const words = sec.content ? sec.content.trim().split(/\s+/).length : 0;
+      const wm = words > 0 ? `<span class="ps-sec-chip">${words}w</span>` : '';
+      body += `<div class="ps-sec-row" style="padding-left:${depth*16+4}px">
+        <span class="ps-sec-name ${nc}">${sec.name||'?'}</span>${pid}
+        <span class="ps-sec-meta">${wm}${am}${bm}</span>
+      </div>`;
+      if (sec.bullets?.length) {
+        body += `<div class="ps-sec-bullets" style="padding-left:${depth*16+20}px">`;
+        sec.bullets.slice(0,3).forEach(b => {
+          body += `<div class="ps-bullet-row">◆ ${b.replace(/</g,'&lt;').slice(0,100)}${b.length>100?'…':''}</div>`;
+        });
+        if (sec.bullets.length > 3) body += `<div class="ps-bullet-row" style="color:#94a3b8">+${sec.bullets.length-3} more</div>`;
+        body += '</div>';
+      }
+      (sec.children||[]).forEach(c => walkSec(c, depth+1));
+    }
+    sections.forEach(s => walkSec(s, 0));
+    body += '</div>';
+
+    // Dropped assets
+    const dropped = s2.dropped || [];
+    if (dropped.length) {
+      body += `<div class="ps-dropped-label">Dropped (${dr} total):</div>
+        <div class="ps-dropped-grid">${dropped.map(d =>
+          `<span class="ps-dropped-chip" title="${d.caption||''}">${d.type==='table'?'⊞':'⊡'} ${(d.caption||'—').slice(0,30)}</span>`
+        ).join('')}${dr > dropped.length ? `<span class="ps-dropped-chip" style="color:#94a3b8">+${dr-dropped.length} more</span>` : ''}</div>`;
+    }
+  } else {
+    body = '<div class="pipe-step-pending">Waiting for Step 2…</div>';
+  }
+
+  return `<div class="pipe-step">
+    <div class="pipe-step-hd" onclick="_pipeStepToggle(this)">
+      <div class="pipe-step-num ${numState}">2</div>
+      <div class="pipe-step-title">Filter & Assign Assets</div>
+      <div class="pipe-step-badge">${badge}</div>
+      <span class="pipe-step-caret">▾</span>
+    </div>
+    <div class="pipe-step-body">${body}</div>
+  </div>`;
+}
+
+function _buildStep3(s3, sections) {
+  const panels   = s3 ? (s3.panels || 0) : 0;
+  const numState = panels ? 'done' : 'pending';
+  const badge    = panels
+    ? `<span class="pipe-badge-chip green">${panels} panels</span>${s3?.assets ? `<span class="pipe-badge-chip blue">${s3.assets} assets</span>` : ''}`
+    : `<span class="pipe-badge-chip">waiting…</span>`;
+
+  let body = '';
+  if (sections && sections.length) {
+    // Build panel → {secs, assets} map from section tree
+    const byPid = {};   // pid → [{name, depth, assets, words, bullets}]
+    function collect(sec, depth) {
+      if (sec.pid) {
+        if (!byPid[sec.pid]) byPid[sec.pid] = [];
+        const words = sec.content ? sec.content.trim().split(/\s+/).length : 0;
+        byPid[sec.pid].push({
+          name:    sec.name || '?',
+          depth,
+          words,
+          assets:  sec.assets  || [],
+          bullets: (sec.bullets || []).length,
+        });
+      }
+      (sec.children || []).forEach(c => collect(c, depth + 1));
+    }
+    sections.forEach(s => collect(s, 0));
+
+    const pids = Object.keys(byPid).sort((a, b) => {
+      // Sort numerically where possible
+      const na = parseFloat(a), nb = parseFloat(b);
+      return isNaN(na) || isNaN(nb) ? a.localeCompare(b) : na - nb;
+    });
+
+    if (pids.length) {
+      // Build parent-child tree from panel IDs (hierarchy encoded in digits: "21" child of "2")
+      const pidSet = new Set(pids);
+      const childrenMap = {};
+      pids.forEach(pid => {
+        const par = pid.length > 1 ? pid.slice(0, -1) : null;
+        if (par && pidSet.has(par)) {
+          if (!childrenMap[par]) childrenMap[par] = [];
+          childrenMap[par].push(pid);
+        }
+      });
+      const rootPids = pids.filter(p => {
+        const par = p.length > 1 ? p.slice(0, -1) : null;
+        return !(par && pidSet.has(par));
+      });
+
+      function leafCount(pid) {
+        const kids = childrenMap[pid] || [];
+        if (!kids.length) return 1;
+        return kids.reduce((s, c) => s + leafCount(c), 0);
+      }
+
+      // DFS to build table rows [{pid, level, rowspan}]
+      const tableData = [];
+      function dfs(pid, level, rowIdx) {
+        const kids = childrenMap[pid] || [];
+        const rs = leafCount(pid);
+        if (!tableData[rowIdx]) tableData[rowIdx] = [];
+        tableData[rowIdx].push({ pid, level, rowspan: rs });
+        if (!kids.length) return rowIdx + 1;
+        let r = rowIdx;
+        kids.forEach(k => { r = dfs(k, level + 1, r); });
+        return r;
+      }
+      let r = 0;
+      rootPids.forEach(rp => { r = dfs(rp, 0, r); });
+
+      // Render table
+      const tableRows = tableData.map(rowCells => {
+        const tds = rowCells.map(c => {
+          const secs = byPid[c.pid] || [];
+          const secHtml = secs.map(s => {
+            const nc = `d${Math.min(s.depth, 3)}`;
+            const am = s.assets.length ? `<span class="ps-sec-chip asset">${s.assets.length}🖼</span>` : '';
+            const wm = s.words   ? `<span class="ps-sec-chip">${s.words}w</span>`   : '';
+            const bm = s.bullets ? `<span class="ps-sec-chip">${s.bullets}pt</span>` : '';
+            const thumbs = s.assets.slice(0, 2).filter(a => a.url).map(a => {
+              const cap = (a.caption || '').replace(/'/g, '').slice(0, 50);
+              return `<img class="sec-mini-thumb" src="${a.url}" title="${cap}" onclick="openOutlineLightbox('${a.url}','${cap}')">`;
+            }).join('');
+            return `<div class="ps3-sec-row" style="padding-left:${s.depth*10}px">
+              <span class="ps-sec-name ${nc}">${s.name}</span>
+              <span class="ps-sec-meta">${wm}${am}${bm}</span>
+            </div>${thumbs ? `<div class="ps3-thumbs">${thumbs}</div>` : ''}`;
+          }).join('');
+          return `<td rowspan="${c.rowspan}" class="ps3-htree-td">
+            <div class="ps3-htree-pid">${c.pid}</div>
+            <div class="ps3-htree-secs">${secHtml}</div>
+          </td>`;
+        }).join('');
+        return `<tr>${tds}</tr>`;
+      }).join('');
+
+      body = `<table class="ps3-htree"><tbody>${tableRows}</tbody></table>`;
+
+      if (pids.length < panels) {
+        body += `<div class="pipe-step-pending" style="margin-top:8px">${panels - pids.length} panels without section mapping</div>`;
+      }
+    } else {
+      body = `<div class="pipe-step-pending">Step 2 section data needed for panel mapping.</div>`;
+    }
+  } else if (panels) {
+    body = `<div class="pipe-step-pending">${panels} panels created. Complete Step 2 to see section assignments.</div>`;
+  } else {
+    body = '<div class="pipe-step-pending">Waiting for Step 3…</div>';
+  }
+
+  return `<div class="pipe-step">
+    <div class="pipe-step-hd" onclick="_pipeStepToggle(this)">
+      <div class="pipe-step-num ${numState}">3</div>
+      <div class="pipe-step-title">Poster Layout</div>
+      <div class="pipe-step-badge">${badge}</div>
+      <span class="pipe-step-caret">▾</span>
+    </div>
+    <div class="pipe-step-body">${body}</div>
+  </div>`;
+}
+
+function _buildOutlineFull(pipeline) {
+  if (!pipeline || (!pipeline.step1 && !pipeline.step2 && !pipeline.sections?.length)) {
+    return '<div class="outline-empty" style="padding:40px;color:#94a3b8;font-size:13px;text-align:center">No data yet.<br>Waiting for Step 1 to complete.</div>';
+  }
+  const sections = (pipeline.step2?.sections) || pipeline.sections || [];
+  return `<div class="outline-scroll">
+    ${pipeline.step1 ? _buildStep1(pipeline.step1) : ''}
+    ${_buildStep2(pipeline.step2 || null)}
+    ${_buildStep3(pipeline.step3 || null, sections)}
+  </div>`;
+}
+
+function _buildPidLookup(pipeline) {
+  const map = {};
+  if (!pipeline) return map;
+  const sections = (pipeline.step2?.sections) || pipeline.sections || [];
+  if (!sections.length) return map;
+  function walk(sec) {
+    if (sec.pid) {
+      const words = sec.content ? sec.content.trim().split(/\s+/).length : 0;
+      map[String(sec.pid)] = {
+        name:    sec.name || '',
+        words,
+        assets:  sec.assets  || [],
+        bullets: (sec.bullets || []).length,
+      };
+    }
+    (sec.children || []).forEach(walk);
+  }
+  sections.forEach(walk);
+  return map;
+}
+
+function _buildActivityLog(activity, pipeline) {
+  if (!activity || !activity.events || !activity.events.length) {
+    return '<div class="activity-empty">No activity log yet.<br>Step 6 generates this log when it runs.</div>';
+  }
+  const pidLookup = _buildPidLookup(pipeline);
+
+  // Group events into attempts
+  const attempts = {};
+  const attemptOrder = [];
+
+  for (const evt of activity.events) {
+    const k = evt.attempt ?? 0;
+    if (evt.type === 'attempt_start') {
+      if (!attempts[k]) { attempts[k] = { layout: [], content: {}, pidOrder: [], critic: null }; attemptOrder.push(k); }
+    } else if (evt.type === 'layout_iter') {
+      if (!attempts[k]) { attempts[k] = { layout: [], content: {}, pidOrder: [], critic: null }; attemptOrder.push(k); }
+      attempts[k].layout.push(evt);
+    } else if (evt.type === 'content_check') {
+      if (!attempts[k]) { attempts[k] = { layout: [], content: {}, pidOrder: [], critic: null }; attemptOrder.push(k); }
+      const a = attempts[k];
+      if (!a.content[evt.panel_id]) { a.content[evt.panel_id] = { name: evt.name, iters: [] }; a.pidOrder.push(evt.panel_id); }
+      a.content[evt.panel_id].iters.push(evt);
+    } else if (evt.type === 'critic') {
+      if (attempts[k]) attempts[k].critic = evt;
+    }
+  }
+
+  const isRunning = activity.running !== false;
+  let html = '';
+
+  if (isRunning) {
+    html += `<div class="activity-running-bar"><div class="running-dot"></div>Step 6 is running…</div>`;
+  }
+
+  for (const k of [...attemptOrder].reverse()) {
+    const att = attempts[k];
+    const hasLayout  = att.layout.length > 0;
+    const hasContent = att.pidOrder.length > 0;
+    const phaseBadges = [
+      hasLayout  ? '<span class="attempt-phase-badge">Layout</span>' : '',
+      hasContent ? '<span class="attempt-phase-badge">Content</span>' : '',
+    ].join('');
+
+    html += `<div class="attempt-block">
+      <div class="attempt-hd">Attempt ${k + 1} ${phaseBadges}</div>`;
+
+    // ── Layout section
+    if (hasLayout) {
+      html += `<div class="phase-section"><div class="phase-label">Layout Adjustments</div>`;
+      for (const iter of att.layout) {
+        const changed = Math.abs(iter.after - iter.before) > 0.001;
+        const dirBadge = iter.direction && iter.direction !== 'none'
+          ? `<span class="layout-dir-badge">${iter.direction}${iter.delta ? ' ×' + iter.delta : ''}</span>` : '';
+        html += `<div class="layout-iter-card">
+          <div class="layout-meta">
+            <span class="layout-node">${(iter.internal_id || '').replace('internal_', 'node ')}</span>
+            <span class="layout-type-badge">${iter.split_type || '?'}</span>
+            ${dirBadge}
+            ${!changed ? '<span class="layout-nochange">no change</span>' : ''}
+          </div>`;
+        if (changed) {
+          const bPct = Math.round(iter.before * 100);
+          const aPct = Math.round(iter.after  * 100);
+          const diff = aPct - bPct;
+          const diffStr = (diff >= 0 ? '+' : '') + diff + '%';
+          html += `<div class="ratio-row">
+            <span class="ratio-label">${bPct}%</span>
+            <div class="ratio-track"><div class="ratio-fill before" style="width:${bPct}%"></div></div>
+            <span class="ratio-arrow">→</span>
+            <div class="ratio-track"><div class="ratio-fill after" style="width:${aPct}%"></div></div>
+            <span class="ratio-val">${aPct}% <span style="color:#94a3b8;font-weight:400">(${diffStr})</span></span>
+          </div>`;
+        }
+        html += `</div>`;
+      }
+      html += `</div>`;
+    }
+
+    // ── Content section
+    if (hasContent) {
+      html += `<div class="phase-section"><div class="phase-label">Text Content Adjustments</div>`;
+      for (const pid of att.pidOrder) {
+        const p = att.content[pid];
+        const last = p.iters[p.iters.length - 1];
+        const lastStatusCls = (last?.status || 'fit').toLowerCase();
+
+        const si = pidLookup[String(pid)];
+        html += `<div class="content-panel-card">
+          <div class="content-panel-hd">
+            <span class="panel-name-chip">${p.name || pid}</span>
+            <span class="status-pill ${lastStatusCls}">${last?.status || '?'}</span>
+            ${p.iters.length > 1 ? `<span style="font-size:9px;color:#94a3b8">${p.iters.length} iters</span>` : ''}
+          </div>`;
+        if (si) {
+          const figs = si.assets.filter(a => a.type === 'figure').length;
+          const tbls = si.assets.filter(a => a.type === 'table').length;
+          const hasA = si.assets.length > 0;
+          html += `<div class="sec-info-row">
+            <span class="sec-info-name">§ ${si.name}</span>
+            <span class="sec-info-meta">
+              <span class="sec-info-tag">${si.words} words</span>
+              <span class="sec-info-tag${hasA?' has-asset':''}">${hasA ? `${figs>0?figs+'fig ':''} ${tbls>0?tbls+'tbl':''}`.trim() : 'no asset'}</span>
+              ${si.bullets > 0 ? `<span class="sec-info-tag">${si.bullets} pts</span>` : ''}
+            </span>
+          </div>`;
+          if (hasA) {
+            html += `<div class="sec-asset-row">`;
+            for (const a of si.assets.slice(0, 4)) {
+              if (a.url) {
+                const cap = (a.caption || '').replace(/'/g, '');
+                html += `<img class="sec-mini-thumb" src="${a.url}" title="${cap}" onclick="openOutlineLightbox('${a.url}','${cap}')">`;
+              }
+            }
+            html += `</div>`;
+          }
+        }
+        for (const iter of p.iters) {
+          const scls = (iter.status || 'fit').toLowerCase();
+          const vol  = iter.volume || 0;
+          html += `<div class="iter-row">
+            <span class="iter-num">iter ${iter.iter}</span>
+            <span class="status-pill ${scls}">${iter.status}</span>
+            <div class="vol-track"><div class="vol-fill ${scls}" style="width:${Math.min(vol, 100)}%"></div></div>
+            <span class="vol-pct">${vol}%</span>
+          </div>`;
+        }
+        html += `</div>`;
+      }
+      html += `</div>`;
+    }
+
+    // ── Critic verdict
+    if (att.critic) {
+      const lbl = (att.critic.label || 'none').toLowerCase();
+      const criticCls = lbl.includes('both') ? 'both' : lbl.includes('layout') ? 'layout' : lbl.includes('text') ? 'text' : 'none';
+      const criticIcon = criticCls === 'none' ? '✓' : criticCls === 'both' ? '⚠' : '↻';
+      html += `<div class="critic-card">
+        <span class="critic-label">Critic verdict:</span>
+        <span class="critic-badge ${criticCls}">${criticIcon} ${att.critic.label || 'none'}</span>
+      </div>`;
+    }
+
+    html += `</div>`;
+  }
+
+  return html;
+}
+
+function _bindFilmstripWheel() {
+  const strip = document.getElementById('main').querySelector('.filmstrip');
+  // Skip wheel binding for the two-row scroll container (let it scroll naturally)
+  if (!strip || strip.classList.contains('filmstrip-2row-scroll')) return;
+  strip.addEventListener('wheel', onFilmstripWheel, { passive: false });
+}
+
+function updateSlide() {
+  if (!slides.length) return;
+  const s = slides[slideIdx];
+  const img = document.getElementById('slide-img');
+  const ctr = document.getElementById('slide-counter');
+  const capInfo = document.getElementById('slide-caption-info');
+  const bp  = document.getElementById('btn-prev');
+  const bn  = document.getElementById('btn-next');
+  if (!img) return;
+  img.src = s.src;
+  ctr.textContent = `${slideIdx + 1} / ${slides.length}`;
+  if (capInfo) capInfo.textContent = s.caption;
+  bp.disabled = slideIdx === 0;
+  bn.disabled = slideIdx === slides.length - 1;
+  document.querySelectorAll('.thumb').forEach(el => {
+    const idx = el.id ? +el.id.replace('thumb-', '') : -1;
+    el.classList.toggle('active', idx === slideIdx);
+  });
+  if (!autoRefreshing) {
+    document.getElementById(`thumb-${slideIdx}`)
+      ?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+  const fpNum = document.getElementById('fp-num');
+  const fpCap = document.getElementById('fp-cap');
+  if (fpNum) fpNum.textContent = `${slideIdx + 1} / ${slides.length}`;
+  if (fpCap) fpCap.textContent = s.caption;
+  applyZoom();
+}
+
+function goSlide(dir) {
+  const next = slideIdx + dir;
+  if (next < 0 || next >= slides.length) return;
+  slideIdx = next;
+  updateSlide();
+}
+
+function adjustZoom(dir) {
+  posterZoom = Math.round(Math.max(0.1, Math.min(3.0, posterZoom + dir * 0.1)) * 10) / 10;
+  applyZoom();
+}
+
+function applyZoom() {
+  const img   = document.getElementById('slide-img');
+  const frame = document.getElementById('slide-frame');
+  const lvl   = document.getElementById('zoom-level');
+  if (lvl) lvl.textContent = Math.round(posterZoom * 100) + '%';
+  if (!img || !frame) return;
+  if (posterZoom <= 1.0) {
+    img.style.maxHeight = (58 * posterZoom) + 'vh';
+    img.style.maxWidth  = '100%';
+    img.style.width     = 'auto';
+    img.style.height    = 'auto';
+    frame.style.overflow   = '';
+    frame.style.maxHeight  = '';
+  } else {
+    // Measure what the image actually looks like at 100% zoom before scaling.
+    // This ensures each +10% step grows the image by exactly 10% relative to
+    // its 100%-zoom rendered size (not relative to the frame container width).
+    img.style.maxHeight = '58vh';
+    img.style.maxWidth  = '100%';
+    img.style.width     = 'auto';
+    img.style.height    = 'auto';
+    frame.style.overflow  = '';
+    frame.style.maxHeight = '';
+    const baseW = img.offsetWidth;  // synchronous layout — px width at 100% zoom
+
+    img.style.maxHeight = 'none';
+    img.style.maxWidth  = 'none';
+    img.style.width     = Math.round(baseW * posterZoom) + 'px';
+    img.style.height    = 'auto';
+    frame.style.overflow  = 'auto';
+    frame.style.maxHeight = '62vh';
+  }
+}
+
+function jumpSlide(i) {
+  slideIdx = i;
+  updateSlide();
+}
+
+function selectPanelCard(idx) {
+  const cards = Array.from(document.querySelectorAll('#panel-grid-wrap .panel-card'));
+  if (!cards.length) return;
+  panelIdx = Math.max(0, Math.min(idx, cards.length - 1));
+  cards.forEach((c, i) => c.classList.toggle('active', i === panelIdx));
+  if (!autoRefreshing) cards[panelIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function goPanelCard(dir) {
+  selectPanelCard(panelIdx + dir);
+}
+
+function onFilmstripWheel(e) {
+  e.preventDefault();
+  goSlide(e.deltaY > 0 ? 1 : -1);
+}
+
+// ── Keyboard navigation ─────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  const isArrow = e.key === 'ArrowRight' || e.key === 'ArrowDown' ||
+                  e.key === 'ArrowLeft'  || e.key === 'ArrowUp';
+  if (document.getElementById('lightbox').classList.contains('open')) {
+    if (e.key === 'Escape') { closeLightbox(); return; }
+    if (isArrow) {
+      e.preventDefault();
+      // panels tab with no slide context: close lightbox and navigate to next card
+      if (activeTab === 'panels' && !lbSlides.length) {
+        closeLightbox();
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goPanelCard(+1);
+        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goPanelCard(-1);
+      } else {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') lbNav(+1);
+        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   lbNav(-1);
+      }
+    }
+    return;
+  }
+  if (activeTab === 'poster' && (e.key === '+' || e.key === '=' || e.key === '-')) {
+    e.preventDefault();
+    adjustZoom(e.key === '-' ? -1 : +1);
+    return;
+  }
+  if (!isArrow && e.key !== 'Escape') return;
+  if (activeTab === 'panels') {
+    e.preventDefault();
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goPanelCard(+1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goPanelCard(-1);
+  } else if (activeTab === 'poster') {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goSlide(+1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goSlide(-1);
+  }
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Ctrl+wheel → zoom poster
+document.getElementById('main').addEventListener('wheel', e => {
+  if (!e.ctrlKey || activeTab !== 'poster') return;
+  e.preventDefault();
+  adjustZoom(e.deltaY < 0 ? +1 : -1);
+}, { passive: false });
+
+// Main area scroll → navigate slides (poster only; other tabs scroll naturally)
+document.getElementById('main').addEventListener('wheel', e => {
+  if (activeTab !== 'poster') return;
+  if (e.ctrlKey) return;  // handled by zoom listener
+  if (e.target.closest('.filmstrip')) return;
+  if (e.target.closest('#slide-frame')) return;  // allow scroll inside zoomed frame
+  if (!slides.length) return;
+  e.preventDefault();
+  goSlide(e.deltaY > 0 ? 1 : -1);
+}, { passive: false });
+
+// ── Lightbox ───────────────────────────────────────────────────────────────
+function _lbShow(src, caption) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-caption').textContent = caption || '';
+  document.getElementById('lb-prev').disabled = !lbSlides.length || lbIdx <= 0;
+  document.getElementById('lb-next').disabled = !lbSlides.length || lbIdx >= lbSlides.length - 1;
+  document.getElementById('lightbox').classList.add('open');
+}
+// Open lightbox for the current poster slide
+function openLightbox() {
+  lbSlides = slides;
+  lbIdx    = slideIdx;
+  const s  = slides[slideIdx];
+  if (s) _lbShow(s.src, s.caption);
+}
+// Open lightbox with a fixed src (no sequence navigation: panels, outline standalone)
+function showLightboxAt(i, directSrc, directCaption) {
+  const src     = directSrc     || (slides[i] && slides[i].src);
+  const caption = directCaption || (slides[i] && slides[i].caption) || '';
+  if (!src) return;
+  if (directSrc !== undefined) {
+    // Direct src — no sequence navigation
+    lbSlides = [];
+    lbIdx    = -1;
+  } else {
+    lbSlides = slides;
+    lbIdx    = i;
+  }
+  _lbShow(src, caption);
+}
+// Open lightbox for an asset by index (assets tab — navigable)
+function openAssetLightbox(i) {
+  const item = tabData.assets[i];
+  if (!item) return;
+  lbSlides = tabData.assets;
+  lbIdx    = i;
+  _lbShow(item.src, item.caption);
+}
+// Open lightbox for an outline/log thumbnail — try to match into the assets array
+function openOutlineLightbox(url, caption) {
+  if (!url) return;
+  const idx = tabData.assets.findIndex(a => a.src === url);
+  if (idx >= 0) {
+    openAssetLightbox(idx);
+  } else {
+    lbSlides = [];
+    lbIdx    = -1;
+    _lbShow(url, caption);
+  }
+}
+function lbNav(dir) {
+  if (!lbSlides.length || lbIdx < 0) return;
+  const next = lbIdx + dir;
+  if (next < 0 || next >= lbSlides.length) return;
+  lbIdx = next;
+  // Keep poster filmstrip in sync when navigating poster slides
+  if (lbSlides === slides) { slideIdx = next; updateSlide(); }
+  const item = lbSlides[next];
+  document.getElementById('lb-img').src = item.src;
+  document.getElementById('lb-caption').textContent = item.caption || '';
+  document.getElementById('lb-prev').disabled = lbIdx <= 0;
+  document.getElementById('lb-next').disabled = lbIdx >= lbSlides.length - 1;
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+});
+
+// ── Utils ──────────────────────────────────────────────────────────────────
+function fmt(n) {
+  if (n == null) return '—';
+  return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
+}
+function fmtTime(s) {
+  if (s == null) return '—';
+  if (s < 60) return s.toFixed(0) + 's';
+  const m = Math.floor(s / 60), sec = Math.round(s % 60);
+  return `${m}m ${sec}s`;
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+loadRuns();
+</script>
+</body>
+</html>

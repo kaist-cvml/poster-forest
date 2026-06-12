@@ -1,0 +1,1233 @@
+[
+    {
+        "panel_id": 0,
+        "x": 0.0,
+        "y": 0.0,
+        "width": 900.0,
+        "height": 74.04648648648649,
+        "textbox_id": 0,
+        "textbox_name": "p<Title>_t0",
+        "content": null,
+        "is_title": 40,
+        "content_for_ppt": [
+            {
+                "alignment": "center",
+                "bullet": false,
+                "level": 0,
+                "font_size": 60,
+                "runs": [
+                    {
+                        "text": "Attention Is All You Need",
+                        "bold": true
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": 0,
+        "x": 0.0,
+        "y": 74.04648648648649,
+        "width": 900.0,
+        "height": 87.11351351351352,
+        "textbox_id": 0,
+        "textbox_name": "p<Title>_t1",
+        "content": null,
+        "content_for_ppt": [
+            {
+                "alignment": "center",
+                "bullet": false,
+                "level": 0,
+                "font_size": 40,
+                "runs": [
+                    {
+                        "text": "Ashish Vaswani¹, Noam Shazeer¹, Niki Parmar¹, Jakob Uszkoreit¹, Llion Jones¹, Aidan N. Gomez¹, Lukasz Kaiser¹, Illia Polosukhin¹"
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "center",
+                "bullet": false,
+                "level": 0,
+                "font_size": 40,
+                "runs": [
+                    {
+                        "text": "Google Brain¹, Google Research¹"
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "1",
+        "x": 6.0,
+        "y": 173.16000000000003,
+        "width": 425.58616134542405,
+        "height": 30.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Introduction>_title",
+        "content": "Introduction",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 48,
+                "runs": [
+                    {
+                        "text": "Introduction",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "11",
+        "x": 6.0,
+        "y": 209.16000000000003,
+        "width": 425.58616134542405,
+        "height": 211.42065850336303,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "Traditional sequence transduction models rely on recurrent or convolutional layers, which inherently limit parallelization due to sequential computation. This sequential nature slows down training and restricts scalability, especially for long sequences. The Transformer proposes a fully attention-based architecture that processes entire input sequences in parallel. By replacing recurrence with self-attention, the model captures dependencies between all positions simultaneously. This design enables faster training and higher efficiency without compromising translation quality. The approach also simplifies the architecture by eliminating the need for encoding-decoding pipelines with fixed-size context. The result is a more scalable, efficient, and effective model for sequence modeling tasks.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Transformer uses self-attention for full parallelization of sequence processing."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Eliminates sequential computation bottlenecks."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Achieves faster training and improved scalability for long sequences."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Maintains high translation quality."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Simplifies architecture by removing fixed-size context constraints."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "2",
+        "x": 6.0,
+        "y": 436.58065850336305,
+        "width": 425.58616134542405,
+        "height": 30.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Model Architecture>_title",
+        "content": "Model Architecture",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 48,
+                "runs": [
+                    {
+                        "text": "Model Architecture",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "21",
+        "x": 6.0,
+        "y": 466.58065850336305,
+        "width": 180.1081671939466,
+        "height": 41.6875,
+        "textbox_id": 0,
+        "textbox_name": "p<Encoder and Decoder Stacks>_title",
+        "content": "Encoder and Decoder Stacks",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Encoder and Decoder Stacks",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "211",
+        "x": 6.0,
+        "y": 739.2936231287549,
+        "width": 180.1081671939466,
+        "height": 40.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Content>_body",
+        "content": "Both the encoder and decoder consist of six identical layers, each containing a multi-head self-attention sub-layer and a position-wise feed-forward network. Residual connections are applied around each sub-layer, followed by layer normalization to ensure stable and efficient training of deep networks. The encoder processes input sequences in parallel, with self-attention allowing each token to attend to all others, capturing global context. In contrast, the decoder includes an additional encoder-decoder attention layer that enables it to attend to the encoder’s output, integrating source information during target generation. To maintain auto-regressive properties, the decoder uses masked self-attention, preventing tokens from attending to future positions during training. This masking ensures that predictions are made only from previously generated tokens, preserving the sequential generation constraint. The consistent stacking of these layers across both components allows for deep, hierarchical representation learning while maintaining computational efficiency.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Encoder and decoder each have six identical layers."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Each layer includes self-attention and feed-forward networks."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Residual connections and layer normalization enable stable training."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "22",
+        "x": 198.1081671939466,
+        "y": 466.58065850336305,
+        "width": 233.47799415147745,
+        "height": 22.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Attention>_title",
+        "content": "Attention",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Attention",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "221",
+        "x": 198.1081671939466,
+        "y": 613.4644064050195,
+        "width": 233.47799415147745,
+        "height": 40.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Content>_body",
+        "content": "Attention mechanisms enable models to dynamically focus on relevant parts of input by computing a weighted sum of values based on the compatibility between queries and keys. This allows for flexible modeling of long-range dependencies and contextual relationships in sequences. The Transformer architecture leverages attention as its core component, replacing recurrent and convolutional structures. By capturing diverse contextual patterns, attention improves performance across a wide range of natural language tasks. Its parallelizable nature also enhances training efficiency compared to sequential models. This foundational mechanism underpins the success of modern deep learning architectures in NLP.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Attention enables dynamic focus on relevant input parts via weighted value sums."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Uses query-key compatibility to compute weights."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Replaces RNNs and convolutions in Transformer architecture."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "23",
+        "x": 198.1081671939466,
+        "y": 666.4644064050195,
+        "width": 233.47799415147745,
+        "height": 41.6875,
+        "textbox_id": 0,
+        "textbox_name": "p<Position-wise Feed-Forward Networks>_title",
+        "content": "Position-wise Feed-Forward Networks",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Position-wise Feed-Forward Networks",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "231",
+        "x": 198.1081671939466,
+        "y": 717.1519064050195,
+        "width": 233.47799415147745,
+        "height": 62.14171672373533,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "Each layer incorporates a position-wise feed-forward network (FFN) composed of two linear transformations separated by a ReLU activation function. The FFN is applied independently to each position in the sequence, allowing for non-linear processing without altering positional relationships. This design enables the model to learn complex feature representations at each token location. The network is efficiently implemented using 1D convolutions, which maintain computational efficiency and support parallel processing. Despite its simplicity, the FFN significantly enhances the model’s representational capacity. It operates identically across all positions, ensuring parameter efficiency and consistency. This component complements the attention layers by introducing additional non-linear transformations to refine learned features.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "FFN enables non-linear processing at each sequence position."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Uses two linear layers with ReLU activation."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Implemented via efficient 1D convolutions for parallel processing."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "24",
+        "x": 6.0,
+        "y": 792.2936231287549,
+        "width": 205.26210747565526,
+        "height": 22.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Embeddings and Softmax>_title",
+        "content": "Embeddings and Softmax",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Embeddings and Softmax",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "241",
+        "x": 6.0,
+        "y": 823.2936231287549,
+        "width": 205.26210747565526,
+        "height": 97.28571836788211,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "Input and output tokens are embedded into 512-dimensional vectors using learned embedding matrices, providing dense semantic representations. The model shares the same embedding matrix between the input and output layers, along with the softmax layer, reducing the number of parameters and improving training efficiency. Embeddings are scaled by the square root of the embedding dimension (sqrt(512)) to prevent gradient vanishing during early training phases. This scaling maintains the magnitude of activations and stabilizes the learning process. The shared weights also promote consistency between encoding and decoding phases. This design choice enhances model generalization and reduces overfitting. The combination of scaled embeddings and weight sharing leads to a more compact and effective architecture.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Input and output tokens embedded into 512D vectors."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Learned embedding matrices used."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Shared embedding and softmax weights reduce parameters."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "25",
+        "x": 223.26210747565526,
+        "y": 792.2936231287549,
+        "width": 208.3240538697688,
+        "height": 22.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Positional Encoding>_title",
+        "content": "Positional Encoding",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Positional Encoding",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "251",
+        "x": 223.26210747565526,
+        "y": 823.2936231287549,
+        "width": 208.3240538697688,
+        "height": 97.28571836788211,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "Since the Transformer model does not rely on recurrence, it incorporates positional encodings into input embeddings to preserve sequence order information. These encodings are based on sinusoidal functions with varying frequencies, enabling the model to learn relative positions of tokens. This design allows the model to generalize effectively to sequences longer than those seen during training. The use of fixed, deterministic positional signals ensures consistency and scalability across different sequence lengths. By leveraging periodic patterns, the model can extrapolate positional information beyond the training context. This approach supports efficient and accurate representation of sequential data without relying on recurrence. The sinusoidal positional encodings are additive to the input embeddings, maintaining compatibility with the model's architecture.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Uses sinusoidal positional encodings to preserve sequence order."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Based on fixed, deterministic sinusoidal functions."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Enables generalization to longer sequences than training."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "3",
+        "x": 6.0,
+        "y": 936.579341496637,
+        "width": 425.58616134542405,
+        "height": 30.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Why Self-Attention>_title",
+        "content": "Why Self-Attention",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 48,
+                "runs": [
+                    {
+                        "text": "Why Self-Attention",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "31",
+        "x": 6.0,
+        "y": 1051.7097765306285,
+        "width": 425.58616134542405,
+        "height": 132.29022346937154,
+        "textbox_id": 0,
+        "textbox_name": "p<Content>_body",
+        "content": "Self-attention mechanisms provide a constant path length between any two positions in a sequence, unlike recurrent or convolutional layers which require sequential processing. This enables high levels of parallelization during both training and inference, significantly improving computational efficiency. Self-attention excels at modeling long-range dependencies by directly computing relationships between all tokens, regardless of distance. Compared to RNNs and CNNs, it avoids gradient vanishing issues and reduces training time for long sequences. The mechanism computes attention scores using query, key, and value vectors, allowing dynamic focus on relevant parts of the input. This leads to better performance on tasks requiring contextual understanding across extended spans. As a result, self-attention is particularly well-suited for large-scale sequence modeling tasks.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Enables constant path length between sequence positions."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Supports full parallelization during training and inference."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Models long-range dependencies effectively via direct token interactions."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Avoids gradient vanishing common in RNNs."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "4",
+        "x": 443.58616134542405,
+        "y": 173.16000000000003,
+        "width": 450.41383865457595,
+        "height": 30.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Training>_title",
+        "content": "Training",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 48,
+                "runs": [
+                    {
+                        "text": "Training",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "41",
+        "x": 443.58616134542405,
+        "y": 203.16000000000003,
+        "width": 221.27765382704385,
+        "height": 41.6875,
+        "textbox_id": 0,
+        "textbox_name": "p<Training Data and Batching>_title",
+        "content": "Training Data and Batching",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Training Data and Batching",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "411",
+        "x": 443.58616134542405,
+        "y": 253.84750000000003,
+        "width": 221.27765382704385,
+        "height": 45.5618217504764,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "Training utilized the WMT 2014 English-German and English-French datasets, which were preprocessed using byte-pair encoding (BPE) to handle out-of-vocabulary tokens effectively. Batches were carefully constructed to maintain a balanced token count, with each batch containing approximately 25,000 source and target tokens. This batching strategy ensured efficient memory utilization and stable gradient updates during training. The use of BPE enabled consistent tokenization across languages, improving model generalization. Data was shuffled per epoch to prevent overfitting and enhance convergence. This setup provided a robust foundation for training high-performance sequence-to-sequence models.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Trained on WMT 2014 English-German and English-French datasets."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Used byte-pair encoding (BPE) for tokenization."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Batches maintained ~25,000 tokens per source and target."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "42",
+        "x": 676.8638151724679,
+        "y": 203.16000000000003,
+        "width": 217.1361848275321,
+        "height": 22.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Hardware and Schedule>_title",
+        "content": "Hardware and Schedule",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Hardware and Schedule",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "421",
+        "x": 676.8638151724679,
+        "y": 234.16000000000003,
+        "width": 217.1361848275321,
+        "height": 65.2493217504764,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "All models were trained on eight NVIDIA P100 GPUs, leveraging parallel computation to accelerate training. The base model was trained for 100,000 steps, completing in approximately 12 hours. The larger model required 300,000 steps, extending training to about 3.5 days due to increased model complexity and longer step times. This scaling allowed for deeper learning and improved representation capacity. The hardware setup supported mixed-precision training, enhancing throughput without sacrificing accuracy. Efficient data loading and gradient synchronization were critical to maintaining high GPU utilization throughout training.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Trained on eight NVIDIA P100 GPUs using parallel computation."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Base model: 100K steps, 12 hours."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Large model: 300K steps, 3.5 days."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "43",
+        "x": 443.58616134542405,
+        "y": 312.4093217504764,
+        "width": 216.21685247533472,
+        "height": 22.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Optimizer>_title",
+        "content": "Optimizer",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Optimizer",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "431",
+        "x": 443.58616134542405,
+        "y": 343.4093217504764,
+        "width": 216.21685247533472,
+        "height": 63.02789518782721,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "The Adam optimizer was employed with a dynamic learning rate schedule to improve training stability and convergence. A warm-up phase gradually increased the learning rate over the first 4,000 steps to prevent initial instability. After warm-up, the learning rate decayed proportionally to the inverse square root of the step number, enabling fine-tuning in later stages. This adaptive schedule balanced fast early progress with precise convergence. It significantly reduced training oscillations and improved final model performance. The combination of warm-up and inverse square root decay proved essential for achieving state-of-the-art results.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Used adaptive learning rate with warm-up and decay for stable training."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Warm-up over 4,000 steps."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Decay: inverse square root of step number."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "44",
+        "x": 671.8030138207588,
+        "y": 312.4093217504764,
+        "width": 222.19698617924124,
+        "height": 22.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Regularization>_title",
+        "content": "Regularization",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Regularization",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "441",
+        "x": 671.8030138207588,
+        "y": 343.4093217504764,
+        "width": 222.19698617924124,
+        "height": 63.02789518782721,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "Regularization in the Transformer model was enhanced through dropout applied to sub-layer outputs and input embeddings, which improved generalization and reduced overfitting. Label smoothing was incorporated during training to prevent overconfidence in predictions, leading to better calibration of output probabilities. Despite a slight increase in perplexity, this approach significantly improved both accuracy and BLEU scores. The combination of dropout and label smoothing contributed to more robust and stable training dynamics. These techniques were critical in achieving superior performance without excessive model complexity. Their integration reflects a balanced trade-off between training stability and final translation quality.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Enhanced regularization via dropout on sub-layer outputs and embeddings."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Reduced overfitting and improved generalization."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Improved model calibration using label smoothing."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "5",
+        "x": 443.58616134542405,
+        "y": 422.43721693830366,
+        "width": 450.41383865457595,
+        "height": 30.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Results>_title",
+        "content": "Results",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 48,
+                "runs": [
+                    {
+                        "text": "Results",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "51",
+        "x": 443.58616134542405,
+        "y": 452.43721693830366,
+        "width": 450.41383865457595,
+        "height": 22.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Machine Translation>_title",
+        "content": "Machine Translation",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Machine Translation",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "511",
+        "x": 443.58616134542405,
+        "y": 577.2576310216153,
+        "width": 450.41383865457595,
+        "height": 40.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Content>_body",
+        "content": "The large-scale Transformer model achieves a BLEU score of 28.4 on English-to-German translation and 41.0 on English-to-French, outperforming all previously published single models and ensembles. These results mark a new benchmark in machine translation performance, demonstrating the model’s ability to capture complex linguistic patterns. Training was completed in just 3.5 days using eight GPUs, highlighting its computational efficiency. The model’s architecture enables faster convergence and better utilization of parallel hardware. These findings validate the Transformer’s superiority in both accuracy and training speed. The results confirm its potential for real-world deployment in high-performance translation systems.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Achieves new state-of-the-art BLEU scores in machine translation."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "28.4 BLEU on English-to-German."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "41.0 BLEU on English-to-French."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "52",
+        "x": 443.58616134542405,
+        "y": 630.2576310216153,
+        "width": 450.41383865457595,
+        "height": 22.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Model Variations>_title",
+        "content": "Model Variations",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 42,
+                "runs": [
+                    {
+                        "text": "Model Variations",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "521",
+        "x": 443.58616134542405,
+        "y": 894.7227830616964,
+        "width": 450.41383865457595,
+        "height": 40.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Content>_body",
+        "content": "Ablation studies reveal that multi-head attention is essential for capturing complex dependencies across sequence positions, significantly boosting model performance. Proper attention dimensionality ensures optimal representation capacity without overfitting, with suboptimal settings leading to noticeable degradation in translation quality. Dropout regularization plays a critical role in preventing overfitting, especially in large-scale training scenarios. Interestingly, replacing sinusoidal positional encodings with learned positional embeddings yields nearly identical performance, indicating that the choice of positional encoding method is less sensitive than architectural components like attention and dimensionality. These findings highlight that attention mechanisms and structural design choices are more impactful than specific encoding strategies. The robustness of learned positional encodings also enhances model flexibility across diverse sequence lengths and domains.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Multi-head attention is critical for modeling complex sequence dependencies."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Boosts translation quality significantly."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Optimal attention dimensionality prevents overfitting and maintains performance."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    },
+    {
+        "panel_id": "6",
+        "x": 443.58616134542405,
+        "y": 950.7227830616964,
+        "width": 450.41383865457595,
+        "height": 30.0,
+        "textbox_id": 0,
+        "textbox_name": "p<Conclusion>_title",
+        "content": "Conclusion",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": false,
+                "level": 0,
+                "font_name": "Arial",
+                "font_size": 48,
+                "runs": [
+                    {
+                        "text": "Conclusion",
+                        "bold": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "panel_id": "61",
+        "x": 443.58616134542405,
+        "y": 986.7227830616964,
+        "width": 450.41383865457595,
+        "height": 197.27721693830358,
+        "textbox_id": 1,
+        "textbox_name": "p<Content>_body",
+        "content": "The Transformer architecture demonstrates that attention mechanisms alone can effectively replace recurrence and convolution in sequence modeling, challenging long-standing assumptions in neural network design. By relying solely on self-attention, the model achieves state-of-the-art translation quality across multiple benchmark datasets. Its fully parallelizable structure enables significantly faster training compared to recurrent models, reducing training time while maintaining high performance. This architectural shift opens new research avenues in efficient sequence modeling, including long-range dependency capture and scalable language generation. The success of the Transformer has inspired a wave of follow-up models across NLP, vision, and multimodal tasks. Its core principles—attention, parallelization, and scalability—have become foundational in modern deep learning research.",
+        "content_for_ppt": [
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Transformer uses self-attention to replace recurrence and convolution."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Achieves state-of-the-art translation quality."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Fully parallelizable structure enables faster training."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Reduces training time without sacrificing performance."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 0,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Inspired a wave of models across NLP, vision, and multimodal tasks."
+                    }
+                ],
+                "font_name": "Arial"
+            },
+            {
+                "alignment": "left",
+                "bullet": true,
+                "level": 1,
+                "font_size": 36,
+                "runs": [
+                    {
+                        "text": "Attention, parallelization, and scalability are now foundational."
+                    }
+                ],
+                "font_name": "Arial"
+            }
+        ]
+    }
+]

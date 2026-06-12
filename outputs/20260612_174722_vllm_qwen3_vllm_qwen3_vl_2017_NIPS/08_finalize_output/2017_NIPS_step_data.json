@@ -1,0 +1,55 @@
+{
+    "step_info.json": {
+        "step": 8,
+        "name": "final_results",
+        "description": "Final poster and output artifacts saved",
+        "total_time_taken": 948.8993623256683,
+        "total_tokens_used": {
+            "text_model": {
+                "input": 48370,
+                "output": 14761
+            },
+            "vision_model": {
+                "input": 148764,
+                "output": 2258
+            }
+        }
+    },
+    "final_log.json": {
+        "input_tokens_t": 48370,
+        "output_tokens_t": 14761,
+        "input_tokens_v": 148764,
+        "output_tokens_v": 2258,
+        "time_taken": 948.8993623256683,
+        "poster_name": "2017_NIPS",
+        "paper_path": "papers/2017_NIPS/Attention_Is_All_You_Need.pdf",
+        "poster_size": {
+            "width_inches": 36.0,
+            "height_inches": 48.0
+        },
+        "parameters": {
+            "model_name_t": "vllm_qwen3",
+            "model_name_v": "vllm_qwen3_vl",
+            "ablation_no_tree_layout": false,
+            "ablation_no_commenter": false,
+            "ablation_no_example": false,
+            "ablation_flat_tree": false
+        }
+    },
+    "detail_log.json": {
+        "hierarchical_parse_in_t": 12693,
+        "hierarchical_parse_out_t": 3461,
+        "tree_refinement_in_t": 3776,
+        "tree_refinement_out_t": 3329,
+        "panel_generation_in_t": 0,
+        "panel_generation_out_t": 0,
+        "content_in_t": 12011,
+        "content_out_t": 4742,
+        "content_in_v": 0,
+        "content_out_v": 0,
+        "feedback_in_t": 19890,
+        "feedback_out_t": 3229,
+        "feedback_in_v": 148764,
+        "feedback_out_v": 2258
+    }
+}

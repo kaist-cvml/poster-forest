@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Enhanced regularization with dropout on sub-layer outputs and embeddings."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Improved generalization and reduced overfitting."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "Uses sinusoidal encodings to preserve sequence order."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Fixed, deterministic functions enable generalization."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]

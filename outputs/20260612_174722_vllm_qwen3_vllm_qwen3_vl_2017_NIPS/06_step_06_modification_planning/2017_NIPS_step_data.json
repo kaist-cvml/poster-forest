@@ -1,0 +1,11 @@
+{
+    "step_info.json": {
+        "step": 6,
+        "name": "feedback_loop",
+        "description": "Feedback loop",
+        "input_tokens_text": 19890,
+        "output_tokens_text": 3229,
+        "input_tokens_vision": 148764,
+        "output_tokens_vision": 2258
+    }
+}

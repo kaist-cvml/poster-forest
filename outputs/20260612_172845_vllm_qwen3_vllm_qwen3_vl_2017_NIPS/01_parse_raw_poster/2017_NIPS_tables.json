@@ -1,0 +1,32 @@
+{
+    "1": {
+        "caption": "Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. n is the sequence length, d is the representation dimension, k is the kernel size of convolutions and r the size of the neighborhood in restricted self-attention.",
+        "table_path": "outputs/20260612_172845_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-2.png",
+        "width": 1884,
+        "height": 378,
+        "figure_size": 712152,
+        "figure_aspect": 4.984126984126984,
+        "original_index": 2,
+        "caption_number": "1"
+    },
+    "2": {
+        "caption": "Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost.",
+        "table_path": "outputs/20260612_172845_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-3.png",
+        "width": 1763,
+        "height": 745,
+        "figure_size": 1313435,
+        "figure_aspect": 2.366442953020134,
+        "original_index": 3,
+        "caption_number": "2"
+    },
+    "3": {
+        "caption": "Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.",
+        "table_path": "outputs/20260612_172845_vllm_qwen3_vllm_qwen3_vl_2017_NIPS/01_parse_raw_poster/2017_NIPS/2017_NIPS-table-4.png",
+        "width": 2014,
+        "height": 1283,
+        "figure_size": 2583962,
+        "figure_aspect": 1.5697583787996883,
+        "original_index": 4,
+        "caption_number": "3"
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "meta": {
+        "poster_title": "PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation",
+        "authors": "Jiho Choi, Seojeong Park, Seongjong Song, Hyunjung Shim",
+        "affiliations": "Graduate School of Artificial Intelligence, KAIST, Republic of Korea; School of Integrated Technology, Yonsei University, Republic of Korea"
+    },
+    "sections": [
+        {
+            "title": "Poster Title & Author",
+            "content": "PosterForest: Hierarchical Multi-Agent Collaboration for Scientific Poster Generation\nJiho Choi 1 *, Seojeong Park 1 *, Seongjong Song 2 , Hyunjung Shim 1 †\n1 Graduate School of Artificial Intelligence, KAIST, Republic of Korea\n2 School of Integrated Technology, Yonsei University, Republic of Korea\n{jihochoi, seojeong.park, kateshim}@kaist.ac.kr, {bell}@yonsei.ac.kr\n* Equal contribution\n† Corresponding author"
+        },
+        {
+            "title": "Problem Overview",
+            "content": "Automating scientific poster generation requires hierarchical document understanding and coherent content-layout planning. Existing methods rely on flat summarization or optimize content and layout separately, leading to information loss, weak logical flow, and poor visual balance. Scientific posters are vital for conveying complex information concisely, but manual creation is labor-intensive, requiring both domain knowledge and design expertise. Current approaches treat documents as linear sequences, ignoring structural relationships and semantic alignment between text and visuals. This results in logical discontinuities, misplaced content, and oversimplified layouts that fail to capture the original document's depth. Additionally, many methods require extensive training, increasing deployment complexity and resource demands."
+        },
+        {
+            "title": "Poster Tree",
+            "content": "PosterForest introduces the Poster Tree, a hierarchical intermediate representation that captures document structure and visual-textual semantics across multiple levels. It begins with a Raw Doc Tree, representing the document’s section-subsection-paragraph hierarchy, with nodes for text, figures, and tables. This is refined into a Content Tree by pruning redundant content, merging related units, and summarizing text—preserving key information while reducing noise. A Layout Tree is then constructed, hierarchically partitioning the poster canvas into rows, columns, and panels, initialized from content statistics. The two trees are merged into the Poster Tree, where each node jointly encodes semantic content (e.g., summarized paragraph, figure) and spatial attributes (position, size, aspect ratio). This unified structure ensures semantic coherence and spatial alignment, providing a strong inductive bias for poster generation."
+        },
+        {
+            "title": "Multi-Agent Collaboration",
+            "content": "PosterForest employs hierarchical multi-agent collaboration to iteratively refine the Poster Tree. The Content Agent and Layout Agent operate in a top-down traversal, updating nodes based on parent and descendant context. The Layout Agent optimizes spatial attributes like region ratios and alignment using descendant statistics, ensuring balanced distribution. The Content Agent refines textual density and abstraction, adapting content to layout constraints and parent-level changes. After a full traversal, a Global Feedback Agent evaluates the poster using an MLLM, assessing visual organization, clarity, and balance. Based on structured feedback, it decides whether to continue refinement. This iterative loop enables joint optimization of content and layout, improving semantic coherence, visual harmony, and structural integrity without requiring training or domain-specific supervision."
+        },
+        {
+            "title": "Results & Evaluation",
+            "content": "Extensive experiments show PosterForest outperforms prior methods in both automatic and human evaluations. On the Paper2Poster benchmark, it achieves the highest scores in informativeness, clarity, and logical flow, closely matching human-created ground truth posters. In MLLM-as-a-Judge evaluations, it ranks best or second in all six criteria, including content completeness and engagement. A user study with 25 AI graduate students confirms strong preference: PosterForest is ranked first in 59.2% of cases across content fidelity, aesthetic quality, structural clarity, and overall quality—significantly outperforming P2P and Paper2Poster (27.2% preference). Ablation studies verify the necessity of hierarchical content structure and dual-agent collaboration. Without hierarchy, content becomes disordered and spatially incoherent. Without both agents, layouts or content suffer from imbalance or overflow. Together, they enable optimal information density and visual harmony."
+        },
+        {
+            "title": "Key Innovation",
+            "content": "PosterForest introduces a training-free, hierarchical framework that unifies content and layout through the Poster Tree—a structured intermediate representation that links document semantics with spatial organization. Unlike prior methods that treat content and layout separately or rely on training, PosterForest uses multi-agent collaboration to perform iterative, context-aware refinement. The Content Agent and Layout Agent work in tandem, leveraging hierarchical dependencies to optimize both semantic coherence and visual balance. This joint optimization enables dynamic adaptation to diverse paper structures and domains, from NLP to reinforcement learning. The method requires only standard APIs and public checkpoints, enabling practical deployment. Its success lies in modeling scientific documents as inherently hierarchical systems, where structure drives both meaning and visual composition."
+        }
+    ]
+}

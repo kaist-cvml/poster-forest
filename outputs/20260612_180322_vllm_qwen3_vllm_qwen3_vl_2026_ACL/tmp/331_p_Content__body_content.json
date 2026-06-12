@@ -1,0 +1,26 @@
+[
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 0,
+        "runs": [
+            {
+                "text": "PosterForest achieves top MLLM-as-a-Judge scores in informativeness."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    },
+    {
+        "alignment": "left",
+        "bullet": true,
+        "level": 1,
+        "runs": [
+            {
+                "text": "Closely matches human ground truth."
+            }
+        ],
+        "font_name": "Arial",
+        "font_size": 36
+    }
+]
